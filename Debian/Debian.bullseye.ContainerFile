@@ -1,5 +1,5 @@
 # vim: set filetype=dockerfile:
-FROM docker.io/library/debian:bullseye-slim
+FROM docker.io/library/debian:bullseye
 
 LABEL maintainer="Maxwell G <gotmax23@github>"
 

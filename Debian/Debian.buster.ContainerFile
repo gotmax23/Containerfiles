@@ -1,5 +1,5 @@
 # vim: set filetype=dockerfile:
-FROM docker.io/library/debian:buster-slim
+FROM docker.io/library/debian:buster
 
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
