@@ -1,34 +1,20 @@
 # vim: set filetype=jinja.dockerfile:
 
-{% set BASEIMAGE = {{ output['baseimage'] | default(distro['baseimage'] | default(defaults['baseimage'])) }} %}
-{% set PKG_MGR = {{ output['pkg_mgr']['name'] | default(distro['pkg_mgr']['name'] | default(defaults['pkg_mgr']['name'])) }} %}
-{% set PKG_MGR_INSTALL_CMD = {{ output['pkg_mgr']['install_cmd'] | default(distro['pkg_mgr']['install_cmd'] | default(defaults['pkg_mgr']['install_cmd'])) }} %}
-{% set PACKAGES = {{ output['packages'] | default(distro['packages'] | default(defaults['packages'])) }} %}
-{% set PKG_MGR_CLEAN_CMD = {{ output['pkg_mgr']['clean_cmd'] | default(distro['pkg_mgr']['clean_cmd'] | default(defaults['pkg_mgr']['clean_cmd'])) }} %}
-
-# TODO: Set the rest of the variables
-##########
-
 FROM {{ BASEIMAGE }}
 
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
-{% if PKG_MGR == "apt" %}
+{% if PKG_MGR_NAME == "apt" %}
 ENV DEBIAN_FRONTEND=noninteractive
 {% endif %}
 
 # Install systemd and python requirements and clean up
-RUN {% if PKG_MGR == "apt" %}apt update && {% endif %}{{ PKG_MGR_INSTALL_CMD }} \
-    {{ PACKAGES | join(' ')}} \
+RUN {{ PKG_MGR_INSTALL_CMD }} \
+    {{ ALL_PACKAGES | join(' ')}} \
 {% if PKG_MGR_CLEAN_CMD is defined%}&& {{ PKG_MGR_CLEAN_CMD }} \{%endif}
 && rm -rf /usr/share/doc /usr/share/man{% if PKG_MGR == "apt" %} /var/lib/apt/lists/*{% endif %}
 
-CMD ["/sbin/init"]
-STOPSIGNAL SIGRTMIN+3
-
-##########
-# Variable Format
-# {{ output['VARIABLE'] | default(distro['VARIABLE'] | default(defaults['VARIABLE'])) }}
-# or
-# {% set VARIABLE = {{ output['VARIABLE'] | default(distro['VARIABLE'] | default(defaults['VARIABLE'])) }} %}
-# {{ VARIABLE }}
+CMD [{{ DOCKER_CMD }}]
+{% if DOCKER_STOPSIGNAL is defined %}
+STOPSIGNAL {{ DOCKER_STOPSIGNAL }}
+{% endif %}

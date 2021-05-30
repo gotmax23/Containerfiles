@@ -1,0 +1,15 @@
+---
+- name: Set DISTRO_FAMILY and GALAXY_VERSION
+  set_fact:
+    DISTRO_FAMILY: "{{ distro['distro_family'] }}"
+    GALAXY_VERSION: "{{ output['galaxy_version'] }}"
+
+- name: Define variables in `all_vars_list` based on hierarchy
+  set_fact:
+    "{{ item|upper }}": "{{ output['vars'][item] | default(distro['vars'][item] | default(distro_families[DISTRO_FAMILY]['vars'][item] | default(item))) }}"
+  loop: "{{ all_vars_list }}"
+
+- name: Create ContainerFiles
+  template:
+    src: "{{ TEMPLATE_SRC }}"
+    dest: "{{ output_file }}"
