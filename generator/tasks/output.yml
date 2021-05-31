@@ -6,7 +6,7 @@
 
 - name: Define variables in `all_vars_list` based on hierarchy
   set_fact:
-    "{{ item|upper }}": "{{ output['vars'][item] | default(distro['vars'][item] | default(distro_families[DISTRO_FAMILY]['vars'][item] | default(item))) }}"
+    "{{ item|upper }}": "{{ output['vars'][item] | default(distro['vars'][item] | default(DISTRO_FAMILY_LOOKUP[item] | default(lookup('vars', item, default='')))) }}"
   loop: "{{ all_vars_list }}"
 
 - name: Create ContainerFiles
