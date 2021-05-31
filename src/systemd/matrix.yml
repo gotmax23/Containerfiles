@@ -98,6 +98,7 @@ distros:
           package_mgr_name: "yum"
           package_mgr_install_cmd: "yum --setopt=tsflags=nodoc install"
           package_mgr_clean_cmd: "yum clean all"
+          python_version: "2"
       - galaxy_version: 8
         vars:
           baseimage: "registry.access.redhat.com/ubi8:latest"
