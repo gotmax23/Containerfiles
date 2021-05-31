@@ -4,15 +4,16 @@ FROM {{ BASEIMAGE }}
 
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
-{% if PKG_MGR_NAME == "apt" %}
+{% if PACKAGE_MGR_NAME == "apt" %}
 ENV DEBIAN_FRONTEND=noninteractive
 {% endif %}
 
 # Install systemd and python requirements and clean up
-RUN {{ PKG_MGR_INSTALL_CMD }} \
-    {{ ALL_PACKAGES | join(' ')}} \
-{% if PKG_MGR_CLEAN_CMD is defined%}&& {{ PKG_MGR_CLEAN_CMD }} \{%endif}
-&& rm -rf /usr/share/doc /usr/share/man{% if PKG_MGR == "apt" %} /var/lib/apt/lists/*{% endif %}
+RUN {{ PACKAGE_MGR_INSTALL_CMD }} \
+    {{ PACKAGES | join(' ') }} \
+    {{ DEFAULT_PACKAGES | join(' ') }} \
+&& {{ PACKAGE_MGR_CLEAN_CMD }} \
+&& rm -rf /usr/share/doc /usr/share/man{% if PACKAGE_MGR_NAME == "apt" %} /var/lib/apt/lists/*{% endif %}
 
 CMD [{{ DOCKER_CMD }}]
 {% if DOCKER_STOPSIGNAL is defined %}

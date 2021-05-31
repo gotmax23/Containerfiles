@@ -1,9 +1,9 @@
 ---
 type: systemd
 repo_root: "{{ lookup('env', 'PWD') }}"
-output_dir: "{{ repo_root }}/{{ type }}"
-output_file: "{{ output_file }}/{{ distro['name'] }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.ContainerFile }}"
-TEMPLATE_SRC: "{{ repo_root }}/src/{{ type }}/ContainerFile.j2"
+output_dir: "{{ repo_root }}/ContainerFiles/{{ type }}"
+output_file: "{{ output_dir }}/{{ distro['name'] }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.ContainerFile"
+template_src: "{{ repo_root }}/src/{{ type }}/ContainerFile.j2"
 
 ##########
 
@@ -20,21 +20,19 @@ all_vars_list:
   - docker_cmd
   - docker_stopsignal
   - default_packages
-  - all_packages
+  - output_file
 
 ##########
 
-defaults:
-  vars:
-    python_version: "3"
-    docker_cmd: "/sbin/init"
-    docker_stopsignal: "SIGRTMIN+3"
-    default_packages:
-      - systemd
-      - "python{{ PYTHON_VERSION }}"
-      - sudo
-    all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
-    baseimage: "{{ BASEIMAGE_REPO }}:{{ BASEIMAGE_TAG | default(GALAXY_VERSION)}}"
+# Defaults
+python_version: "3"
+docker_cmd: "/sbin/init"
+docker_stopsignal: "SIGRTMIN+3"
+default_packages:
+  - systemd
+  - "python{{ PYTHON_VERSION }}"
+  - sudo
+baseimage: "{{ BASEIMAGE_REPO }}:{{ GALAXY_VERSION }}"
 
 distro_families:
   Debian:
@@ -66,8 +64,8 @@ distro_families:
       package_mgr_name: pacman
       package_mgr_install_cmd: "pacman -Syu --noconfirm && pacman -S --noconfirm"
       package_mgr_clean_cmd: "pacman -Scc"
-    packages:
-      - systemd-sysvcompat
+      packages:
+        - systemd-sysvcompat
 
 ##########
 
@@ -92,15 +90,13 @@ distros:
     outputs:
       - galaxy_version: 7
         vars:
-          baseimage_repo: registry.access.redhat.com/ubi7
-          baseimage_tag: latest
+          baseimage: "registry.access.redhat.com/ubi7:latest"
           package_mgr_name: "yum"
           package_mgr_install_cmd: "yum --setopt=tsflags=nodoc install"
           package_mgr_clean_cmd: "yum clean all"
       - galaxy_version: 8
         vars:
-          baseimage_repo: registry.access.redhat.com/ubi8
-          baseimage_tag: latest
+          baseimage: "registry.access.redhat.com/ubi8:latest"
 
   - name: Fedora
     distro_family: RedHat

@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   name: Generate systemd ContainerFiles
+  gather_facts: false
 
   vars_files:
     - matrix.yml
