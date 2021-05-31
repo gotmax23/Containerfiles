@@ -1,0 +1,8 @@
+---
+# TODO: Include Vars
+- name: Loop over outputs
+  include_tasks:
+    file: output.yml
+  loop: "{{ distro['outputs'] }}"
+  loop_control:
+    loop_var: output

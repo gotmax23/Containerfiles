@@ -1,0 +1,23 @@
+{{ ansible_managed | comment }}
+
+# vim: set filetype=jinja.dockerfile:
+
+FROM {{ BASEIMAGE }}
+
+LABEL maintainer="Maxwell G <gotmax23@github>"
+
+{% if PACKAGE_MGR_NAME == "apt" %}
+ENV DEBIAN_FRONTEND=noninteractive
+{% endif %}
+
+# Install systemd and python requirements and clean up
+RUN {{ PACKAGE_MGR_INSTALL_CMD }} \
+    {{ all_packages | join(' ') }} \
+&& {{ PACKAGE_MGR_CLEAN_CMD }} \
+&& rm -rf /usr/share/doc /usr/share/man{% if PACKAGE_MGR_NAME == "apt" %} /var/lib/apt/lists/*{% endif %}
+
+
+CMD [{{ DOCKER_CMD }}]
+{% if DOCKER_STOPSIGNAL is defined %}
+STOPSIGNAL {{ DOCKER_STOPSIGNAL }}
+{% endif %}

@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  name: Generate systemd ContainerFiles
+  gather_facts: false
+
+  vars_files:
+    - matrix.yml
+
+  roles:
+    - name: gotmax23.containerfile_generator
+      role: "../../generator"

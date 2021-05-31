@@ -1,0 +1,8 @@
+---
+# TODO: Include Vars
+- name: Loop over distros
+  include_tasks:
+    file: distro.yml
+  loop: "{{ distros }}"
+  loop_control:
+    loop_var: distro
