@@ -11,5 +11,5 @@
 
 - name: Create ContainerFiles
   template:
-    src: "{{ TEMPLATE_SRC }}"
+    src: "{{ template_src }}"
     dest: "{{ output_file }}"
