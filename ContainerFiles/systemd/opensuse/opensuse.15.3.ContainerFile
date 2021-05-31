@@ -1,3 +1,7 @@
+#
+# Ansible managed
+#
+
 # vim: set filetype=jinja.dockerfile:
 
 FROM registry.opensuse.org/opensuse/leap:15.3

@@ -1,3 +1,7 @@
+#
+# Ansible managed
+#
+
 # vim: set filetype=jinja.dockerfile:
 
 FROM registry.fedoraproject.org/fedora:34

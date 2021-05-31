@@ -1,3 +1,7 @@
+#
+# Ansible managed
+#
+
 # vim: set filetype=jinja.dockerfile:
 
 FROM docker.io/library/archlinux/base:any

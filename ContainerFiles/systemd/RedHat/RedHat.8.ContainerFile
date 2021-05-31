@@ -1,3 +1,7 @@
+#
+# Ansible managed
+#
+
 # vim: set filetype=jinja.dockerfile:
 
 FROM registry.access.redhat.com/ubi8:latest
