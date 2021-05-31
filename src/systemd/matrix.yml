@@ -44,6 +44,7 @@ distro_families:
       package_mgr_clean_cmd: "apt-get clean"
       packages:
         - systemd-sysv
+        - python3-apt
 
   RedHat:
     vars:
