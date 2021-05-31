@@ -8,9 +8,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install systemd and python requirements and clean up
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    systemd-sysv \
-    systemd python3 sudo \
+    systemd python3 sudo systemd-sysv \
 && apt-get clean \
 && rm -rf /usr/share/doc /usr/share/man /var/lib/apt/lists/*
+
 CMD [/sbin/init]
 STOPSIGNAL SIGRTMIN+3

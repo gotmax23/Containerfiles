@@ -1,6 +1,6 @@
 # vim: set filetype=jinja.dockerfile:
 
-FROM docker.io/library/debian:bullseye
+FROM docker.io/library/ubuntu:hirsute
 
 LABEL maintainer="Maxwell G <gotmax23@github>"
 

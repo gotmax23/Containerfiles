@@ -21,6 +21,7 @@ all_vars_list:
   - docker_stopsignal
   - default_packages
   - output_file
+  - all_packages
 
 ##########
 
@@ -32,6 +33,7 @@ default_packages:
   - systemd
   - "python{{ PYTHON_VERSION }}"
   - sudo
+all_packages: "{{ default_packages + PACKAGES }}"
 baseimage: "{{ BASEIMAGE_REPO }}:{{ GALAXY_VERSION }}"
 
 distro_families:
@@ -50,6 +52,7 @@ distro_families:
       package_mgr_install_cmd: "dnf --setopt=tsflags=nodoc install"
       #package_mgr_clean_cmd: "{{ PACKAGE_MGR_NAME }} clean all"
       package_mgr_clean_cmd: "dnf clean all"
+      packages: []
 
   opensuse:
     vars:
@@ -122,4 +125,4 @@ distros:
     outputs:
       - galaxy_version: bionic
       - galaxy_version: focal
-      - galaxy_versions: hirsute
+      - galaxy_version: hirsute
