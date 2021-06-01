@@ -4,10 +4,21 @@
     DISTRO_FAMILY: "{{ distro['distro_family'] }}"
     GALAXY_VERSION: "{{ output['galaxy_version'] }}"
 
+- name: (Temporarily) Set variables in `all_vars_list` to empty strings to avoid undefined var error
+  set_fact:
+    "{{ item|upper }}": ''
+  loop: "{{ all_vars_list }}"
+
 - name: Define variables in `all_vars_list` based on hierarchy
   set_fact:
-    "{{ item|upper }}": "{{ output['vars'][item] | default(distro['vars'][item] | default(distro_families[DISTRO_FAMILY]['vars'][item] | default(lookup('vars', item, default='')))) }}"
+    "{{ item|upper }}": "{{ output['vars'][item] | default(distro['vars'][item] | default(distro_families[DISTRO_FAMILY]['vars'][item] | default(defaults['vars'][item]))) }}"
   loop: "{{ all_vars_list }}"
+
+#- name: Check if any variable is still an empty string
+#  assert:
+#    that: item|upper != ''
+#    quiet: true
+#  loop: "{{ all_vars_list }}"
 
 - name: Create ContainerFiles
   template:

@@ -1,40 +1,44 @@
 ---
+# General variables for the generator role
 type: systemd
 repo_root: "{{ lookup('env', 'PWD') }}"
 output_dir: "{{ repo_root }}/ContainerFiles/{{ type }}"
 output_file: "{{ output_dir }}/{{ distro['name'] }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.ContainerFile"
 template_src: "{{ repo_root }}/src/{{ type }}/ContainerFile.j2"
+all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
 
 ##########
+# Variables used inside ContainerFile.j2
+
+# These variables are generated at runtime based on the following hierarchy (higher # = higher priority):
+# 1. Variables in `defaults.vars`
+# 2. Variables under `distro_families.NAME`
+# 3. Variables under `distros.*.vars`
+# 4. Variables under `distros.*.outputs.*.vars`
 
 all_vars_list:
-  - template_src
   - python_version
   - packages
   - package_mgr_name
   - package_mgr_install_cmd
   - package_mgr_clean_cmd
-  - baseimage_tag
   - baseimage_repo
   - baseimage
   - docker_cmd
   - docker_stopsignal
   - default_packages
-  - output_file
-  - all_packages
 
 ##########
-
-# Defaults
-python_version: "3"
-docker_cmd: "/sbin/init"
-docker_stopsignal: "SIGRTMIN+3"
-default_packages:
-  - systemd
-  - "python{{ PYTHON_VERSION }}"
-  - sudo
-all_packages: "{{ default_packages + PACKAGES }}"
-baseimage: "{{ BASEIMAGE_REPO }}:{{ GALAXY_VERSION }}"
+defaults:
+  vars:
+    python_version: "3"
+    docker_cmd: "/sbin/init"
+    docker_stopsignal: "SIGRTMIN+3"
+    default_packages:
+      - systemd
+      - "python{{ PYTHON_VERSION }}"
+      - sudo
+    baseimage: "{{ BASEIMAGE_REPO }}:{{ GALAXY_VERSION }}"
 
 distro_families:
   Debian:
@@ -49,10 +53,8 @@ distro_families:
   RedHat:
     vars:
       package_mgr_name: dnf
-      #package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} --setopt=tsflags=nodoc install"
-      package_mgr_install_cmd: "dnf --setopt=tsflags=nodoc install"
-      #package_mgr_clean_cmd: "{{ PACKAGE_MGR_NAME }} clean all"
-      package_mgr_clean_cmd: "dnf clean all"
+      package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} --setopt=tsflags=nodoc install"
+      package_mgr_clean_cmd: "{{ PACKAGE_MGR_NAME | default('') }} clean all"
       packages: []
 
   opensuse:
@@ -91,13 +93,13 @@ distros:
 
   - name: RedHat
     distro_family: RedHat
+    vars:
+      baseimage_repo: '' #This variable is not used for the UBI-based images"
     outputs:
       - galaxy_version: 7
         vars:
           baseimage: "registry.access.redhat.com/ubi7:latest"
           package_mgr_name: "yum"
-          package_mgr_install_cmd: "yum --setopt=tsflags=nodoc install"
-          package_mgr_clean_cmd: "yum clean all"
           python_version: "2"
       - galaxy_version: 8
         vars:
