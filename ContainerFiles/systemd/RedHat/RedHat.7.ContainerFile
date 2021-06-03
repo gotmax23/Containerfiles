@@ -10,7 +10,7 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
 # Install systemd and python requirements and clean up
-RUN yum --setopt=tsflags=nodoc install \
+RUN yum -y --setopt=tsflags=nodoc install \
     systemd python2 sudo \
 && yum clean all \
 && rm -rf /usr/share/doc /usr/share/man

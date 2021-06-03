@@ -64,7 +64,7 @@ distro_families:
   RedHat:
     vars:
       package_mgr_name: dnf
-      package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} --setopt=tsflags=nodoc install"
+      package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} -y --setopt=tsflags=nodoc install"
       package_mgr_clean_cmd: "{{ PACKAGE_MGR_NAME | default('') }} clean all"
       packages: []
 
