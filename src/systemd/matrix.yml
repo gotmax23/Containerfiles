@@ -90,7 +90,7 @@ distros:
   - name: Archlinux
     distro_family: Archlinux
     vars:
-      baseimage: docker.io/library/archlinux/base:base
+      baseimage: docker.io/library/archlinux/base
       baseimage_repo: ''
     outputs:
       - galaxy_version: any
