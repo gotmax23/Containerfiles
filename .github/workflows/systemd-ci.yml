@@ -3,7 +3,7 @@ name: Build and push systemd container images
 'on':
   push:
     branches:
-      - master
+      - main
     paths:
       - "ContainerFiles/systemd/**"
       - .github/workflows/systemd-ci.yml

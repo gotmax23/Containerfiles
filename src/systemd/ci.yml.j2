@@ -3,7 +3,7 @@ name: Build and push {{ type }} container images
 'on':
   push:
     branches:
-      - master
+      - main
     paths:
       - "ContainerFiles/{{ type }}/**"
       - {{ CI_output_path }}
