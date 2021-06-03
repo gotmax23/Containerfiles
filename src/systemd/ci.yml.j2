@@ -6,6 +6,7 @@ name: Build and push {{ type }} container images
       - master
     paths:
       - "ContainerFiles/{{ type }}/**"
+      - {{ CI_output_path }}
   schedule:
     - cron: "10 1 * * 0"
 

@@ -6,6 +6,7 @@ name: Build and push systemd container images
       - master
     paths:
       - "ContainerFiles/systemd/**"
+      - .github/workflows/systemd-ci.yml
   schedule:
     - cron: "10 1 * * 0"
 
