@@ -21,7 +21,7 @@ jobs:
 {% for distro in distros %}
 {% for output in distro.outputs %}
           - name:
-            tags: quay.io/{{ distro['name'] | lower}}-{{ type }}:{{ output['galaxy_version'] }}
+            tags: quay.io/gotmax23/{{ distro['name'] | lower}}-{{ type }}:{{ output['galaxy_version'] }}
             context: ./ContainerFiles/{{ type }}/{{ distro['name'] }}
             file: ./ContainerFiles/{{ type }}/{{ distro['name'] }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.ContainerFile
 {% endfor %}

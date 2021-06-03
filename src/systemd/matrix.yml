@@ -10,9 +10,9 @@ CF_output_path: "{{ CF_output_dir }}/{{ distro['name'] }}.{{ output['galaxy_vers
 
 CI_template_src_path: "{{ template_src_dir }}/ci.yml.j2"
 CI_output_path: ".github/workflows/{{ type }}-ci.yml"
-#CI_image_repo: "quay.io/{{ distro['name'] | lower}}-{{ type }}"
+#CI_image_repo: "quay.io/gotmax23/{{ distro['name'] | lower}}-{{ type }}"
 CI_image_tags:
-  - "quay.io/{{ distro['name'] | lower}}-{{ type }}:{{ output['galaxy_version'] }}"
+  - "quay.io/gotmax23/{{ distro['name'] | lower}}-{{ type }}:{{ output['galaxy_version'] }}"
 
 ##########
 # Variables used inside ContainerFile.j2
