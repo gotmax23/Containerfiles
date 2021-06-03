@@ -24,7 +24,6 @@ jobs:
             file: ./ContainerFiles/{{ type }}/{{ distro['name'] }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.ContainerFile
 {% endfor %}
 {% endfor %}
-
 {% raw %}
     steps:
       - uses: actions/checkout@v2
@@ -36,14 +35,14 @@ jobs:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
-        - name: Build and push image.
-          uses: docker/build-push-action@v2
-          with:
-            context: ${{ matrix.context }}
-            file: ${{ matrix.file }}
-            platforms: linux/amd64,linux/arm64
-            push: true
-            tags: ${{ matrix.tags }}
+      - name: Build and push image.
+        uses: docker/build-push-action@v2
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.file }}
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ matrix.tags }}
 {% endraw %}
 
-# vim: set filetype=jinja.yaml
+# vim: set filetype=jinja.yaml:
