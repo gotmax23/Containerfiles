@@ -1,0 +1,49 @@
+---
+name: Build and push {{ type }} container images
+'on':
+  push:
+    branches:
+      - master
+    paths:
+      - "ContainerFiles/{{ type }}/**"
+  schedule:
+    - cron: "10 1 * * 0"
+
+jobs:
+  build_push:
+    name: Build and Push to quay.io
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        include:
+{% for distro in distros %}
+{% for output in distro.outputs %}
+          - name:
+            tags: quay.io/{{ distro['name'] | lower}}-{{ type }}:{{ output['galaxy_version'] }}
+            context: ./ContainerFiles/{{ type }}/{{ distro['name'] }}
+            file: ./ContainerFiles/{{ type }}/{{ distro['name'] }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.ContainerFile
+{% endfor %}
+{% endfor %}
+
+{% raw %}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+      - name: Login to quay.io
+        uses: docker/login-action@v1
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+        - name: Build and push image.
+          uses: docker/build-push-action@v2
+          with:
+            context: ${{ matrix.context }}
+            file: ${{ matrix.file }}
+            platforms: linux/amd64,linux/arm64
+            push: true
+            tags: ${{ matrix.tags }}
+{% endraw %}
+
+# vim: set filetype=jinja.yaml

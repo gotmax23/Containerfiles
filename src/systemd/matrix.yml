@@ -2,10 +2,17 @@
 # General variables for the generator role
 type: systemd
 repo_root: "{{ lookup('env', 'PWD') }}"
-output_dir: "{{ repo_root }}/ContainerFiles/{{ type }}"
-output_file: "{{ output_dir }}/{{ distro['name'] }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.ContainerFile"
-template_src: "{{ repo_root }}/src/{{ type }}/ContainerFile.j2"
-all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
+
+template_src_dir: "src/{{ type }}"
+CF_template_src_path: "{{ template_src_dir }}/ContainerFile.j2"
+CF_output_dir: "ContainerFiles/{{ type }}/{{ distro['name'] }}"
+CF_output_path: "{{ CF_output_dir }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.ContainerFile"
+
+CI_template_src_path: "{{ template_src_dir }}/ci.yml.j2"
+CI_output_path: ".github/workflows/{{ type }}-ci.yml"
+#CI_image_repo: "quay.io/{{ distro['name'] | lower}}-{{ type }}"
+CI_image_tags:
+  - "quay.io/{{ distro['name'] | lower}}-{{ type }}:{{ output['galaxy_version'] }}"
 
 ##########
 # Variables used inside ContainerFile.j2
@@ -29,6 +36,9 @@ all_vars_list:
   - default_packages
 
 ##########
+all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
+#all_CI_image_tags: "{{ CI_image_tags + EXTRA_CI_IMAGE_TAGS }}"
+all_CI_image_tags: "{{ CI_image_tags }}"
 defaults:
   vars:
     python_version: "3"
@@ -39,6 +49,7 @@ defaults:
       - "python{{ PYTHON_VERSION }}"
       - sudo
     baseimage: "{{ BASEIMAGE_REPO }}:{{ GALAXY_VERSION }}"
+    extra_CI_image_tags: []
 
 distro_families:
   Debian:

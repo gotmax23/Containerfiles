@@ -4,9 +4,9 @@
     DISTRO_FAMILY: "{{ distro['distro_family'] }}"
     GALAXY_VERSION: "{{ output['galaxy_version'] }}"
 
-- name: (Temporarily) Set variables in `all_vars_list` to empty strings to avoid undefined var error
+- name: (Temporarily) Set variables in `all_vars_list` to 'EMPTY' to avoid undefined var error
   set_fact:
-    "{{ item|upper }}": ''
+    "{{ item|upper }}": 'EMPTY'
   loop: "{{ all_vars_list }}"
 
 - name: Define variables in `all_vars_list` based on hierarchy
@@ -14,13 +14,13 @@
     "{{ item|upper }}": "{{ output['vars'][item] | default(distro['vars'][item] | default(distro_families[DISTRO_FAMILY]['vars'][item] | default(defaults['vars'][item]))) }}"
   loop: "{{ all_vars_list }}"
 
-#- name: Check if any variable is still an empty string
-#  assert:
-#    that: item|upper != ''
-#    quiet: true
-#  loop: "{{ all_vars_list }}"
+- name: Check if any variable is still set to 'EMPTY'
+  assert:
+    that: item|upper != 'EMPTY'
+    quiet: true
+  loop: "{{ all_vars_list }}"
 
 - name: Create ContainerFiles
   template:
-    src: "{{ template_src }}"
-    dest: "{{ output_file }}"
+    src: "{{ repo_root }}/{{ CF_template_src_path }}"
+    dest: "{{ repo_root }}/{{ CF_output_path }}"
