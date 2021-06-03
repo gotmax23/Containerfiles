@@ -1,0 +1,92 @@
+---
+name: Build and push systemd container images
+'on':
+  push:
+    branches:
+      - master
+    paths:
+      - "ContainerFiles/systemd/**"
+  schedule:
+    - cron: "10 1 * * 0"
+
+jobs:
+  build_push:
+    name: Build and Push to quay.io
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        include:
+          - name:
+            tags: quay.io/archlinux-systemd:any
+            context: ./ContainerFiles/systemd/Archlinux
+            file: ./ContainerFiles/systemd/Archlinux/Archlinux.any.ContainerFile
+          - name:
+            tags: quay.io/debian-systemd:buster
+            context: ./ContainerFiles/systemd/Debian
+            file: ./ContainerFiles/systemd/Debian/Debian.buster.ContainerFile
+          - name:
+            tags: quay.io/debian-systemd:bullseye
+            context: ./ContainerFiles/systemd/Debian
+            file: ./ContainerFiles/systemd/Debian/Debian.bullseye.ContainerFile
+          - name:
+            tags: quay.io/redhat-systemd:7
+            context: ./ContainerFiles/systemd/RedHat
+            file: ./ContainerFiles/systemd/RedHat/RedHat.7.ContainerFile
+          - name:
+            tags: quay.io/redhat-systemd:8
+            context: ./ContainerFiles/systemd/RedHat
+            file: ./ContainerFiles/systemd/RedHat/RedHat.8.ContainerFile
+          - name:
+            tags: quay.io/fedora-systemd:33
+            context: ./ContainerFiles/systemd/Fedora
+            file: ./ContainerFiles/systemd/Fedora/Fedora.33.ContainerFile
+          - name:
+            tags: quay.io/fedora-systemd:34
+            context: ./ContainerFiles/systemd/Fedora
+            file: ./ContainerFiles/systemd/Fedora/Fedora.34.ContainerFile
+          - name:
+            tags: quay.io/fedora-systemd:rawhide
+            context: ./ContainerFiles/systemd/Fedora
+            file: ./ContainerFiles/systemd/Fedora/Fedora.rawhide.ContainerFile
+          - name:
+            tags: quay.io/opensuse-systemd:15.2
+            context: ./ContainerFiles/systemd/opensuse
+            file: ./ContainerFiles/systemd/opensuse/opensuse.15.2.ContainerFile
+          - name:
+            tags: quay.io/opensuse-systemd:15.3
+            context: ./ContainerFiles/systemd/opensuse
+            file: ./ContainerFiles/systemd/opensuse/opensuse.15.3.ContainerFile
+          - name:
+            tags: quay.io/ubuntu-systemd:bionic
+            context: ./ContainerFiles/systemd/Ubuntu
+            file: ./ContainerFiles/systemd/Ubuntu/Ubuntu.bionic.ContainerFile
+          - name:
+            tags: quay.io/ubuntu-systemd:focal
+            context: ./ContainerFiles/systemd/Ubuntu
+            file: ./ContainerFiles/systemd/Ubuntu/Ubuntu.focal.ContainerFile
+          - name:
+            tags: quay.io/ubuntu-systemd:hirsute
+            context: ./ContainerFiles/systemd/Ubuntu
+            file: ./ContainerFiles/systemd/Ubuntu/Ubuntu.hirsute.ContainerFile
+
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+      - name: Login to quay.io
+        uses: docker/login-action@v1
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+        - name: Build and push image.
+          uses: docker/build-push-action@v2
+          with:
+            context: ${{ matrix.context }}
+            file: ${{ matrix.file }}
+            platforms: linux/amd64,linux/arm64
+            push: true
+            tags: ${{ matrix.tags }}
+
+# vim: set filetype=jinja.yaml
