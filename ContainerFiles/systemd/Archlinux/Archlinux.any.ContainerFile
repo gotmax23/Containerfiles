@@ -4,7 +4,7 @@
 
 # vim: set filetype=jinja.dockerfile:
 
-FROM docker.io/library/archlinux/base:any
+FROM docker.io/library/archlinux/base:base
 
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
