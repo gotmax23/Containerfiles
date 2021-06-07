@@ -9,10 +9,10 @@ CF_output_dir: "ContainerFiles/{{ type }}/{{ distro['name'] }}"
 CF_output_path: "{{ CF_output_dir }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.ContainerFile"
 
 CI_template_src_path: "{{ template_src_dir }}/ci.yml.j2"
-CI_output_path: ".github/workflows/{{ type }}-ci.yml"
-#CI_image_repo: "quay.io/gotmax23/{{ distro['name'] | lower}}-{{ type }}"
+CI_output_path: ".github/workflows/{{ type }}-{{ distro['name'] }}.{{ output['galaxy_version'] }}-ci.yml"
+CI_image_repo: "quay.io/gotmax23/{{ distro['name'] | lower}}-{{ type }}"
 CI_image_tags:
-  - "quay.io/gotmax23/{{ distro['name'] | lower}}-{{ type }}:{{ output['galaxy_version'] }}"
+  - "{{ CI_IMAGE_REPO }}:{{ output['galaxy_version'] }}"
 
 ##########
 # Variables used inside ContainerFile.j2
@@ -33,23 +33,30 @@ all_vars_list:
   - baseimage
   - docker_cmd
   - docker_stopsignal
+  - docker_platforms
   - default_packages
+  - extra_ci_image_tags
 
 ##########
 all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
-#all_CI_image_tags: "{{ CI_image_tags + EXTRA_CI_IMAGE_TAGS }}"
-all_CI_image_tags: "{{ CI_image_tags }}"
+all_CI_image_tags: "{{ CI_IMAGE_TAGS + EXTRA_CI_IMAGE_TAGS }}"
 defaults:
   vars:
     python_version: "3"
     docker_cmd: "/sbin/init"
     docker_stopsignal: "SIGRTMIN+3"
+    docker_platforms:
+      - linux/amd64
+      - linux/arm64
     default_packages:
       - systemd
       - "python{{ PYTHON_VERSION }}"
       - sudo
     baseimage: "{{ BASEIMAGE_REPO }}:{{ GALAXY_VERSION }}"
-    extra_CI_image_tags: []
+    CI_image_repo: "quay.io/gotmax23/{{ distro['name'] | lower}}-{{ type }}"
+    CI_image_tags:
+      - "{{ CI_IMAGE_REPO }}:{{ output['galaxy_version'] }}"
+    extra_ci_image_tags: []
 
 distro_families:
   Debian:
@@ -94,6 +101,11 @@ distros:
       baseimage_repo: ''
     outputs:
       - galaxy_version: any
+        vars:
+          docker_platforms:
+            - linux/amd64
+          extra_ci_image_tags:
+            - "{{ CI_IMAGE_REPO }}:latest"
 
   - name: Debian
     distro_family: Debian
@@ -101,7 +113,15 @@ distros:
       baseimage_repo: docker.io/library/debian
     outputs:
       - galaxy_version: buster
+        vars:
+          extra_ci_image_tags:
+            - "{{ CI_IMAGE_REPO }}:latest"
+            - "{{ CI_IMAGE_REPO }}:10"
+            - "{{ CI_IMAGE_REPO }}:stable"
       - galaxy_version: bullseye
+        vars:
+          extra_ci_image_tags:
+            - "{{ CI_IMAGE_REPO }}:testing"
 
   - name: RedHat
     distro_family: RedHat
@@ -113,9 +133,13 @@ distros:
           baseimage: "registry.access.redhat.com/ubi7:latest"
           package_mgr_name: "yum"
           python_version: "2"
+          docker_platforms:
+            - linux/amd64
       - galaxy_version: 8
         vars:
           baseimage: "registry.access.redhat.com/ubi8:latest"
+          extra_ci_image_tags:
+            - "{{ CI_IMAGE_REPO }}:latest"
 
   - name: Fedora
     distro_family: RedHat
@@ -124,15 +148,26 @@ distros:
     outputs:
       - galaxy_version: 33
       - galaxy_version: 34
+        vars:
+          extra_ci_image_tags:
+            - "{{ CI_IMAGE_REPO }}:latest"
       - galaxy_version: rawhide
 
   - name: opensuse
     distro_family: opensuse
-    outputs:
-      - galaxy_version: 15.2
-      - galaxy_version: 15.3
     vars:
       baseimage_repo: registry.opensuse.org/opensuse/leap
+    outputs:
+      - galaxy_version: 15.2
+        vars:
+          extra_ci_image_tags:
+            - "quay.io/gotmax23/systemd-opensuse-leap:15.2"
+      - galaxy_version: 15.3
+        vars:
+          extra_ci_image_tags:
+            - "{{ CI_IMAGE_REPO }}:latest"
+            - "quay.io/gotmax23/systemd-opensuse-leap:15.3"
+            - "quay.io/gotmax23/systemd-opensuse-leap:latest"
 
   - name: Ubuntu
     distro_family: Debian
@@ -140,5 +175,18 @@ distros:
       baseimage_repo: docker.io/library/ubuntu
     outputs:
       - galaxy_version: bionic
+        vars:
+          extra_ci_image_tags:
+            - "{{ CI_IMAGE_REPO }}:18.04"
+            - "{{ CI_IMAGE_REPO }}:18"
       - galaxy_version: focal
+        vars:
+          extra_ci_image_tags:
+            - "{{ CI_IMAGE_REPO }}:latest"
+            - "{{ CI_IMAGE_REPO }}:20"
+            - "{{ CI_IMAGE_REPO }}:20.04"
       - galaxy_version: hirsute
+        vars:
+          extra_ci_image_tags:
+            - "{{ CI_IMAGE_REPO }}:21"
+            - "{{ CI_IMAGE_REPO }}:21.04"
