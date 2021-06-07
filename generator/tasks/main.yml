@@ -6,10 +6,3 @@
   loop: "{{ distros }}"
   loop_control:
     loop_var: distro
-  when:
-    - generate_ci_only is not defined or not generate_ci_only | bool
-
-- name: Generate CI files
-  template:
-    src: "{{ repo_root }}/{{ CI_template_src_path }}"
-    dest: "{{ repo_root }}/{{ CI_output_path }}"

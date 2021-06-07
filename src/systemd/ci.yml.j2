@@ -1,32 +1,19 @@
 ---
-name: Build and push {{ type }} container images
+name: {{ type }}-{{ distro['name'] }}.{{ output['galaxy_version'] }}: Build and push container images
 'on':
   push:
     branches:
       - main
     paths:
-      - "ContainerFiles/{{ type }}/**"
-      - {{ CI_output_path }}
+      - ./{{ CF_output_path }}
+      - ./{{ CI_output_path }}
   schedule:
     - cron: "10 1 * * 0"
 
 jobs:
   build_push:
-    name: Build and Push to quay.io
+    name: Build and Push container images to quay.io
     runs-on: ubuntu-20.04
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-{% for distro in distros %}
-{% for output in distro.outputs %}
-          - name:
-            tags: quay.io/gotmax23/{{ distro['name'] | lower}}-{{ type }}:{{ output['galaxy_version'] }}
-            context: ./ContainerFiles/{{ type }}/{{ distro['name'] }}
-            file: ./ContainerFiles/{{ type }}/{{ distro['name'] }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.ContainerFile
-{% endfor %}
-{% endfor %}
-{% raw %}
     steps:
       - uses: actions/checkout@v2
       - uses: docker/setup-qemu-action@v1
@@ -35,16 +22,17 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: quay.io
+{% raw -%}
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
+{%- endraw %}
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
-          context: ${{ matrix.context }}
-          file: ${{ matrix.file }}
-          platforms: linux/amd64,linux/arm64
+          context: ./{{ CF_output_dir }}
+          file: ./{{ CF_output_path }}
+          platforms: {{ DOCKER_PLATFORMS | join(',') }}
           push: true
-          tags: ${{ matrix.tags }}
-{% endraw %}
+          tags: {{ all_CI_image_tags | join(',') }} 
 
 # vim: set filetype=jinja.yaml:
