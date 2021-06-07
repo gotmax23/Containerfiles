@@ -31,7 +31,7 @@
         dest: "{{ repo_root }}/{{ CF_output_path }}"
 
 
-  - name: Generate CI files
-    template:
-      src: "{{ repo_root }}/{{ CI_template_src_path }}"
-      dest: "{{ repo_root }}/{{ CI_output_path }}"
+- name: Generate CI files
+  template:
+    src: "{{ repo_root }}/{{ CI_template_src_path }}"
+    dest: "{{ repo_root }}/{{ CI_output_path }}"

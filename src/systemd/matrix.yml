@@ -24,6 +24,8 @@ CI_image_tags:
 # 4. Variables under `distros.*.outputs.*.vars`
 
 all_vars_list:
+  - CI_image_repo
+  - CI_image_tags
   - python_version
   - packages
   - package_mgr_name
@@ -40,6 +42,7 @@ all_vars_list:
 ##########
 all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
 all_CI_image_tags: "{{ CI_IMAGE_TAGS + EXTRA_CI_IMAGE_TAGS }}"
+CI_IMAGE_REPO: 'EMPTY' #Needed to avoid undefined variable error
 defaults:
   vars:
     python_version: "3"
