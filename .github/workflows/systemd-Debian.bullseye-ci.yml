@@ -5,7 +5,7 @@ name: "systemd-Debian.bullseye: Build and push container images"
     branches:
       - main
     paths:
-      - ./ContainerFiles/systemd/Debian/Debian.bullseye.ContainerFile
+      - ./Containerfiles/systemd/Debian/Debian.bullseye.Containerfile
       - ./.github/workflows/systemd-Debian.bullseye-ci.yml
   schedule:
     - cron: "10 1 * * 0"
@@ -29,8 +29,8 @@ jobs:
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
-          context: ./ContainerFiles/systemd/Debian
-          file: ./ContainerFiles/systemd/Debian/Debian.bullseye.ContainerFile
+          context: ./Containerfiles/systemd/Debian
+          file: ./Containerfiles/systemd/Debian/Debian.bullseye.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |

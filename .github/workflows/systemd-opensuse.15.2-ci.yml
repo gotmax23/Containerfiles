@@ -5,7 +5,7 @@ name: "systemd-opensuse.15.2: Build and push container images"
     branches:
       - main
     paths:
-      - ./ContainerFiles/systemd/opensuse/opensuse.15.2.ContainerFile
+      - ./Containerfiles/systemd/opensuse/opensuse.15.2.Containerfile
       - ./.github/workflows/systemd-opensuse.15.2-ci.yml
   schedule:
     - cron: "10 1 * * 0"
@@ -29,8 +29,8 @@ jobs:
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
-          context: ./ContainerFiles/systemd/opensuse
-          file: ./ContainerFiles/systemd/opensuse/opensuse.15.2.ContainerFile
+          context: ./Containerfiles/systemd/opensuse
+          file: ./Containerfiles/systemd/opensuse/opensuse.15.2.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |

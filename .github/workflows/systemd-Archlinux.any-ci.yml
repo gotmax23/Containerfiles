@@ -5,7 +5,7 @@ name: "systemd-Archlinux.any: Build and push container images"
     branches:
       - main
     paths:
-      - ./ContainerFiles/systemd/Archlinux/Archlinux.any.ContainerFile
+      - ./Containerfiles/systemd/Archlinux/Archlinux.any.Containerfile
       - ./.github/workflows/systemd-Archlinux.any-ci.yml
   schedule:
     - cron: "10 1 * * 0"
@@ -29,8 +29,8 @@ jobs:
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
-          context: ./ContainerFiles/systemd/Archlinux
-          file: ./ContainerFiles/systemd/Archlinux/Archlinux.any.ContainerFile
+          context: ./Containerfiles/systemd/Archlinux
+          file: ./Containerfiles/systemd/Archlinux/Archlinux.any.Containerfile
           platforms: linux/amd64
           push: true
           tags: |

@@ -5,7 +5,7 @@ name: "systemd-Fedora.34: Build and push container images"
     branches:
       - main
     paths:
-      - ./ContainerFiles/systemd/Fedora/Fedora.34.ContainerFile
+      - ./Containerfiles/systemd/Fedora/Fedora.34.Containerfile
       - ./.github/workflows/systemd-Fedora.34-ci.yml
   schedule:
     - cron: "10 1 * * 0"
@@ -29,8 +29,8 @@ jobs:
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
-          context: ./ContainerFiles/systemd/Fedora
-          file: ./ContainerFiles/systemd/Fedora/Fedora.34.ContainerFile
+          context: ./Containerfiles/systemd/Fedora
+          file: ./Containerfiles/systemd/Fedora/Fedora.34.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |

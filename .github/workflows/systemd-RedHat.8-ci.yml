@@ -5,7 +5,7 @@ name: "systemd-RedHat.8: Build and push container images"
     branches:
       - main
     paths:
-      - ./ContainerFiles/systemd/RedHat/RedHat.8.ContainerFile
+      - ./Containerfiles/systemd/RedHat/RedHat.8.Containerfile
       - ./.github/workflows/systemd-RedHat.8-ci.yml
   schedule:
     - cron: "10 1 * * 0"
@@ -29,8 +29,8 @@ jobs:
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
-          context: ./ContainerFiles/systemd/RedHat
-          file: ./ContainerFiles/systemd/RedHat/RedHat.8.ContainerFile
+          context: ./Containerfiles/systemd/RedHat
+          file: ./Containerfiles/systemd/RedHat/RedHat.8.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |

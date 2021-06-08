@@ -4,9 +4,9 @@ type: systemd
 repo_root: "{{ lookup('env', 'PWD') }}"
 
 template_src_dir: "src/{{ type }}"
-CF_template_src_path: "{{ template_src_dir }}/ContainerFile.j2"
-CF_output_dir: "ContainerFiles/{{ type }}/{{ distro['name'] }}"
-CF_output_path: "{{ CF_output_dir }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.ContainerFile"
+CF_template_src_path: "{{ template_src_dir }}/Containerfile.j2"
+CF_output_dir: "Containerfiles/{{ type }}/{{ distro['name'] }}"
+CF_output_path: "{{ CF_output_dir }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.Containerfile"
 
 CI_template_src_path: "{{ template_src_dir }}/ci.yml.j2"
 CI_output_path: ".github/workflows/{{ type }}-{{ distro['name'] }}.{{ output['galaxy_version'] }}-ci.yml"
@@ -14,7 +14,7 @@ CI_output_path: ".github/workflows/{{ type }}-{{ distro['name'] }}.{{ output['ga
 matrix_file: "{{ repo_root }}/{{ template_src_dir }}/matrix.yml"
 
 ##########
-# Variables used inside ContainerFile.j2
+# Variables used inside Containerfile.j2
 
 # These variables are generated at runtime based on the following hierarchy (higher # = higher priority):
 # 1. Variables in `defaults.vars`
