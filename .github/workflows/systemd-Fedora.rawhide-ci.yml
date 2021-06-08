@@ -1,5 +1,5 @@
 ---
-name: systemd-Fedora.rawhide: Build and push container images
+name: "systemd-Fedora.rawhide: Build and push container images"
 'on':
   push:
     branches:

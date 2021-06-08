@@ -1,5 +1,5 @@
 ---
-name: systemd-Debian.buster: Build and push container images
+name: "systemd-Debian.buster: Build and push container images"
 'on':
   push:
     branches:

@@ -1,5 +1,5 @@
 ---
-name: systemd-RedHat.7: Build and push container images
+name: "systemd-RedHat.7: Build and push container images"
 'on':
   push:
     branches:
