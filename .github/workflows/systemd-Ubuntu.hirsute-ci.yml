@@ -5,8 +5,8 @@ name: "systemd-Ubuntu.hirsute: Build and push container images"
     branches:
       - main
     paths:
-      - ./Containerfiles/systemd/Ubuntu/Ubuntu.hirsute.Containerfile
-      - ./.github/workflows/systemd-Ubuntu.hirsute-ci.yml
+      - "Containerfiles/systemd/Ubuntu/Ubuntu.hirsute.Containerfile"
+      - ".github/workflows/systemd-Ubuntu.hirsute-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:

@@ -5,8 +5,8 @@ name: "systemd-Fedora.34: Build and push container images"
     branches:
       - main
     paths:
-      - ./Containerfiles/systemd/Fedora/Fedora.34.Containerfile
-      - ./.github/workflows/systemd-Fedora.34-ci.yml
+      - "Containerfiles/systemd/Fedora/Fedora.34.Containerfile"
+      - ".github/workflows/systemd-Fedora.34-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:

@@ -5,8 +5,8 @@ name: "systemd-RedHat.8: Build and push container images"
     branches:
       - main
     paths:
-      - ./Containerfiles/systemd/RedHat/RedHat.8.Containerfile
-      - ./.github/workflows/systemd-RedHat.8-ci.yml
+      - "Containerfiles/systemd/RedHat/RedHat.8.Containerfile"
+      - ".github/workflows/systemd-RedHat.8-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:

@@ -5,8 +5,8 @@ name: "systemd-Archlinux.any: Build and push container images"
     branches:
       - main
     paths:
-      - ./Containerfiles/systemd/Archlinux/Archlinux.any.Containerfile
-      - ./.github/workflows/systemd-Archlinux.any-ci.yml
+      - "Containerfiles/systemd/Archlinux/Archlinux.any.Containerfile"
+      - ".github/workflows/systemd-Archlinux.any-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:

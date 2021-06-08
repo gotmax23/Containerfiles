@@ -5,8 +5,8 @@ name: "systemd-Fedora.rawhide: Build and push container images"
     branches:
       - main
     paths:
-      - ./Containerfiles/systemd/Fedora/Fedora.rawhide.Containerfile
-      - ./.github/workflows/systemd-Fedora.rawhide-ci.yml
+      - "Containerfiles/systemd/Fedora/Fedora.rawhide.Containerfile"
+      - ".github/workflows/systemd-Fedora.rawhide-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:
