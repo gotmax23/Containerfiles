@@ -9,6 +9,7 @@ name: "systemd-RedHat.7: Build and push container images"
       - ./.github/workflows/systemd-RedHat.7-ci.yml
   schedule:
     - cron: "10 1 * * 0"
+  workflow_dispatch:
 
 jobs:
   build_push:

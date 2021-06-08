@@ -9,6 +9,7 @@ name: "systemd-Ubuntu.focal: Build and push container images"
       - ./.github/workflows/systemd-Ubuntu.focal-ci.yml
   schedule:
     - cron: "10 1 * * 0"
+  workflow_dispatch:
 
 jobs:
   build_push:
