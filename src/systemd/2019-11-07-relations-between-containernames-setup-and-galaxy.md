@@ -1,6 +1,7 @@
 ---
 title: Relations between containernames, setup and Galaxy
 ---
+# This file is copied from https://robertdebock.nl/2019/11/07/relations-between-containernames-setup-and-galaxy.html with a couple modifications.
 
 # Relations between containernames, setup and Galaxy
 
@@ -46,7 +47,7 @@ galaxy_platform: ArchLinux
 
 | galaxy_version | docker_tag | ansible_distribution_major_version |
 | -------------- | ---------- | ---------------------------------- |
-| any            | lates      | NA                                 |
+| any            | latest      | NA                                 |
 
 ## CentOS
 

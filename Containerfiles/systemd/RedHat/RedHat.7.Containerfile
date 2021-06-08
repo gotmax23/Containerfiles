@@ -15,5 +15,5 @@ RUN yum -y --setopt=tsflags=nodoc install \
 && yum clean all \
 && rm -rf /usr/share/doc /usr/share/man
 
-CMD [/sbin/init]
+CMD ["/sbin/init"]
 STOPSIGNAL SIGRTMIN+3

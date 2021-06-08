@@ -16,5 +16,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 && apt-get clean \
 && rm -rf /usr/share/doc /usr/share/man /var/lib/apt/lists/*
 
-CMD [/sbin/init]
+CMD ["/sbin/init"]
 STOPSIGNAL SIGRTMIN+3

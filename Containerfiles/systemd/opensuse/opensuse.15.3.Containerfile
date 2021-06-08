@@ -15,5 +15,5 @@ RUN zypper install -y \
 && zypper clean \
 && rm -rf /usr/share/doc /usr/share/man
 
-CMD [/sbin/init]
+CMD ["/sbin/init"]
 STOPSIGNAL SIGRTMIN+3

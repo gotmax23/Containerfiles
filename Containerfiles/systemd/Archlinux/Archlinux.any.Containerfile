@@ -15,5 +15,5 @@ RUN pacman -Syu --noconfirm && pacman -S --noconfirm \
 && pacman -Scc \
 && rm -rf /usr/share/doc /usr/share/man
 
-CMD [/sbin/init]
+CMD ["/sbin/init"]
 STOPSIGNAL SIGRTMIN+3
