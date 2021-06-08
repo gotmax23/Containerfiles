@@ -1,12 +1,12 @@
 ---
-name: {{ type }}-{{ distro['name'] }}.{{ output['galaxy_version'] }}: Build and push container images
+name: systemd-opensuse.15.3: Build and push container images
 'on':
   push:
     branches:
       - main
     paths:
-      - ./{{ CF_output_path }}
-      - ./{{ CI_output_path }}
+      - ./ContainerFiles/systemd/opensuse/opensuse.15.3.ContainerFile
+      - ./.github/workflows/systemd-opensuse.15.3-ci.yml
   schedule:
     - cron: "10 1 * * 0"
 
@@ -22,25 +22,19 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: quay.io
-{% raw %}
+
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
-{% endraw %}
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
-          context: ./{{ CF_output_dir }}
-          file: ./{{ CF_output_path }}
-          platforms: {{ DOCKER_PLATFORMS | join(',') }}
+          context: ./ContainerFiles/systemd/opensuse
+          file: ./ContainerFiles/systemd/opensuse/opensuse.15.3.ContainerFile
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-{% for tag in all_CI_image_tags %}
-            {{ CI_IMAGE_REPO }}:{{ tag }}
-{% endfor %}
-{%- if EXTRA_CI_IMAGE_REPOS != [] %}
-{% for repo in EXTRA_CI_IMAGE_REPOS %}
-            {{ repo }}
-{% endfor %}
-{% endif -%}
-
+            quay.io/gotmax23/opensuse-systemd:15.3
+            quay.io/gotmax23/opensuse-systemd:latest
+            quay.io/gotmax23/systemd-opensuse-leap:15.3
+            quay.io/gotmax23/systemd-opensuse-leap:latest
 # vim: set filetype=jinja.yaml:

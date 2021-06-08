@@ -1,12 +1,12 @@
 ---
-name: {{ type }}-{{ distro['name'] }}.{{ output['galaxy_version'] }}: Build and push container images
+name: systemd-Fedora.34: Build and push container images
 'on':
   push:
     branches:
       - main
     paths:
-      - ./{{ CF_output_path }}
-      - ./{{ CI_output_path }}
+      - ./ContainerFiles/systemd/Fedora/Fedora.34.ContainerFile
+      - ./.github/workflows/systemd-Fedora.34-ci.yml
   schedule:
     - cron: "10 1 * * 0"
 
@@ -22,25 +22,17 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: quay.io
-{% raw %}
+
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
-{% endraw %}
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
-          context: ./{{ CF_output_dir }}
-          file: ./{{ CF_output_path }}
-          platforms: {{ DOCKER_PLATFORMS | join(',') }}
+          context: ./ContainerFiles/systemd/Fedora
+          file: ./ContainerFiles/systemd/Fedora/Fedora.34.ContainerFile
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-{% for tag in all_CI_image_tags %}
-            {{ CI_IMAGE_REPO }}:{{ tag }}
-{% endfor %}
-{%- if EXTRA_CI_IMAGE_REPOS != [] %}
-{% for repo in EXTRA_CI_IMAGE_REPOS %}
-            {{ repo }}
-{% endfor %}
-{% endif -%}
-
+            quay.io/gotmax23/fedora-systemd:34
+            quay.io/gotmax23/fedora-systemd:latest
 # vim: set filetype=jinja.yaml:

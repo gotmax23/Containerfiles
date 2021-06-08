@@ -1,12 +1,12 @@
 ---
-name: {{ type }}-{{ distro['name'] }}.{{ output['galaxy_version'] }}: Build and push container images
+name: systemd-Debian.buster: Build and push container images
 'on':
   push:
     branches:
       - main
     paths:
-      - ./{{ CF_output_path }}
-      - ./{{ CI_output_path }}
+      - ./ContainerFiles/systemd/Debian/Debian.buster.ContainerFile
+      - ./.github/workflows/systemd-Debian.buster-ci.yml
   schedule:
     - cron: "10 1 * * 0"
 
@@ -22,25 +22,19 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: quay.io
-{% raw %}
+
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
-{% endraw %}
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
-          context: ./{{ CF_output_dir }}
-          file: ./{{ CF_output_path }}
-          platforms: {{ DOCKER_PLATFORMS | join(',') }}
+          context: ./ContainerFiles/systemd/Debian
+          file: ./ContainerFiles/systemd/Debian/Debian.buster.ContainerFile
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-{% for tag in all_CI_image_tags %}
-            {{ CI_IMAGE_REPO }}:{{ tag }}
-{% endfor %}
-{%- if EXTRA_CI_IMAGE_REPOS != [] %}
-{% for repo in EXTRA_CI_IMAGE_REPOS %}
-            {{ repo }}
-{% endfor %}
-{% endif -%}
-
+            quay.io/gotmax23/debian-systemd:buster
+            quay.io/gotmax23/debian-systemd:latest
+            quay.io/gotmax23/debian-systemd:10
+            quay.io/gotmax23/debian-systemd:stable
 # vim: set filetype=jinja.yaml:
