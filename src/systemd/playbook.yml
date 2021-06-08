@@ -14,4 +14,4 @@
 
   roles:
     - name: gotmax23.containerfile_generator
-      role: "../../generator"
+      role: "./generator"
