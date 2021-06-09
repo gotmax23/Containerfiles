@@ -46,7 +46,7 @@ ansible_os_family: RedHat
 ansible_distribution: RedHat
 
 # These aren't actually Ansible variables
-galaxy_platform: RedHat
+galaxy_platform: EL
 container_repo: quay.io/gotmax23/redhat-systemd
 ```
 
@@ -106,5 +106,3 @@ container_repo: quay.io/gotmax23/debian-systemd
 | bionic,18,18.04  | bionic           | 18                                   |
 | focal,20,20.04   | focal            | 20                                   |
 | hirsute,21,21.04 | hirsute[^1]      | 21                                   |
-
-
