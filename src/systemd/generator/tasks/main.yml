@@ -1,8 +1,13 @@
 ---
-# TODO: Include Vars
+- name: (Temporarily) Set variables in `all_vars_list` to 'EMPTY' to avoid undefined var error
+  set_fact:
+    "{{ item|upper }}": 'EMPTY'
+  loop: "{{ all_vars_list }}"
+
 - name: Loop over distros
   include_tasks:
     file: distro.yml
   loop: "{{ distros }}"
   loop_control:
     loop_var: distro
+    index_var: distro_index

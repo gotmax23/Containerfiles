@@ -6,3 +6,4 @@
   loop: "{{ distro['outputs'] }}"
   loop_control:
     loop_var: output
+    index_var: output_index

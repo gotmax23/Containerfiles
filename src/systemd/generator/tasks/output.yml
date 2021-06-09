@@ -4,19 +4,10 @@
     DISTRO_FAMILY: "{{ distro['distro_family'] }}"
     GALAXY_VERSION: "{{ output['galaxy_version'] }}"
 
-- name: (Temporarily) Set variables in `all_vars_list` to 'EMPTY' to avoid undefined var error
-  set_fact:
-    "{{ item|upper }}": 'EMPTY'
-  loop: "{{ all_vars_list }}"
-
 - name: Define variables in `all_vars_list` based on hierarchy
   set_fact:
-    "{{ item|upper }}": "{{ output['vars'][item] | default(distro['vars'][item] | default(distro_families[DISTRO_FAMILY]['vars'][item] | default(defaults['vars'][item]))) }}"
+    "{{ item|upper }}": "{{ distros[distro_index]['outputs'][output_index]['vars'][item] | default(distros[distro_index]['vars'][item] | default(distro_families[DISTRO_FAMILY]['vars'][item] | default(defaults['vars'][item]))) }}"
   loop: "{{ all_vars_list }}"
-
-- name: Reload vars
-  include_vars:
-    file: "{{ matrix_file }}"
 
 - name: Create ContainerFiles
   template:
