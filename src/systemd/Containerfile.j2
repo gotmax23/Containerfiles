@@ -16,6 +16,9 @@ RUN {{ PACKAGE_MGR_INSTALL_CMD }} \
 && {{ PACKAGE_MGR_CLEAN_CMD }} \
 && rm -rf /usr/share/doc /usr/share/man{% if PACKAGE_MGR_NAME == "apt" %} /var/lib/apt/lists/*{% endif %}
 
+{% if GALAXY_VERSION == "7" %}
+RUN systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service systemd-udev-trigger.service systemd-udevd.service systemd-random-seed.service systemd-machine-id-commit.service
+{% endif %}
 
 CMD ["{{ DOCKER_CMD }}"]
 {% if DOCKER_STOPSIGNAL is defined %}
