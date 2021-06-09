@@ -1,6 +1,6 @@
 # Systemd Containers for Ansible Testing
 
-I built these containers for use with Molecule and Podman to test Ansible roles and playbooks. They are also compatible with Docker. However, I recommend using Podman because it has better support for running systemd inside containers, requiring no special configuration. Naturally, it is more secure, as it doesn't require a daemon. However, as long as your distro does not use Cgroups V2/Unified Hierarchy, you can run these images with Docker, as well.
+I built these containers for use with Molecule and Podman to test Ansible roles and playbooks. However, I recommend using Podman because it has better support for running systemd inside containers, requiring no special configuration. Naturally, it is more secure, as it doesn't require a daemon. However, as long as your distro does not use Cgroups V2/Unified Hierarchy, you can run these images with Docker, as well.
 
 In order to ease maintenance, these Containerfiles are templated by an Ansible playbook located in [`src/systemd`](https://github.com/gotmax23/Containerfiles/tree/main/src/systemd). I am still working on finalizing the code and writing documentation for possible contributors.
 
