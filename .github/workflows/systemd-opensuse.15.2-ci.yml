@@ -35,5 +35,5 @@ jobs:
           push: true
           tags: |
             quay.io/gotmax23/opensuse-systemd:15.2
-            quay.io/gotmax23/systemd-opensuse-leap:15.2
+            quay.io/gotmax23/opensuse-leap-systemd:15.2
 # vim: set filetype=jinja.yaml:

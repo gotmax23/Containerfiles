@@ -125,6 +125,7 @@ distros:
         vars:
           extra_CI_image_tags:
             - "testing"
+            - "11"
 
   - name: RedHat
     distro_family: RedHat
@@ -154,7 +155,10 @@ distros:
         vars:
           extra_CI_image_tags:
             - "latest"
-      - galaxy_version: rawhide
+      - galaxy_version: 35
+        vars:
+          extra_CI_image_tags:
+            - "rawhide"
 
   - name: opensuse
     distro_family: opensuse
@@ -164,14 +168,14 @@ distros:
       - galaxy_version: 15.2
         vars:
           extra_CI_image_repos:
-            - "quay.io/gotmax23/systemd-opensuse-leap:15.2"
+            - "quay.io/gotmax23/opensuse-leap-systemd:15.2"
       - galaxy_version: 15.3
         vars:
           extra_CI_image_tags:
             - "latest"
           extra_CI_image_repos:
-            - "quay.io/gotmax23/systemd-opensuse-leap:15.3"
-            - "quay.io/gotmax23/systemd-opensuse-leap:latest"
+            - "quay.io/gotmax23/opensuse-leap-systemd:15.3"
+            - "quay.io/gotmax23/opensuse-leap-systemd:latest"
 
   - name: Ubuntu
     distro_family: Debian

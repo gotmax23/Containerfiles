@@ -4,7 +4,7 @@
 
 # vim: set filetype=jinja.dockerfile:
 
-FROM registry.fedoraproject.org/fedora:rawhide
+FROM registry.fedoraproject.org/fedora:35
 
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
