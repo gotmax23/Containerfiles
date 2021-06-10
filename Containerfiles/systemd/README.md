@@ -90,14 +90,14 @@ Due to a discrepancy between `galaxy_platform` and `ansible_os_family`, these im
 | 15.2           | 15.2             | 15                                   |
 | 15.3,latest    | 15.3[^1]         | 15                                   |
 
-### [Ubuntu](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Debian)
+### [Ubuntu](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Ubuntu)
 
 ```yaml
 ansible_os_family: Debian
-ansible_distribution: Debian
+ansible_distribution: Ubuntu
 
 # These aren't actually Ansible variables
-galaxy_platform: Debian
+galaxy_platform: Ubuntu
 container_repo: quay.io/gotmax23/debian-systemd
 ```
 
