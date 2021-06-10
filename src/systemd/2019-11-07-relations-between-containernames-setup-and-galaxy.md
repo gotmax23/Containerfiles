@@ -1,7 +1,7 @@
 ---
 title: Relations between containernames, setup and Galaxy
 ---
-# This file is copied from https://robertdebock.nl/2019/11/07/relations-between-containernames-setup-and-galaxy.html with a couple modifications.
+> This file is copied from https://robertdebock.nl/2019/11/07/relations-between-containernames-setup-and-galaxy.html with a couple modifications.
 
 # Relations between containernames, setup and Galaxy
 
