@@ -90,6 +90,19 @@ Due to a discrepancy between `galaxy_platform` and `ansible_os_family`, these im
 | 15.2           | 15.2             | 15                                   |
 | 15.3,latest    | 15.3[^1]         | 15                                   |
 
+There is also an image for Tumbleweed.
+
+```yaml
+ansible_os_family: Suse
+ansible_distribution: "openSUSE Tumbleweed"
+ansible_distribution_major_version: 20210610 #Changes monthly
+
+# There is no `galaxy_platform` for Tumbleweed
+tags:
+  - quay.io/gotmax23/opensuse-systemd:tumbleweed
+  - quay.io/gotmax23/opensuse-tumbleweed-systemd:latest
+```
+
 ### [Ubuntu](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Ubuntu)
 
 ```yaml
@@ -106,3 +119,5 @@ container_repo: quay.io/gotmax23/debian-systemd
 | bionic,18,18.04  | bionic           | 18                                   |
 | focal,20,20.04   | focal            | 20                                   |
 | hirsute,21,21.04 | hirsute[^1]      | 21                                   |
+
+[^1]: This distro version is not listed at [https://galaxy.ansible.com/api/v1/platforms/](https://galaxy.ansible.com/api/v1/platforms/).
