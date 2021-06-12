@@ -23,9 +23,23 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: quay.io
-{% raw %}
+{%- raw %}
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
+{% endraw %}
+      - name: Calculate Docker image tags # Based on https://gist.github.com/sagikazarmark/0119e1f3dde0d8e755fd0ee5a5ef4cdc
+        id: tags
+        run: |
+{%- raw %}
+          case $GITHUB_REF in
+            refs/tags/*)  VERSION=${GITHUB_REF#refs/tags/};;
+            refs/heads/*) VERSION=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g');;
+            refs/pull/*)  VERSION=pr-${{ github.event.number }};;
+            *)            VERSION=sha-${GITHUB_SHA::8};;
+          esac
+          echo ::set-output name=version::${VERSION}
+          echo ::set-output name=commit_hash::${GITHUB_SHA::8}
+          echo ::set-output name=build_date::$(git show -s --format=%cI)
 {% endraw %}
       - name: Build and push image.
         uses: docker/build-push-action@v2
@@ -34,6 +48,17 @@ jobs:
           file: ./{{ CF_output_path }}
           platforms: {{ DOCKER_PLATFORMS | join(',') }}
           push: true
+          labels: |
+            org.opencontainers.image.tite="{{ distro['name'] }} image with {{ type }}"
+            org.opencontainers.image.description="{{ distro['name'] }} image with {{ type }} for Ansible testing using Podman and Molecule"
+{%- raw %}
+            org.opencontainers.image.url=${{ github.event.repository.html_url }}/tree/main/Containerfiles/systemd
+            org.opencontainers.image.source=${{ github.event.repository.clone_url }}
+            org.opencontainers.image.version=${{ steps.tags.outputs.version }}
+            org.opencontainers.image.created=${{ steps.tags.outputs.build_date }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
+{% endraw %}
           tags: |
 {% for tag in all_CI_image_tags %}
             {{ CI_IMAGE_REPO }}:{{ tag }}
@@ -43,5 +68,6 @@ jobs:
             {{ repo }}
 {% endfor %}
 {% endif -%}
+
 
 # vim: set filetype=jinja.yaml:

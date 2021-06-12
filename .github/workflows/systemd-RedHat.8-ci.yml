@@ -23,9 +23,20 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: quay.io
-
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
+      - name: Calculate Docker image tags # Based on https://gist.github.com/sagikazarmark/0119e1f3dde0d8e755fd0ee5a5ef4cdc
+        id: tags
+        run: |
+          case $GITHUB_REF in
+            refs/tags/*)  VERSION=${GITHUB_REF#refs/tags/};;
+            refs/heads/*) VERSION=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g');;
+            refs/pull/*)  VERSION=pr-${{ github.event.number }};;
+            *)            VERSION=sha-${GITHUB_SHA::8};;
+          esac
+          echo ::set-output name=version::${VERSION}
+          echo ::set-output name=commit_hash::${GITHUB_SHA::8}
+          echo ::set-output name=build_date::$(git show -s --format=%cI)
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
@@ -33,6 +44,15 @@ jobs:
           file: ./Containerfiles/systemd/RedHat/RedHat.8.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
+          labels: |
+            org.opencontainers.image.tite="RedHat image with systemd"
+            org.opencontainers.image.description="RedHat image with systemd for Ansible testing using Podman and Molecule"
+            org.opencontainers.image.url=${{ github.event.repository.html_url }}/tree/main/Containerfiles/systemd
+            org.opencontainers.image.source=${{ github.event.repository.clone_url }}
+            org.opencontainers.image.version=${{ steps.tags.outputs.version }}
+            org.opencontainers.image.created=${{ steps.tags.outputs.build_date }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
             quay.io/gotmax23/redhat-systemd:8
             quay.io/gotmax23/redhat-systemd:latest
