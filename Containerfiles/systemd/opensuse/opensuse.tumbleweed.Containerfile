@@ -4,7 +4,7 @@
 
 # vim: set filetype=jinja.dockerfile:
 
-FROM registry.opensuse.org/opensuse/tumbleweed:tumbleweed
+FROM registry.opensuse.org/opensuse/tumbleweed
 
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
