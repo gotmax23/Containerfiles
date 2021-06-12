@@ -124,4 +124,5 @@ container_repo: quay.io/gotmax23/debian-systemd
 ## Credits
 These images are inspired by `geerlingguy` and `robertdebock`'s Ansible images
 
+## Footnotes
 [^1]: This distro version is not listed at [https://galaxy.ansible.com/api/v1/platforms/](https://galaxy.ansible.com/api/v1/platforms/).
