@@ -48,6 +48,7 @@ jobs:
             org.opencontainers.image.tite="Ubuntu image with systemd"
             org.opencontainers.image.description="Ubuntu image with systemd for Ansible testing using Podman and Molecule"
             org.opencontainers.image.url=${{ github.event.repository.html_url }}/tree/main/Containerfiles/systemd
+            org.opencontainers.image.documentation=${{ github.event.repository.html_url }}/tree/main/Containerfiles/systemd/README.md
             org.opencontainers.image.source=${{ github.event.repository.clone_url }}
             org.opencontainers.image.version=${{ steps.tags.outputs.version }}
             org.opencontainers.image.created=${{ steps.tags.outputs.build_date }}
