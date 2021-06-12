@@ -177,6 +177,11 @@ distros:
           extra_CI_image_repos:
             - "quay.io/gotmax23/opensuse-leap-systemd:15.3"
             - "quay.io/gotmax23/opensuse-leap-systemd:latest"
+      - galaxy_version: tumbleweed
+        vars:
+          baseimage_repo: registry.opensuse.org/opensuse/tumbleweed
+        extra_CI_image_repos:
+          - "quay.io/gotmax23/opensuse-tumbleweed-systemd:latest"
 
   - name: Ubuntu
     distro_family: Debian
