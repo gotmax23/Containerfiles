@@ -120,4 +120,8 @@ container_repo: quay.io/gotmax23/debian-systemd
 | focal,20,20.04   | focal            | 20                                   |
 | hirsute,21,21.04 | hirsute[^1]      | 21                                   |
 
+
+## Credits
+These images are inspired by `geerlingguy` and `robertdebock`'s Ansible images
+
 [^1]: This distro version is not listed at [https://galaxy.ansible.com/api/v1/platforms/](https://galaxy.ansible.com/api/v1/platforms/).
