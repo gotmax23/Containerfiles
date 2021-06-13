@@ -56,4 +56,5 @@ jobs:
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
             quay.io/gotmax23/opensuse-systemd:tumbleweed
+            quay.io/gotmax23/opensuse-tumbleweed-systemd:latest
 # vim: set filetype=jinja.yaml:
