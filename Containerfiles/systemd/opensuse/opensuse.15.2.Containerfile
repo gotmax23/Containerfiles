@@ -11,7 +11,7 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 
 # Install systemd and python requirements and clean up
 RUN zypper install -y \
-    systemd python3 sudo systemd-sysvinit \
+    systemd python3 sudo systemd-sysvinit python3-xml \
 && zypper clean \
 && rm -rf /usr/share/doc /usr/share/man
 
