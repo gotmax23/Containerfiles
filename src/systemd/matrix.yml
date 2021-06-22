@@ -147,6 +147,36 @@ distros:
           extra_CI_image_tags:
             - "latest"
 
+  - name: CentOS
+    distro_family: RedHat
+    vars:
+      baseimage_repo: "docker.io/library/centos"
+    outputs:
+      - galaxy_version: 7
+        vars:
+          package_mgr_name: "yum"
+          package_mgr_install_cmd: "yum -y install"
+          python_version: "2"
+          extra_CI_image_repos:
+            - "quay.io/gotmax23/el-systemd:7"
+      - galaxy_version: 8
+        vars:
+          extra_CI_image_tags:
+            - "latest"
+
+  - name: AlmaLinux
+    distro_family: RedHat
+    vars:
+      baseimage_repo: "docker.io/library/almalinux"
+    outputs:
+      - galaxy_version: 8
+        vars:
+          extra_CI_image_tags:
+            - "latest"
+          extra_CI_image_repos:
+            - "quay.io/gotmax23/el-systemd:8"
+            - "quay.io/gotmax23/el-systemd:latest"
+
   - name: Fedora
     distro_family: RedHat
     vars:
