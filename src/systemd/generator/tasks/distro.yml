@@ -1,5 +1,9 @@
 ---
-# TODO: Include Vars
+- name: Create necessary directories
+  file:
+    path: "{{ repo_root }}/{{ CF_output_dir }}"
+    state: directory
+
 - name: Loop over outputs
   include_tasks:
     file: output.yml
