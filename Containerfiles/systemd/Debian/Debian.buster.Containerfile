@@ -5,7 +5,6 @@
 # vim: set filetype=jinja.dockerfile:
 
 FROM docker.io/library/debian:buster
-
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 ENV DEBIAN_FRONTEND=noninteractive

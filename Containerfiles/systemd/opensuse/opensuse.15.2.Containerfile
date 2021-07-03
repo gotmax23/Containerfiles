@@ -5,7 +5,6 @@
 # vim: set filetype=jinja.dockerfile:
 
 FROM registry.opensuse.org/opensuse/leap:15.2
-
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 

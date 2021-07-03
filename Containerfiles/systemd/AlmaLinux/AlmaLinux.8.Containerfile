@@ -5,7 +5,6 @@
 # vim: set filetype=jinja.dockerfile:
 
 FROM docker.io/library/almalinux:8
-
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 

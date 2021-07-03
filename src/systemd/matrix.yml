@@ -151,11 +151,12 @@ distros:
     distro_family: RedHat
     vars:
       baseimage_repo: "docker.io/library/centos"
+      package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} update -y && {{ PACKAGE_MGR_NAME }} -y --setopt=tsflags=nodoc install"
     outputs:
       - galaxy_version: 7
         vars:
           package_mgr_name: "yum"
-          package_mgr_install_cmd: "yum -y install"
+          #package_mgr_install_cmd: "yum -y install"
           python_version: "2"
           extra_CI_image_repos:
             - "quay.io/gotmax23/el-systemd:7"

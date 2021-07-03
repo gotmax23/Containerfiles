@@ -5,7 +5,6 @@
 # vim: set filetype=jinja.dockerfile:
 
 FROM registry.access.redhat.com/ubi7:latest
-
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 

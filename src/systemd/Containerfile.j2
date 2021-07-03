@@ -2,7 +2,7 @@
 
 # vim: set filetype=jinja.dockerfile:
 
-FROM {{ BASEIMAGE }}
+FROM {{ BASEIMAGE }}{% if distro['name'] == "CentOS" %} as update{% endif %}
 
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
@@ -20,6 +20,10 @@ RUN {{ PACKAGE_MGR_INSTALL_CMD }} \
 RUN systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service systemd-udev-trigger.service systemd-udevd.service systemd-random-seed.service systemd-machine-id-commit.service
 {% endif %}
 
+{% if distro['name'] == "CentOS" %}
+FROM scratch
+COPY --from=update / /
+{% endif %}
 CMD ["{{ DOCKER_CMD }}"]
 {% if DOCKER_STOPSIGNAL is defined %}
 STOPSIGNAL {{ DOCKER_STOPSIGNAL }}
