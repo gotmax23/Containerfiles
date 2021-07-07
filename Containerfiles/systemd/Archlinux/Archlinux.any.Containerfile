@@ -9,7 +9,7 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
 # Install systemd and python requirements and clean up
-RUN pacman -Syu --noconfirm && pacman -S --noconfirm \
+RUN pacman -Syu --noconfirm && pacman -S --needed --noconfirm \
     systemd python3 sudo systemd-sysvcompat \
 && pacman -Scc \
 && rm -rf /usr/share/doc /usr/share/man
