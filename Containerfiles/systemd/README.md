@@ -2,7 +2,7 @@
 
 ## Description
 
-I built these containers for use with Molecule and Podman to test Ansible roles and playbooks. However, I recommend using Podman because it has better support for running systemd inside containers, requiring no special configuration. Naturally, it is more secure, as it doesn't require a daemon. However, as long as your distro does not use Cgroups V2/Unified Hierarchy (or you manually disable it), you can run these images with Docker, as well.
+I built these containers for use with Molecule and Podman to test Ansible roles and playbooks. I recommend using Podman over Docker because it has better support for running systemd inside containers, requiring no special configuration. Naturally, it is more secure, as it doesn't require a daemon. However, as long as your distro does not use Cgroups V2/Unified Hierarchy[^3] (or you manually disable it), you can run these images with Docker, as well.
 
 In order to ease maintenance, these Containerfiles are templated by an Ansible playbook located in [`src/systemd`](https://github.com/gotmax23/Containerfiles/tree/main/src/systemd). I am still working on finalizing the code and writing documentation for possible contributors.
 
@@ -58,7 +58,7 @@ container_repo: quay.io/gotmax23/redhat-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
 | -------------- | ---------------- | ------------------------------------ |
-| 7              | 7                | 7                                    |
+| 7              | 7                | 7[^3]                                |
 | 8,latest       | 8                | 8                                    |
 
 ### [AlmaLinux](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/AlmaLinux)
@@ -89,7 +89,7 @@ container_repo: quay.io/gotmax23/centos-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
 | -------------- | ---------------- | ------------------------------------ |
-| 7              | 7                | 7                                    |
+| 7              | 7                | 7[^3]                                |
 | 8,latest       | 8                | 8                                    |
 
 ### quay.io/gotmax23/el-systemd repo
@@ -142,7 +142,7 @@ There is also an image for Tumbleweed.
 ```yaml
 ansible_os_family: Suse
 ansible_distribution: "openSUSE Tumbleweed"
-ansible_distribution_major_version: 20210610 #Changes monthly
+ansible_distribution_major_version: 20210704 #Changes Daily, it seems
 
 # There is no `galaxy_platform` for Tumbleweed
 tags:
@@ -176,3 +176,5 @@ These images are inspired by `geerlingguy` and `robertdebock`'s Ansible images
 [^1]: This distro version is not listed at [https://galaxy.ansible.com/api/v1/platforms/](https://galaxy.ansible.com/api/v1/platforms/).
 
 [^2]: https://developers.redhat.com/articles/ubi-faq#community
+
+[^3]: EL 7 comes with a very old version of Systemd that is not compatible with Cgroups V2 at all (even with Podman).
