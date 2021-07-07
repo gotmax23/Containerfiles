@@ -10,6 +10,8 @@ In order to ease maintenance, these Containerfiles are templated by an Ansible p
 
 As you will see below, I have listed the values for a couple major Ansible variables for each image, as well as [the platforms and versions that Ansible Galaxy uses](https://galaxy.ansible.com/api/v1/platforms/). I tried to name the Containers like this: `"quay.io/gotmax23{{ galaxy_platform | lower }}/{{ galaxy_version | lower }}-systemd"`.
 
+Github does not properly display markdown footnotes. `[^1]` is an example. Please manually scroll to the `## Footnotes` section.
+
 ### [Archlinux](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Archlinux)
 
 ```yaml
@@ -43,6 +45,8 @@ container_repo: quay.io/gotmax23/debian-systemd
 
 ### [RedHat](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/RedHat)
 
+These images are based on RedHat's UBI (Universal Base Image). UBI and images based on it are free to use without a RedHat subscription. However, if they are not used on a registered RedHat system, the package selection is limited. For example, it is not possible to install the dependencies needed for many EPEL packages without a RedHat subscription[^2]. Therefore, I recommend using the CentOS and AlmaLinux based images, instead.
+
 ```yaml
 ansible_os_family: RedHat
 ansible_distribution: RedHat
@@ -56,6 +60,47 @@ container_repo: quay.io/gotmax23/redhat-systemd
 | -------------- | ---------------- | ------------------------------------ |
 | 7              | 7                | 7                                    |
 | 8,latest       | 8                | 8                                    |
+
+### [AlmaLinux](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/AlmaLinux)
+
+```yaml
+ansible_os_family: RedHat
+ansible_distribution: AlmaLinux
+
+# These aren't actually Ansible variables
+galaxy_platform: EL
+container_repo: quay.io/gotmax23/almalinux-systemd
+```
+
+| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
+| -------------- | ---------------- | ------------------------------------ |
+| 8,latest       | 8                | 8                                    |
+
+### [CentOS](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/CentOS)
+
+```yaml
+ansible_os_family: RedHat
+ansible_distribution: CentOS
+
+# These aren't actually Ansible variables
+galaxy_platform: EL
+container_repo: quay.io/gotmax23/centos-systemd
+```
+
+| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
+| -------------- | ---------------- | ------------------------------------ |
+| 7              | 7                | 7                                    |
+| 8,latest       | 8                | 8                                    |
+
+### quay.io/gotmax23/el-systemd repo
+
+The quay.io/gotmax23/el-systemd:latest and quay.io/gotmax23/el-systemd:8 tags use the [AlmaLinux 8 Containerfile](https://github.com/gotmax23/Containerfiles/blob/main/Containerfiles/systemd/AlmaLinux/AlmaLinux.8.Containerfile).
+The quay.io/gotmax23/el-systemd:7 tag uses the [CentOS 7 Containerile](https://github.com/gotmax23/Containerfiles/blob/main/Containerfiles/systemd/CentOS/CentOS.7.Containerfile).
+
+This solves two problems:
+
+1. EL containers follow the `"quay.io/gotmax23{{ galaxy_platform | lower }}/{{ galaxy_version | lower }}-systemd"` rule I set earlier.
+2. It will still be possible to test on both EL 7 and EL 8 after [CentOS 8's early EOL](https://blog.centos.org/2020/12/future-is-centos-stream/).
 
 ### [Fedora](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Fedora)
 
@@ -129,3 +174,5 @@ These images are inspired by `geerlingguy` and `robertdebock`'s Ansible images
 ## Footnotes
 
 [^1]: This distro version is not listed at [https://galaxy.ansible.com/api/v1/platforms/](https://galaxy.ansible.com/api/v1/platforms/).
+
+[^2]: https://developers.redhat.com/articles/ubi-faq#community
