@@ -39,6 +39,7 @@ all_vars_list:
   - extra_CI_image_tags
   - extra_CI_image_repos
   - build_cron
+  - update_ms
 
 ##########
 all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
@@ -62,6 +63,7 @@ defaults:
     extra_CI_image_tags: []
     extra_CI_image_repos: []
     build_cron: "10 1 * * 0"
+    update_ms: false
 
 distro_families:
   Debian:
@@ -155,6 +157,7 @@ distros:
     vars:
       baseimage_repo: "docker.io/library/centos"
       package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} update -y && {{ PACKAGE_MGR_NAME }} -y --setopt=tsflags=nodoc install"
+      update_ms: true
     outputs:
       - galaxy_version: 7
         vars:
