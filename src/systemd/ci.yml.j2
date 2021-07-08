@@ -8,7 +8,7 @@ name: "{{ type }}-{{ distro['name'] }}.{{ output['galaxy_version'] }}: Build and
       - "{{ CF_output_path }}"
       - "{{ CI_output_path }}"
   schedule:
-    - cron: "10 1 * * 0"
+    - cron: "{{ BUILD_CRON }}"
   workflow_dispatch:
 
 jobs:

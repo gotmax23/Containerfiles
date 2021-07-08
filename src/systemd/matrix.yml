@@ -38,6 +38,7 @@ all_vars_list:
   - default_packages
   - extra_CI_image_tags
   - extra_CI_image_repos
+  - build_cron
 
 ##########
 all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
@@ -60,6 +61,7 @@ defaults:
       - "{{ output['galaxy_version'] }}"
     extra_CI_image_tags: []
     extra_CI_image_repos: []
+    build_cron: "10 1 * * 0"
 
 distro_families:
   Debian:
@@ -110,6 +112,7 @@ distros:
             - linux/amd64
           extra_CI_image_tags:
             - "latest"
+          build_cron: "10 1 * * *"
 
   - name: Debian
     distro_family: Debian
@@ -214,6 +217,7 @@ distros:
           baseimage: registry.opensuse.org/opensuse/tumbleweed
           extra_CI_image_repos:
             - "quay.io/gotmax23/opensuse-tumbleweed-systemd:latest"
+          build_cron: "10 1 * * *"
 
   - name: Ubuntu
     distro_family: Debian
