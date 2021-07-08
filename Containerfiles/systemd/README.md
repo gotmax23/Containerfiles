@@ -95,6 +95,7 @@ container_repo: quay.io/gotmax23/centos-systemd
 ### quay.io/gotmax23/el-systemd repo
 
 The quay.io/gotmax23/el-systemd:latest and quay.io/gotmax23/el-systemd:8 tags use the [AlmaLinux 8 Containerfile](https://github.com/gotmax23/Containerfiles/blob/main/Containerfiles/systemd/AlmaLinux/AlmaLinux.8.Containerfile).
+
 The quay.io/gotmax23/el-systemd:7 tag uses the [CentOS 7 Containerile](https://github.com/gotmax23/Containerfiles/blob/main/Containerfiles/systemd/CentOS/CentOS.7.Containerfile).
 
 This solves two problems:
@@ -175,6 +176,6 @@ These images are inspired by `geerlingguy` and `robertdebock`'s Ansible images
 
 [^1]: This distro version is not listed at [https://galaxy.ansible.com/api/v1/platforms/](https://galaxy.ansible.com/api/v1/platforms/).
 
-[^2]: https://developers.redhat.com/articles/ubi-faq#community
+[^2]: See https://developers.redhat.com/articles/ubi-faq#community
 
 [^3]: EL 7 comes with a very old version of Systemd that is not compatible with Cgroups V2 at all (even with Podman).
