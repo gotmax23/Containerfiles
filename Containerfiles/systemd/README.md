@@ -10,7 +10,7 @@ In order to ease maintenance, these Containerfiles are templated by an Ansible p
 
 As you will see below, I have listed the values for a couple major Ansible variables for each image, as well as [the platforms and versions that Ansible Galaxy uses](https://galaxy.ansible.com/api/v1/platforms/). I tried to name the Containers like this: `"quay.io/gotmax23{{ galaxy_platform | lower }}/{{ galaxy_version | lower }}-systemd"`.
 
-Github does not properly display markdown footnotes. `[^1]` is an example. Please manually scroll to the `## Footnotes` section.
+Github does not properly display markdown footnotes. `[^1]` is an example. Please manually scroll to the [`## Footnotes`](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/#Footnotes) section.
 
 ### [Archlinux](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Archlinux)
 
