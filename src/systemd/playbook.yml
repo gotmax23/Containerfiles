@@ -6,12 +6,6 @@
   vars_files:
     - matrix.yml
 
-  pre_tasks:
-    - name: Remove old GH Actions workflow file
-      file:
-        path: "{{ repo_root }}/.github/workflows/systemd-ci.yml"
-        state: absent
-
-  roles:
-    - name: gotmax23.containerfile_generator
-      role: "./generator"
+  tasks:
+    - tags: [ always ]
+      include_role: name="./generator"

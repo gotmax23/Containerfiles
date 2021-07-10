@@ -1,10 +1,12 @@
 ---
 - name: (Temporarily) Set variables in `all_vars_list` to 'EMPTY' to avoid undefined var error
+  tags: [ always ]
   set_fact:
     "{{ item|upper }}": 'EMPTY'
   loop: "{{ all_vars_list }}"
 
 - name: Loop over distros
+  tags: [ always ]
   include_tasks:
     file: distro.yml
   loop: "{{ distros }}"
