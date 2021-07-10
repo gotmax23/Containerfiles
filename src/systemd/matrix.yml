@@ -40,6 +40,7 @@ all_vars_list:
   - extra_CI_image_repos
   - build_cron
   - update_ms
+  - masked_services
 
 ##########
 all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
@@ -64,6 +65,17 @@ defaults:
     extra_CI_image_repos: []
     build_cron: "10 1 * * 0"
     update_ms: false
+    masked_services:
+      - systemd-remount-fs.service
+      - dev-hugepages.mount
+      - sys-fs-fuse-connections.mount
+      - systemd-logind.service
+      - getty.target
+      - console-getty.service
+      - systemd-udev-trigger.service
+      - systemd-udevd.service
+      - systemd-random-seed.service
+      - systemd-machine-id-commit.service
 
 distro_families:
   Debian:

@@ -1,7 +1,5 @@
 {{ ansible_managed | comment }}
 
-# vim: set filetype=jinja.dockerfile:
-
 FROM {{ BASEIMAGE }}{% if UPDATE_MS | bool %} as update{% endif %}
 
 LABEL maintainer="Maxwell G <gotmax23@github>"
@@ -10,14 +8,18 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 ENV DEBIAN_FRONTEND=noninteractive
 {% endif %}
 
-# Install systemd and python requirements and clean up
-RUN {{ PACKAGE_MGR_INSTALL_CMD }} \
-    {{ all_packages | join(' ') }} \
-&& {{ PACKAGE_MGR_CLEAN_CMD }} \
-&& rm -rf /usr/share/doc /usr/share/man{% if PACKAGE_MGR_NAME == "apt" %} /var/lib/apt/lists/*{% endif %}
-
-{% if GALAXY_VERSION == "7" %}
-RUN systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service systemd-udev-trigger.service systemd-udevd.service systemd-random-seed.service systemd-machine-id-commit.service
+RUN echo "**** Installing packages and updating if necessary" \
+    && {{ PACKAGE_MGR_INSTALL_CMD }} \
+        {{ all_packages | join(' ') }} \
+    && echo "**** Cleaning package cache ****" \
+    && {{ PACKAGE_MGR_CLEAN_CMD }} \
+{% if PACKAGE_MGR_NAME == "apt" %}
+    && rm -rf /var/lib/apt/lists/* \
+{% endif %}
+{% if MASKED_SERVICES != [] %}
+    && echo "**** Masking systemd services ****" \
+    && systemctl mask \
+        {{ MASKED_SERVICES | join(' ') }}
 {% endif %}
 
 {% if UPDATE_MS | bool %}
@@ -28,3 +30,8 @@ CMD ["{{ DOCKER_CMD }}"]
 {% if DOCKER_STOPSIGNAL is defined %}
 STOPSIGNAL {{ DOCKER_STOPSIGNAL }}
 {% endif %}
+
+# {{ "vim: set filetype=dockerfile:" }}
+{#
+# vim: set filetype=dockerfile.jinja2:
+#}

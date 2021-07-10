@@ -2,17 +2,20 @@
 # Ansible managed
 #
 
-# vim: set filetype=jinja.dockerfile:
-
 FROM docker.io/library/archlinux:base
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
-# Install systemd and python requirements and clean up
-RUN pacman -Syu --noconfirm && pacman -S --needed --noconfirm \
-    systemd python3 sudo systemd-sysvcompat \
-&& pacman -Scc \
-&& rm -rf /usr/share/doc /usr/share/man
+RUN echo "**** Installing packages and updating if necessary" \
+    && pacman -Syu --noconfirm && pacman -S --needed --noconfirm \
+        systemd python3 sudo systemd-sysvcompat \
+    && echo "**** Cleaning package cache ****" \
+    && pacman -Scc \
+    && echo "**** Masking systemd services ****" \
+    && systemctl mask \
+        systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service systemd-udev-trigger.service systemd-udevd.service systemd-random-seed.service systemd-machine-id-commit.service
 
 CMD ["/sbin/init"]
 STOPSIGNAL SIGRTMIN+3
+
+# vim: set filetype=dockerfile:

@@ -2,18 +2,22 @@
 # Ansible managed
 #
 
-# vim: set filetype=jinja.dockerfile:
-
 FROM docker.io/library/debian:bullseye
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install systemd and python requirements and clean up
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    systemd python3 sudo systemd-sysv python3-apt \
-&& apt-get clean \
-&& rm -rf /usr/share/doc /usr/share/man /var/lib/apt/lists/*
+RUN echo "**** Installing packages and updating if necessary" \
+    && apt-get update && apt-get install -y --no-install-recommends \
+        systemd python3 sudo systemd-sysv python3-apt \
+    && echo "**** Cleaning package cache ****" \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && echo "**** Masking systemd services ****" \
+    && systemctl mask \
+        systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service systemd-udev-trigger.service systemd-udevd.service systemd-random-seed.service systemd-machine-id-commit.service
 
 CMD ["/sbin/init"]
 STOPSIGNAL SIGRTMIN+3
+
+# vim: set filetype=dockerfile:
