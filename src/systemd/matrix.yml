@@ -110,6 +110,7 @@ distro_families:
       package_mgr_clean_cmd: "pacman -Scc"
       packages:
         - systemd-sysvcompat
+      masked_services: "{{ defaults['vars']['masked_services'] + ['systemd-firstboot.service'] }}"
 
 ##########
 
