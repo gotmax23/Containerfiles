@@ -133,17 +133,18 @@ container_repo: quay.io/gotmax23/opensuse-systemd
 
 Due to a discrepancy between `galaxy_platform` and `ansible_os_family`, these images (with the same tags) are also available at `quay.io/gotmax23/opensuse-leap-systemd`.
 
-| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
-| -------------- | ---------------- | ------------------------------------ |
-| 15.2           | 15.2             | 15                                   |
-| 15.3,latest    | 15.3[^1]         | 15                                   |
+| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` |
+| -------------- | ---------------- | ------------------------------------ | ------------------------------ |
+| 15.2           | 15.2             | 15                                   | 15.2                           |
+| 15.3,latest    | 15.3[^1]         | 15                                   | 15.3                           |
 
 There is also an image for Tumbleweed.
 
 ```yaml
 ansible_os_family: Suse
 ansible_distribution: "openSUSE Tumbleweed"
-ansible_distribution_major_version: 20210704 #Changes Daily, it seems
+ansible_distribution_major_version: "20210710" #Changes Daily, it seems
+ansible_distribution_version: "20210710" #Changes Daily, it seems
 
 # There is no `galaxy_platform` for Tumbleweed
 tags:
@@ -176,6 +177,6 @@ These images are inspired by `geerlingguy` and `robertdebock`'s Ansible images
 
 [^1]: This distro version is not listed at [https://galaxy.ansible.com/api/v1/platforms/](https://galaxy.ansible.com/api/v1/platforms/).
 
-[^2]: See https://developers.redhat.com/articles/ubi-faq#community
+[^2]: See [https://developers.redhat.com/articles/ubi-faq#community](https://developers.redhat.com/articles/ubi-faq#community).
 
 [^3]: EL 7 comes with a very old version of Systemd that is not compatible with Cgroups V2 at all (even with Podman).
