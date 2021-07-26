@@ -2,7 +2,7 @@
 # Ansible managed
 #
 
-FROM docker.io/library/archlinux:base
+FROM docker.io/archlinux/archlinux:base
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
