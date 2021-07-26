@@ -59,4 +59,3 @@ jobs:
             quay.io/gotmax23/ubuntu-systemd:latest
             quay.io/gotmax23/ubuntu-systemd:20
             quay.io/gotmax23/ubuntu-systemd:20.04
-# vim: set filetype=jinja.yaml:

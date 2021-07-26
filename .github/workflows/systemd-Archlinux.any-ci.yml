@@ -57,4 +57,3 @@ jobs:
           tags: |
             quay.io/gotmax23/archlinux-systemd:any
             quay.io/gotmax23/archlinux-systemd:latest
-# vim: set filetype=jinja.yaml:

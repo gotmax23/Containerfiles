@@ -57,4 +57,3 @@ jobs:
           tags: |
             quay.io/gotmax23/fedora-systemd:35
             quay.io/gotmax23/fedora-systemd:rawhide
-# vim: set filetype=jinja.yaml:

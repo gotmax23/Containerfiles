@@ -57,4 +57,3 @@ jobs:
           tags: |
             quay.io/gotmax23/centos-systemd:8
             quay.io/gotmax23/centos-systemd:latest
-# vim: set filetype=jinja.yaml:

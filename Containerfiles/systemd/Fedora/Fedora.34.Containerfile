@@ -6,7 +6,7 @@ FROM registry.fedoraproject.org/fedora:34
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
-RUN echo "**** Installing packages and updating if necessary" \
+RUN echo "**** Installing packages and updating if necessary ****" \
     && dnf -y --setopt=tsflags=nodoc install \
         systemd python3 sudo \
     && echo "**** Cleaning package cache ****" \

@@ -59,4 +59,3 @@ jobs:
             quay.io/gotmax23/debian-systemd:latest
             quay.io/gotmax23/debian-systemd:10
             quay.io/gotmax23/debian-systemd:stable
-# vim: set filetype=jinja.yaml:

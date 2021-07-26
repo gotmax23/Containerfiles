@@ -7,7 +7,7 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN echo "**** Installing packages and updating if necessary" \
+RUN echo "**** Installing packages and updating if necessary ****" \
     && apt-get update && apt-get install -y --no-install-recommends \
         systemd python3 sudo systemd-sysv python3-apt \
     && echo "**** Cleaning package cache ****" \

@@ -6,7 +6,7 @@ FROM registry.opensuse.org/opensuse/tumbleweed
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
-RUN echo "**** Installing packages and updating if necessary" \
+RUN echo "**** Installing packages and updating if necessary ****" \
     && zypper install -y \
         systemd python3 sudo systemd-sysvinit python3-xml \
     && echo "**** Cleaning package cache ****" \

@@ -6,7 +6,7 @@ FROM registry.access.redhat.com/ubi7:latest
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
-RUN echo "**** Installing packages and updating if necessary" \
+RUN echo "**** Installing packages and updating if necessary ****" \
     && yum -y install \
         systemd python2 sudo \
     && echo "**** Cleaning package cache ****" \

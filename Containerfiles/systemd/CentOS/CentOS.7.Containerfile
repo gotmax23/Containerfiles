@@ -6,7 +6,7 @@ FROM docker.io/library/centos:7 as update
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
-RUN echo "**** Installing packages and updating if necessary" \
+RUN echo "**** Installing packages and updating if necessary ****" \
     && yum update -y && yum -y --setopt=tsflags=nodoc install \
         systemd python2 sudo \
     && echo "**** Cleaning package cache ****" \

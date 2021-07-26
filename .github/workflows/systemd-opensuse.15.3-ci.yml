@@ -59,4 +59,3 @@ jobs:
             quay.io/gotmax23/opensuse-systemd:latest
             quay.io/gotmax23/opensuse-leap-systemd:15.3
             quay.io/gotmax23/opensuse-leap-systemd:latest
-# vim: set filetype=jinja.yaml:

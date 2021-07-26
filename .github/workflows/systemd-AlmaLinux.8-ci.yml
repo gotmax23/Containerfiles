@@ -59,4 +59,3 @@ jobs:
             quay.io/gotmax23/almalinux-systemd:latest
             quay.io/gotmax23/el-systemd:8
             quay.io/gotmax23/el-systemd:latest
-# vim: set filetype=jinja.yaml:
