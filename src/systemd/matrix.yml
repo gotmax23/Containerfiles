@@ -41,6 +41,7 @@ all_vars_list:
   - build_cron
   - update_ms
   - masked_services
+  - fix_seccomp
 
 ##########
 all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
@@ -76,6 +77,7 @@ defaults:
       - systemd-udevd.service
       - systemd-random-seed.service
       - systemd-machine-id-commit.service
+    fix_seccomp: false
 
 distro_families:
   Debian:
@@ -210,10 +212,13 @@ distros:
           extra_CI_image_tags:
             - "latest"
       - galaxy_version: 35
+        vars:
+          fix_seccomp: true
       - galaxy_version: 36
         vars:
           extra_CI_image_tags:
             - "rawhide"
+          fix_seccomp: true
 
   - name: opensuse
     distro_family: opensuse
