@@ -25,6 +25,7 @@ jobs:
           sudo cp seccomp.def.orig.json /etc/docker/seccomp.json
           sudo cp src/seccomp_fix/daemon.json /etc/docker/
           sudo systemctl restart docker
+          sleep 5
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
       - name: Login to quay.io
