@@ -4,7 +4,7 @@
  				"clock_getres_time64",
  				"clock_gettime",
  				"clock_gettime64",
-+                                "clone3",
++                               "clone3",
  				"clock_nanosleep",
  				"clock_nanosleep_time64",
  				"close",
