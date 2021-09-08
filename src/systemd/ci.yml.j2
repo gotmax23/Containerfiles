@@ -17,6 +17,20 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - name: Calculate Docker image tags # Based on https://gist.github.com/sagikazarmark/0119e1f3dde0d8e755fd0ee5a5ef4cdc
+        id: tags
+        run: |
+{%- raw %}
+          case $GITHUB_REF in
+            refs/tags/*)  VERSION=${GITHUB_REF#refs/tags/};;
+            refs/heads/*) VERSION=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g');;
+            refs/pull/*)  VERSION=pr-${{ github.event.number }};;
+            *)            VERSION=sha-${GITHUB_SHA::8};;
+          esac
+          echo ::set-output name=version::${VERSION}
+          echo ::set-output name=commit_hash::${GITHUB_SHA::8}
+          echo ::set-output name=build_date::$(git show -s --format=%cI)
+{% endraw %}
 {% if FIX_SECCOMP | bool %}
       # See https://bugzilla.redhat.com/show_bug.cgi?id=1988199#c3 for more information
       - name: Fix seccomp
@@ -36,20 +50,6 @@ jobs:
 {%- raw %}
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
-{% endraw %}
-      - name: Calculate Docker image tags # Based on https://gist.github.com/sagikazarmark/0119e1f3dde0d8e755fd0ee5a5ef4cdc
-        id: tags
-        run: |
-{%- raw %}
-          case $GITHUB_REF in
-            refs/tags/*)  VERSION=${GITHUB_REF#refs/tags/};;
-            refs/heads/*) VERSION=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g');;
-            refs/pull/*)  VERSION=pr-${{ github.event.number }};;
-            *)            VERSION=sha-${GITHUB_SHA::8};;
-          esac
-          echo ::set-output name=version::${VERSION}
-          echo ::set-output name=commit_hash::${GITHUB_SHA::8}
-          echo ::set-output name=build_date::$(git show -s --format=%cI)
 {% endraw %}
       - name: Build and push image.
         uses: docker/build-push-action@v2
