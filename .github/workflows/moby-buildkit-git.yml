@@ -6,8 +6,8 @@ name: "moby-buildkit-git: Build and push container images"
 #      - main
     paths:
       - ".github/workflows/moby-buildkit-git.yml"
-  schedule:
-    - cron: "10 1 * * *"
+#  schedule:
+#    - cron: "10 1 * * *"
   workflow_dispatch:
 
 jobs:
