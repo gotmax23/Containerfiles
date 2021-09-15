@@ -118,7 +118,8 @@ container_repo: quay.io/gotmax23/fedora-systemd
 | -------------- | ---------------- | ------------------------------------ |
 | 33             | 33[^1]           | 33                                   |
 | 34,latest      | 34[^1]           | 34                                   |
-| 35,rawhide     | 35[^1]           | 35                                   |
+| 35             | 35[^1]           | 35                                   |
+| 36,rawhide     | 36[^1]           | 36                                   |
 
 ### [opensuse](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/opensuse)
 
@@ -143,8 +144,8 @@ There is also an image for Tumbleweed.
 ```yaml
 ansible_os_family: Suse
 ansible_distribution: "openSUSE Tumbleweed"
-ansible_distribution_major_version: "20210710" #Changes Daily, it seems
-ansible_distribution_version: "20210710" #Changes Daily, it seems
+ansible_distribution_major_version: "20210710"  # Changes Daily, it seems
+ansible_distribution_version: "20210710"  # Changes Daily, it seems
 
 # There is no `galaxy_platform` for Tumbleweed
 tags:
@@ -175,7 +176,7 @@ These images are inspired by `geerlingguy` and `robertdebock`'s Ansible images
 
 ## Footnotes
 
-[^1]: This distro version is not listed at [https://galaxy.ansible.com/api/v1/platforms/](https://galaxy.ansible.com/api/v1/platforms/).
+[^1]: This distro version is not listed at [https://galaxy.ansible.com/api/v1/platforms/](https://galaxy.ansible.com/api/v1/platforms/). Unfortunately, Ansible Galaxy has not updated its platform list in a while, and certain newer distros versions are missing. The `galaxy_version`s that link to this footnote are simply a reflection of what the platform version *should* be based on the existing pattern. Please see [ansible/galaxy#2533](https://github.com/ansible/galaxy/issues/2533) for more information.
 
 [^2]: See [https://developers.redhat.com/articles/ubi-faq#community](https://developers.redhat.com/articles/ubi-faq#community).
 
