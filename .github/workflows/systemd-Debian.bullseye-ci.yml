@@ -56,5 +56,6 @@ jobs:
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
             quay.io/gotmax23/debian-systemd:bullseye
-            quay.io/gotmax23/debian-systemd:testing
+            quay.io/gotmax23/debian-systemd:latest
+            quay.io/gotmax23/debian-systemd:stable
             quay.io/gotmax23/debian-systemd:11

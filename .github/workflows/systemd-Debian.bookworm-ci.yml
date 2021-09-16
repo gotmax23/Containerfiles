@@ -1,12 +1,12 @@
 ---
-name: "systemd-Debian.buster: Build and push container images"
+name: "systemd-Debian.bookworm: Build and push container images"
 'on':
   push:
     branches:
       - main
     paths:
-      - "Containerfiles/systemd/Debian/Debian.buster.Containerfile"
-      - ".github/workflows/systemd-Debian.buster-ci.yml"
+      - "Containerfiles/systemd/Debian/Debian.bookworm.Containerfile"
+      - ".github/workflows/systemd-Debian.bookworm-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./Containerfiles/systemd/Debian
-          file: ./Containerfiles/systemd/Debian/Debian.buster.Containerfile
+          file: ./Containerfiles/systemd/Debian/Debian.bookworm.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           labels: |
@@ -55,6 +55,6 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
-            quay.io/gotmax23/debian-systemd:buster
-            quay.io/gotmax23/debian-systemd:10
-            quay.io/gotmax23/debian-systemd:oldstable
+            quay.io/gotmax23/debian-systemd:bookworm
+            quay.io/gotmax23/debian-systemd:testing
+            quay.io/gotmax23/debian-systemd:12

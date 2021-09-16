@@ -38,10 +38,13 @@ galaxy_platform: Debian
 container_repo: quay.io/gotmax23/debian-systemd
 ```
 
-| Available Tags          | `galaxy_version` | `ansible_distribution_major_verison` |
-| ----------------------- | ---------------- | ------------------------------------ |
-| latest,buster,10,stable | buster           | buster                               |
-| bullseye,testing        | bullseye         | testing                              |
+| Available Tags            | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_release` |
+| ------------------------- | ---------------- | ------------------------------------ | ------------------------------ |
+| buster,10,oldstable       | buster           | 10                                   | buster                         |
+| latest,bullseye,11,stable | bullseye         | 11                                   | bullseye                       |
+| bookworm,12,testing       | bookworm[^1]     | NA                                   | NA                             |
+
+For Debian, `ansible_distribution_major_version` and `ansible_distribution_version` are the same.
 
 ### [RedHat](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/RedHat)
 

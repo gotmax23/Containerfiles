@@ -139,14 +139,19 @@ distros:
       - galaxy_version: buster
         vars:
           extra_CI_image_tags:
-            - "latest"
             - "10"
-            - "stable"
+            - "oldstable"
       - galaxy_version: bullseye
         vars:
           extra_CI_image_tags:
-            - "testing"
+            - "latest"
+            - "stable"
             - "11"
+      - galaxy_version: bookworm
+        vars:
+          extra_CI_image_tags:
+            - "testing"
+            - "12"
 
   - name: RedHat
     distro_family: RedHat
