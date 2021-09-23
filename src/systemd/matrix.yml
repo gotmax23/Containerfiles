@@ -96,7 +96,7 @@ distro_families:
       package_mgr_clean_cmd: "{{ PACKAGE_MGR_NAME | default('') }} clean all"
       packages: []
 
-  opensuse:
+  Suse:
     vars:
       package_mgr_name: zypper
       package_mgr_install_cmd: "zypper install -y"
@@ -226,7 +226,7 @@ distros:
           fix_seccomp: true
 
   - name: opensuse
-    distro_family: opensuse
+    distro_family: Suse
     vars:
       baseimage_repo: registry.opensuse.org/opensuse/leap
     outputs:
@@ -247,6 +247,18 @@ distros:
           extra_CI_image_repos:
             - "quay.io/gotmax23/opensuse-tumbleweed-systemd:latest"
           build_cron: "10 1 * * *"
+  - name: SLES
+    distro_family: Suse
+    vars:
+      baseimage_repo: registry.suse.com/suse/sle15
+    outputs:
+      - baseimage_version: 15.3
+        extra_CI_image_repos:
+          - "quay.io/gotmax23/sles-systemd:latest"
+          - "quay.io/gotmax23/sles-systemd:15"
+#       - baseimage_version: 15.2
+#         extra_CI_image_repos:
+#           - "quay.io/gotmax23/sles-systemd:15.2"
 
   - name: Ubuntu
     distro_family: Debian
