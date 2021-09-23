@@ -6,10 +6,10 @@ repo_root: "{{ lookup('env', 'PWD') }}"
 template_src_dir: "src/{{ type }}"
 CF_template_src_path: "{{ template_src_dir }}/Containerfile.j2"
 CF_output_dir: "Containerfiles/{{ type }}/{{ distro['name'] }}"
-CF_output_path: "{{ CF_output_dir }}/{{ distro['name'] }}.{{ output['galaxy_version'] }}.Containerfile"
+CF_output_path: "{{ CF_output_dir }}/{{ distro['name'] }}.{{ output['baseimage_version'] }}.Containerfile"
 
 CI_template_src_path: "{{ template_src_dir }}/ci.yml.j2"
-CI_output_path: ".github/workflows/{{ type }}-{{ distro['name'] }}.{{ output['galaxy_version'] }}-ci.yml"
+CI_output_path: ".github/workflows/{{ type }}-{{ distro['name'] }}.{{ output['baseimage_version'] }}-ci.yml"
 
 matrix_file: "{{ repo_root }}/{{ template_src_dir }}/matrix.yml"
 
@@ -58,10 +58,10 @@ defaults:
       - systemd
       - "python{{ PYTHON_VERSION }}"
       - sudo
-    baseimage: "{{ BASEIMAGE_REPO }}:{{ GALAXY_VERSION }}"
+    baseimage: "{{ BASEIMAGE_REPO }}:{{ BASEIMAGE_VERSION }}"
     CI_image_repo: "quay.io/gotmax23/{{ distro['name'] | lower}}-{{ type }}"
     CI_image_tags:
-      - "{{ output['galaxy_version'] }}"
+      - "{{ output['baseimage_version'] }}"
     extra_CI_image_tags: []
     extra_CI_image_repos: []
     build_cron: "10 1 * * 0"
@@ -123,7 +123,7 @@ distros:
       baseimage: docker.io/archlinux/archlinux:base
       baseimage_repo: ''
     outputs:
-      - galaxy_version: any
+      - baseimage_version: any
         vars:
           docker_platforms:
             - linux/amd64
@@ -136,18 +136,18 @@ distros:
     vars:
       baseimage_repo: docker.io/library/debian
     outputs:
-      - galaxy_version: buster
+      - baseimage_version: buster
         vars:
           extra_CI_image_tags:
             - "10"
             - "oldstable"
-      - galaxy_version: bullseye
+      - baseimage_version: bullseye
         vars:
           extra_CI_image_tags:
             - "latest"
             - "stable"
             - "11"
-      - galaxy_version: bookworm
+      - baseimage_version: bookworm
         vars:
           extra_CI_image_tags:
             - "testing"
@@ -158,7 +158,7 @@ distros:
     vars:
       baseimage_repo: '' #This variable is not used for the UBI-based images"
     outputs:
-      - galaxy_version: 7
+      - baseimage_version: 7
         vars:
           baseimage: "registry.access.redhat.com/ubi7:latest"
           package_mgr_name: "yum"
@@ -166,7 +166,7 @@ distros:
           python_version: "2"
           docker_platforms:
             - linux/amd64
-      - galaxy_version: 8
+      - baseimage_version: 8
         vars:
           baseimage: "registry.access.redhat.com/ubi8:latest"
           extra_CI_image_tags:
@@ -179,7 +179,7 @@ distros:
       package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} update -y && {{ PACKAGE_MGR_NAME }} -y --nodoc install"
       update_ms: true
     outputs:
-      - galaxy_version: 7
+      - baseimage_version: 7
         vars:
           package_mgr_name: "yum"
           package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} update -y && {{ PACKAGE_MGR_NAME }} -y --setopt=tsflags=nodoc install"
@@ -187,7 +187,7 @@ distros:
           python_version: "2"
           extra_CI_image_repos:
             - "quay.io/gotmax23/el-systemd:7"
-      - galaxy_version: 8
+      - baseimage_version: 8
         vars:
           package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} update -y && {{ PACKAGE_MGR_NAME }} -y --nodoc install"
           extra_CI_image_tags:
@@ -198,7 +198,7 @@ distros:
     vars:
       baseimage_repo: "docker.io/library/almalinux"
     outputs:
-      - galaxy_version: 8
+      - baseimage_version: 8
         vars:
           extra_CI_image_tags:
             - "latest"
@@ -211,15 +211,15 @@ distros:
     vars:
       baseimage_repo: registry.fedoraproject.org/fedora
     outputs:
-      - galaxy_version: 33
-      - galaxy_version: 34
+      - baseimage_version: 33
+      - baseimage_version: 34
         vars:
           extra_CI_image_tags:
             - "latest"
-      - galaxy_version: 35
+      - baseimage_version: 35
         vars:
           fix_seccomp: true
-      - galaxy_version: 36
+      - baseimage_version: 36
         vars:
           extra_CI_image_tags:
             - "rawhide"
@@ -230,18 +230,18 @@ distros:
     vars:
       baseimage_repo: registry.opensuse.org/opensuse/leap
     outputs:
-      - galaxy_version: 15.2
+      - baseimage_version: 15.2
         vars:
           extra_CI_image_repos:
             - "quay.io/gotmax23/opensuse-leap-systemd:15.2"
-      - galaxy_version: 15.3
+      - baseimage_version: 15.3
         vars:
           extra_CI_image_tags:
             - "latest"
           extra_CI_image_repos:
             - "quay.io/gotmax23/opensuse-leap-systemd:15.3"
             - "quay.io/gotmax23/opensuse-leap-systemd:latest"
-      - galaxy_version: tumbleweed
+      - baseimage_version: tumbleweed
         vars:
           baseimage: registry.opensuse.org/opensuse/tumbleweed
           extra_CI_image_repos:
@@ -253,18 +253,18 @@ distros:
     vars:
       baseimage_repo: docker.io/library/ubuntu
     outputs:
-      - galaxy_version: bionic
+      - baseimage_version: bionic
         vars:
           extra_CI_image_tags:
             - "18.04"
             - "18"
-      - galaxy_version: focal
+      - baseimage_version: focal
         vars:
           extra_CI_image_tags:
             - "latest"
             - "20"
             - "20.04"
-      - galaxy_version: hirsute
+      - baseimage_version: hirsute
         vars:
           extra_CI_image_tags:
             - "21"

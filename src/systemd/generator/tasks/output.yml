@@ -3,7 +3,7 @@
   tags: [ always ]
   set_fact:
     DISTRO_FAMILY: "{{ distro['distro_family'] }}"
-    GALAXY_VERSION: "{{ output['galaxy_version'] }}"
+    BASEIMAGE_VERSION: "{{ output['baseimage_version'] }}"
 
 - name: Define variables in `all_vars_list` based on hierarchy
   tags: [ always ]

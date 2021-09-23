@@ -1,5 +1,5 @@
 ---
-name: "{{ type }}-{{ distro['name'] }}.{{ output['galaxy_version'] }}: Build and push container images"
+name: "{{ type }}-{{ distro['name'] }}.{{ output['baseimage_version'] }}: Build and push container images"
 'on':
   push:
     branches:
