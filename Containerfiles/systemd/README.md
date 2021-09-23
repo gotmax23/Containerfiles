@@ -42,7 +42,7 @@ container_repo: quay.io/gotmax23/debian-systemd
 | ------------------------- | ---------------- | ------------------------------------ | ------------------------------ |
 | buster,10,oldstable       | buster           | 10                                   | buster                         |
 | latest,bullseye,11,stable | bullseye         | 11                                   | bullseye                       |
-| bookworm,12,testing       | bookworm[^1]     | NA                                   | NA                             |
+| bookworm,12,testing       | bookworm         | NA                                   | NA                             |
 
 For Debian, `ansible_distribution_major_version` and `ansible_distribution_version` are the same.
 
@@ -119,10 +119,10 @@ container_repo: quay.io/gotmax23/fedora-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
 | -------------- | ---------------- | ------------------------------------ |
-| 33             | 33[^1]           | 33                                   |
-| 34,latest      | 34[^1]           | 34                                   |
-| 35             | 35[^1]           | 35                                   |
-| 36,rawhide     | 36[^1]           | 36                                   |
+| 33             | 33               | 33                                   |
+| 34,latest      | 34               | 34                                   |
+| 35             | 35               | 35                                   |
+| 36,rawhide     | 36               | 36                                   |
 
 ### [opensuse](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/opensuse)
 
@@ -140,7 +140,7 @@ Due to a discrepancy between `galaxy_platform` and `ansible_os_family`, these im
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` |
 | -------------- | ---------------- | ------------------------------------ | ------------------------------ |
 | 15.2           | 15.2             | 15                                   | 15.2                           |
-| 15.3,latest    | 15.3[^1]         | 15                                   | 15.3                           |
+| 15.3,latest    | 15.3             | 15                                   | 15.3                           |
 
 There is also an image for Tumbleweed.
 
@@ -171,7 +171,7 @@ container_repo: quay.io/gotmax23/debian-systemd
 | ---------------- | ---------------- | ------------------------------------ |
 | bionic,18,18.04  | bionic           | 18                                   |
 | focal,20,20.04   | focal            | 20                                   |
-| hirsute,21,21.04 | hirsute[^1]      | 21                                   |
+| hirsute,21,21.04 | hirsute          | 21                                   |
 
 ## Credits
 
