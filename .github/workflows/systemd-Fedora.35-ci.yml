@@ -29,7 +29,7 @@ jobs:
           echo ::set-output name=version::${VERSION}
           echo ::set-output name=commit_hash::${GITHUB_SHA::8}
           echo ::set-output name=build_date::$(git show -s --format=%cI)
-      # See https://bugzilla.redhat.com/show_bug.cgi?id=1988199#c3 for more information
+      # See https://github.com/moby/moby/pull/42681 for more information
       - name: Download Docker with patched seccomp
         run: |
           sudo systemctl stop docker containerd
