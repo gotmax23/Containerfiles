@@ -167,8 +167,6 @@ galaxy_platform: SLES
 container_repo: quay.io/gotmax23/sles-systemd
 ```
 
-Due to a discrepancy between `galaxy_platform` and `ansible_os_family`, these images (with the same tags) are also available at `quay.io/gotmax23/opensuse-leap-systemd`.
-
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` |
 | -------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
 | 15.3,latest    | 15.3             | 15                                   | 15.3                           | 3                              |
