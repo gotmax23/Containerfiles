@@ -156,7 +156,7 @@ tags:
   - quay.io/gotmax23/opensuse-tumbleweed-systemd:latest
 ```
 
-### [SLES](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/SLES)
+### [SLES](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/SLES) (SUSE Linux Enterprise Server)
 
 ```yaml
 ansible_os_family: Suse
