@@ -253,14 +253,18 @@ distros:
     distro_family: Suse
     vars:
       baseimage_repo: registry.suse.com/suse/sle15
+      packages: []
+      extra_commands:
+        - 'echo "**** Symlinking /usr/lib/systemd/systemd to /sbin/init due to missing systemd-sysvinit package ****"'
+        - "ln -s /usr/lib/systemd/systemd /sbin/init"
     outputs:
       - baseimage_version: 15.3
-        extra_CI_image_repos:
-          - "quay.io/gotmax23/sles-systemd:latest"
-          - "quay.io/gotmax23/sles-systemd:15"
+        extra_CI_image_tags:
+          - "latest"
+          - "15"
 #       - baseimage_version: 15.2
-#         extra_CI_image_repos:
-#           - "quay.io/gotmax23/sles-systemd:15.2"
+#         extra_CI_image_tags:
+#           - "15.2"
 
   - name: Ubuntu
     distro_family: Debian
