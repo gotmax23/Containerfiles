@@ -14,13 +14,18 @@ RUN echo "**** Installing packages and updating if necessary ****" \
     && echo "**** Cleaning package cache ****" \
     && {{ PACKAGE_MGR_CLEAN_CMD }} \
 {% if PACKAGE_MGR_NAME == "apt" %}
-    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/lib/apt/lists/*{{ " \\" if (MASKED_SERVICES != []) or (EXTRA_COMMANDS != []) }}
 {% endif %}
 {% if MASKED_SERVICES != [] %}
     && echo "**** Masking systemd services ****" \
     && systemctl mask \
-        {{ MASKED_SERVICES | join(' ') }}
+        {{ MASKED_SERVICES | join(' ') }}{{ " \\" if EXTRA_COMMANDS != [] }}
 {% endif %}
+{%- if EXTRA_COMMANDS != [] %}
+{%-  for command in EXTRA_COMMANDS %}
+    && {{ command }}{{ " \\" if not loop.last }}
+{%  endfor %}
+{%- endif %}
 
 {% if UPDATE_MS | bool %}
 FROM scratch

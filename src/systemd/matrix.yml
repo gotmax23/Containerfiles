@@ -42,6 +42,7 @@ all_vars_list:
   - update_ms
   - masked_services
   - fix_seccomp
+  - extra_commands
 
 ##########
 all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
@@ -78,6 +79,7 @@ defaults:
       - systemd-random-seed.service
       - systemd-machine-id-commit.service
     fix_seccomp: false
+    extra_commands: []
 
 distro_families:
   Debian:
