@@ -25,7 +25,7 @@ container_repo: quay.io/gotmax23/archlinux-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
 | -------------- | ---------------- | ------------------------------------ |
-| latest         | any              | NA                                   |
+| latest         | any              | "NA"                                 |
 
 ### [Debian](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Debian)
 
@@ -40,9 +40,9 @@ container_repo: quay.io/gotmax23/debian-systemd
 
 | Available Tags            | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_release` |
 | ------------------------- | ---------------- | ------------------------------------ | ------------------------------ |
-| buster,10,oldstable       | buster           | 10                                   | buster                         |
-| latest,bullseye,11,stable | bullseye         | 11                                   | bullseye                       |
-| bookworm,12,testing       | bookworm         | NA                                   | NA                             |
+| buster,10,oldstable       | buster           | "10"                                 | "buster"                       |
+| latest,bullseye,11,stable | bullseye         | "11"                                 | "bullseye"                     |
+| bookworm,12,testing       | bookworm         | "NA"                                 | "NA"                           |
 
 For Debian, `ansible_distribution_major_version` and `ansible_distribution_version` are the same.
 
@@ -61,8 +61,8 @@ container_repo: quay.io/gotmax23/redhat-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
 | -------------- | ---------------- | ------------------------------------ |
-| 7              | 7                | 7[^3]                                |
-| 8,latest       | 8                | 8                                    |
+| 7              | 7                | "7"[^3]                              |
+| 8,latest       | 8                | "8"                                  |
 
 ### [AlmaLinux](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/AlmaLinux)
 
@@ -77,7 +77,7 @@ container_repo: quay.io/gotmax23/almalinux-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
 | -------------- | ---------------- | ------------------------------------ |
-| 8,latest       | 8                | 8                                    |
+| 8,latest       | 8                | "8"                                  |
 
 ### [CentOS](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/CentOS)
 
@@ -92,8 +92,8 @@ container_repo: quay.io/gotmax23/centos-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
 | -------------- | ---------------- | ------------------------------------ |
-| 7              | 7                | 7[^3]                                |
-| 8,latest       | 8                | 8                                    |
+| 7              | 7                | "7"[^3]                              |
+| 8,latest       | 8                | "8"                                  |
 
 ### quay.io/gotmax23/el-systemd repo
 
@@ -119,10 +119,10 @@ container_repo: quay.io/gotmax23/fedora-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
 | -------------- | ---------------- | ------------------------------------ |
-| 33             | 33               | 33                                   |
-| 34,latest      | 34               | 34                                   |
-| 35             | 35               | 35                                   |
-| 36,rawhide     | 36               | 36                                   |
+| 33             | 33               | "33"                                 |
+| 34,latest      | 34               | "34"                                 |
+| 35             | 35               | "35"                                 |
+| 36,rawhide     | 36               | "36"                                 |
 
 ### [opensuse](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/opensuse)
 
@@ -139,8 +139,8 @@ Due to a discrepancy between `galaxy_platform` and `ansible_os_family`, these im
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` |
 | -------------- | ---------------- | ------------------------------------ | ------------------------------ |
-| 15.2           | 15.2             | 15                                   | 15.2                           |
-| 15.3,latest    | 15.3             | 15                                   | 15.3                           |
+| 15.2           | 15.2             | "15"                                 | "15.2"                         |
+| 15.3,latest    | 15.3             | "15"                                 | "15.3"                         |
 
 There is also an image for Tumbleweed.
 
@@ -169,7 +169,7 @@ container_repo: quay.io/gotmax23/sles-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` |
 | -------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
-| 15.3,latest    | 15.3             | 15                                   | 15.3                           | 3                              |
+| 15.3,latest    | 15.3             | "15"                                 | "15.3"                         | 3                              |
 
 ### [Ubuntu](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Ubuntu)
 
@@ -182,11 +182,12 @@ galaxy_platform: Ubuntu
 container_repo: quay.io/gotmax23/debian-systemd
 ```
 
-| Available Tags   | `galaxy_version` | `ansible_distribution_major_verison` |
-| ---------------- | ---------------- | ------------------------------------ |
-| bionic,18,18.04  | bionic           | 18                                   |
-| focal,20,20.04   | focal            | 20                                   |
-| hirsute,21,21.04 | hirsute          | 21                                   |
+| Available Tags     | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` |
+| ------------------ | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
+| bionic,18,18.04    | bionic           | "18"                                 | "18.04"                        | "bionic"                       |
+| focal,20,20.04     | focal            | "20"                                 | "20.04"                        | "focal"                        |
+| hirsute,21,21.04   | hirsute          | "21"                                 | "21.04"                        | "hirsute"                      |
+| impish,21.10,devel | impish           | "21"                                 | "21.10"                        | "impish"                       |
 
 ## Credits
 
