@@ -249,6 +249,8 @@ distros:
           extra_CI_image_repos:
             - "quay.io/gotmax23/opensuse-tumbleweed-systemd:latest"
           build_cron: "10 1 * * *"
+          fix_seccomp: true
+
   - name: SLES
     distro_family: Suse
     vars:
