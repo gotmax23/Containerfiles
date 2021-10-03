@@ -1,7 +1,10 @@
+#!/usr/bin/env ansible-playbook
 ---
-- hosts: localhost
-  name: Generate systemd ContainerFiles
+- name: Generate systemd ContainerFiles
+  hosts: localhost
+  connection: local
   gather_facts: false
+  become: false
 
   vars_files:
     - matrix.yml
@@ -9,3 +12,5 @@
   tasks:
     - tags: [ always ]
       include_role: name="./generator"
+
+# vim: set filetype=yaml.ansible:
