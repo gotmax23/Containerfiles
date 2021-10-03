@@ -294,3 +294,4 @@ distros:
           extra_CI_image_tags:
             - "21.10"
             - "devel"
+          fix_seccomp: true
