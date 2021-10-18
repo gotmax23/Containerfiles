@@ -4,4 +4,4 @@ In this repository, I store all my Containerfiles and build them (with multiarch
 
 > Please click the links below for documentation about each image type.
 
-- Systemd Containers for Ansible Testing: located at [`Containerfiles/systemd`](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd)
+- Systemd Containers for Ansible Testing: located at [`Containerfiles/systemd`](Containerfiles/systemd)
