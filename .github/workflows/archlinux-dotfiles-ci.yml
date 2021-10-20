@@ -44,6 +44,7 @@ jobs:
           file: ./Containerfiles/archlinux-dotfiles/Containerfile
           platforms: linux/amd64
           push: true
+          labels: |
             org.opencontainers.image.source=${{ github.event.repository.clone_url }}
             org.opencontainers.image.version=${{ steps.tags.outputs.version }}
             org.opencontainers.image.created=${{ steps.tags.outputs.build_date }}
