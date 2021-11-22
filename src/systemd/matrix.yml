@@ -71,7 +71,7 @@ defaults:
       - systemd-remount-fs.service
       - dev-hugepages.mount
       - sys-fs-fuse-connections.mount
-      - systemd-logind.service
+      # - systemd-logind.service
       - getty.target
       - console-getty.service
       - systemd-udev-trigger.service
