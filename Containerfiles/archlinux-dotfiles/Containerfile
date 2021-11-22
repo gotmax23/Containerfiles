@@ -46,7 +46,7 @@ RUN echo "**** Installing packages and updating if necessary ****" \
     && sudo -u aur_builder zsh -ic exit \
 \
     && echo "**** Unmask systemd-logind" \
-    && "systemctl unmask systemd-logind"
+    && systemctl unmask systemd-logind
 
 ENV TERM=xterm-256color
 # vim: set filetype=dockerfile:
