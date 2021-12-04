@@ -2,7 +2,7 @@
 # Ansible managed
 #
 
-FROM docker.io/library/centos:8 as update
+FROM quay.io/centos/centos:8 as update
 LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
