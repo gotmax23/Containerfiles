@@ -5,7 +5,7 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 
 RUN echo "**** Installing packages and updating if necessary ****" \
     && pacman -S --needed --noconfirm \
-        ansible-core base-devel git bash-completion bat vim pacman-contrib \
+        ansible-core base-devel git bash-completion bat vim pacman-contrib zsh \
 \
     && echo "Creating aur_builder user" \
     && useradd -m -u 1000 -G wheel -s /bin/bash aur_builder \
@@ -33,7 +33,7 @@ RUN echo "**** Installing packages and updating if necessary ****" \
         mkdir -p ~/.ansible/roles \
         && git clone https://github.com/gotmax23/ansible-role-dotfiles ~/.ansible/roles/gotmax23.dotfiles \
         && git clone https://github.com/gotmax23/dotfiles.git /tmp/dotfiles \
-        && ansible-playbook -i 'localhost,' -c local /tmp/dotfiles/dotfiles.yml" \
+        && (cd /tmp/dotfiles && ansible-playbook -e dotfiles_target=dotfiles_localhost ./dotfiles.yml)" \
 \
     && echo "**** Cleaning package cache and temp files ****" \
     && rm -rf /tmp/* /home/aur_builder/.cache /home/aur_builder/.cargo \
@@ -44,9 +44,6 @@ RUN echo "**** Installing packages and updating if necessary ****" \
 \
     && echo "**** Downloading Zsh plugins ****" \
     && sudo -u aur_builder zsh -ic exit \
-\
-    && echo "**** Unmask systemd-logind" \
-    && systemctl unmask systemd-logind
 
 ENV TERM=xterm-256color
 # vim: set filetype=dockerfile:
