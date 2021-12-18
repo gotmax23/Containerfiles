@@ -296,4 +296,10 @@ distros:
         vars:
           extra_CI_image_tags:
             - "21.10"
-            - "devel"
+            - "rolling"
+
+      - baseimage_version: jammy
+        vars:
+          extra_CI_image_tags:
+            - devel
+            - "22.04"

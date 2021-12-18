@@ -1,12 +1,12 @@
 ---
-name: "systemd-Ubuntu.impish: Build and push container images"
+name: "systemd-Ubuntu.jammy: Build and push container images"
 'on':
   push:
     branches:
       - main
     paths:
-      - "Containerfiles/systemd/Ubuntu/Ubuntu.impish.Containerfile"
-      - ".github/workflows/systemd-Ubuntu.impish-ci.yml"
+      - "Containerfiles/systemd/Ubuntu/Ubuntu.jammy.Containerfile"
+      - ".github/workflows/systemd-Ubuntu.jammy-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./Containerfiles/systemd/Ubuntu
-          file: ./Containerfiles/systemd/Ubuntu/Ubuntu.impish.Containerfile
+          file: ./Containerfiles/systemd/Ubuntu/Ubuntu.jammy.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           labels: |
@@ -55,6 +55,6 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
-            quay.io/gotmax23/ubuntu-systemd:impish
-            quay.io/gotmax23/ubuntu-systemd:21.10
-            quay.io/gotmax23/ubuntu-systemd:rolling
+            quay.io/gotmax23/ubuntu-systemd:jammy
+            quay.io/gotmax23/ubuntu-systemd:devel
+            quay.io/gotmax23/ubuntu-systemd:22.04
