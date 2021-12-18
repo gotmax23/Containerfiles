@@ -41,7 +41,6 @@ all_vars_list:
   - build_cron
   - update_ms
   - masked_services
-  - fix_seccomp
   - extra_commands
 
 ##########
@@ -78,7 +77,6 @@ defaults:
       - systemd-udevd.service
       - systemd-random-seed.service
       - systemd-machine-id-commit.service
-    fix_seccomp: false
     extra_commands: []
 
 distro_families:
@@ -228,12 +226,10 @@ distros:
             - "latest"
       - baseimage_version: 35
         vars:
-          fix_seccomp: true
       - baseimage_version: 36
         vars:
           extra_CI_image_tags:
             - "rawhide"
-          fix_seccomp: true
 
   - name: opensuse
     distro_family: Suse
@@ -257,7 +253,6 @@ distros:
           extra_CI_image_repos:
             - "quay.io/gotmax23/opensuse-tumbleweed-systemd:latest"
           build_cron: "10 1 * * *"
-          fix_seccomp: true
 
   - name: SLES
     distro_family: Suse
@@ -302,4 +297,3 @@ distros:
           extra_CI_image_tags:
             - "21.10"
             - "devel"
-          fix_seccomp: true
