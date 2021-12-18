@@ -182,12 +182,13 @@ galaxy_platform: Ubuntu
 container_repo: quay.io/gotmax23/debian-systemd
 ```
 
-| Available Tags     | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` |
-| ------------------ | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
-| bionic,18,18.04    | bionic           | "18"                                 | "18.04"                        | "bionic"                       |
-| focal,20,20.04     | focal            | "20"                                 | "20.04"                        | "focal"                        |
-| hirsute,21,21.04   | hirsute          | "21"                                 | "21.04"                        | "hirsute"                      |
-| impish,21.10,devel | impish           | "21"                                 | "21.10"                        | "impish"                       |
+| Available Tags       | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` |
+| -------------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
+| bionic,18,18.04      | bionic           | "18"                                 | "18.04"                        | "bionic"                       |
+| focal,20,20.04       | focal            | "20"                                 | "20.04"                        | "focal"                        |
+| hirsute,21,21.04     | hirsute          | "21"                                 | "21.04"                        | "hirsute"                      |
+| impish,21.10,rolling | impish           | "21"                                 | "21.10"                        | "impish"                       |
+| jammy,22.04,devel    | jammy[^1]        | "22"                                 | "22.04"                        | "jammy"                        |
 
 ## Credits
 
