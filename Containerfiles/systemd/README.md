@@ -117,12 +117,13 @@ galaxy_platform: Fedora
 container_repo: quay.io/gotmax23/fedora-systemd
 ```
 
-| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
-| -------------- | ---------------- | ------------------------------------ |
-| 33             | 33               | "33"                                 |
-| 34,latest      | 34               | "34"                                 |
-| 35             | 35               | "35"                                 |
-| 36,rawhide     | 36               | "36"                                 |
+| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | State[^4] |
+| -------------- | ---------------- | ------------------------------------ | --------- |
+| ~~33~~         | 33               | "33"                                 | EOL       |
+| 34             | 34               | "34"                                 | Stable    |
+| 35,latest      | 35               | "35"                                 | Stable    |
+| 36             | 36               | "36"                                 | Beta      |
+| 37,rawhide     | 37               | "37"                                 | Rawhide   |
 
 ### [opensuse](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/opensuse)
 
@@ -182,13 +183,13 @@ galaxy_platform: Ubuntu
 container_repo: quay.io/gotmax23/debian-systemd
 ```
 
-| Available Tags       | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` |
-| -------------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
-| bionic,18,18.04      | bionic           | "18"                                 | "18.04"                        | "bionic"                       |
-| focal,20,20.04       | focal            | "20"                                 | "20.04"                        | "focal"                        |
-| hirsute,21,21.04     | hirsute          | "21"                                 | "21.04"                        | "hirsute"                      |
-| impish,21.10,rolling | impish           | "21"                                 | "21.10"                        | "impish"                       |
-| jammy,22.04,devel    | jammy[^1]        | "22"                                 | "22.04"                        | "jammy"                        |
+| Available Tags        | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` | EOL[^4] |
+| --------------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ | ------- |
+| bionic,18,18.04       | bionic           | "18"                                 | "18.04"                        | "bionic"                       |         |
+| focal,20,20.04,latest | focal            | "20"                                 | "20.04"                        | "focal"                        |         |
+| hirsute,21,21.04      | hirsute          | "21"                                 | "21.04"                        | "hirsute"                      | Yes     |
+| impish,21.10,rolling  | impish           | "21"                                 | "21.10"                        | "impish"                       |         |
+| jammy,22.04,devel     | jammy[^1]        | "22"                                 | "22.04"                        | "jammy"                        |         |
 
 ## Credits
 
@@ -201,3 +202,5 @@ These images are inspired by `geerlingguy` and `robertdebock`'s Ansible images
 [^2]: See [https://developers.redhat.com/articles/ubi-faq#community](https://developers.redhat.com/articles/ubi-faq#community).
 
 [^3]: EL 7 comes with a very old version of Systemd that is not compatible with Cgroups V2 at all (even with Podman).
+
+[^4]: EOL Containerfiles are kept in the repository but don't receive image updates.

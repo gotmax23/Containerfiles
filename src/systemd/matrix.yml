@@ -42,6 +42,7 @@ all_vars_list:
   - update_ms
   - masked_services
   - extra_commands
+  - gha_workflow
 
 ##########
 all_packages: "{{ DEFAULT_PACKAGES + PACKAGES }}"
@@ -78,6 +79,7 @@ defaults:
       - systemd-random-seed.service
       - systemd-machine-id-commit.service
     extra_commands: []
+    gha_workflow: true
 
 distro_families:
   Debian:
@@ -220,13 +222,16 @@ distros:
       baseimage_repo: registry.fedoraproject.org/fedora
     outputs:
       - baseimage_version: 33
+        vars:
+          gha_workflow: false
       - baseimage_version: 34
+        vars:
+      - baseimage_version: 35
         vars:
           extra_CI_image_tags:
             - "latest"
-      - baseimage_version: 35
-        vars:
       - baseimage_version: 36
+      - baseimage_version: 37
         vars:
           extra_CI_image_tags:
             - "rawhide"
@@ -289,6 +294,7 @@ distros:
             - "20.04"
       - baseimage_version: hirsute
         vars:
+          gha_workflow: false
           extra_CI_image_tags:
             - "21"
             - "21.04"

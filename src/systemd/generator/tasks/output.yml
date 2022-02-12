@@ -1,24 +1,31 @@
 ---
 - name: Set DISTRO_FAMILY and GALAXY_VERSION
   tags: [ always ]
-  set_fact:
+  ansible.builtin.set_fact:
     DISTRO_FAMILY: "{{ distro['distro_family'] }}"
     BASEIMAGE_VERSION: "{{ output['baseimage_version'] }}"
 
 - name: Define variables in `all_vars_list` based on hierarchy
   tags: [ always ]
-  set_fact:
+  ansible.builtin.set_fact:
     "{{ item|upper }}": "{{ distros[distro_index]['outputs'][output_index]['vars'][item] | default(distros[distro_index]['vars'][item] | default(distro_families[DISTRO_FAMILY]['vars'][item] | default(defaults['vars'][item]))) }}"
   loop: "{{ all_vars_list }}"
 
 - name: Create ContainerFiles
   tags: [ containerfiles, Containerfiles ]
-  template:
+  ansible.builtin.template:
     src: "{{ repo_root }}/{{ CF_template_src_path }}"
     dest: "{{ repo_root }}/{{ CF_output_path }}"
 
 - name: Generate CI files
   tags: [ ci, cifile, action, workflow, workflows, actions ]
-  template:
+  when: GHA_WORKFLOW | bool
+  ansible.builtin.template:
     src: "{{ repo_root }}/{{ CI_template_src_path }}"
     dest: "{{ repo_root }}/{{ CI_output_path }}"
+
+- name: Remove disabled CI files
+  when: not GHA_WORKFLOW | bool
+  ansible.builtin.file:
+    path: "{{ repo_root }}/{{ CI_output_path }}"
+    state: absent
