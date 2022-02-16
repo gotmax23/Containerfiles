@@ -90,10 +90,12 @@ galaxy_platform: EL
 container_repo: quay.io/gotmax23/centos-systemd
 ```
 
-| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
-| -------------- | ---------------- | ------------------------------------ |
-| 7              | 7                | "7"[^3]                              |
-| 8,latest       | 8                | "8"                                  |
+| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_verison` | `ansible_distribution_release` |
+| -------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
+| 7              | 7                | "7"[^3]                              | "7.9" (Currently)              | "Core"                         |
+| 8,latest       | 8                | "8"                                  |                                |                                |
+| stream8        | N/A              | "8"                                  | "8"                            | "Stream"                       |
+| stream9        | N/A              | "9"                                  | "9"                            | "Stream"                       |
 
 ### quay.io/gotmax23/el-systemd repo
 
