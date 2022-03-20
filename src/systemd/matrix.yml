@@ -192,12 +192,14 @@ distros:
       - baseimage_version: 8
         vars:
           package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} update -y && {{ PACKAGE_MGR_NAME }} -y --nodoc install"
-          extra_CI_image_tags:
-            - "latest"
+          gha_workflow: false
+
       - baseimage_version: stream8
         vars:
           update_ms: false
           package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} -y --nodoc install"
+          # extra_CI_image_tags:
+          #   - "latest"
       - baseimage_version: stream9
         vars:
           update_ms: false

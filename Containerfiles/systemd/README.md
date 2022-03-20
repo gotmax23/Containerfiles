@@ -10,7 +10,7 @@ In order to ease maintenance, these Containerfiles are templated by an Ansible p
 
 As you will see below, I have listed the values for a couple major Ansible variables for each image, as well as [the platforms and versions that Ansible Galaxy uses](https://galaxy.ansible.com/api/v1/platforms/). I tried to name the Containers like this: `"quay.io/gotmax23{{ galaxy_platform | lower }}/{{ galaxy_version | lower }}-systemd"`.
 
-Github does not properly display markdown footnotes. `[^1]` is an example. Please manually scroll to the [`## Footnotes`](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/#Footnotes) section.
+
 
 ### [Archlinux](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Archlinux)
 
@@ -90,12 +90,12 @@ galaxy_platform: EL
 container_repo: quay.io/gotmax23/centos-systemd
 ```
 
-| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_verison` | `ansible_distribution_release` |
-| -------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
-| 7              | 7                | "7"[^3]                              | "7.9" (Currently)              | "Core"                         |
-| 8,latest       | 8                | "8"                                  |                                |                                |
-| stream8        | N/A              | "8"                                  | "8"                            | "Stream"                       |
-| stream9        | N/A              | "9"                                  | "9"                            | "Stream"                       |
+| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_verison` | `ansible_distribution_release` | EOL[^4] |
+| -------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ | ------- |
+| 7              | 7                | "7"[^3]                              | "7.9" (Currently)              | "Core"                         |         |
+| 8,latest       | 8                | "8"                                  |                                |                                | Yes     |
+| stream8        | N/A              | "8"                                  | "8"                            | "Stream"                       |         |
+| stream9        | N/A              | "9"                                  | "9"                            | "Stream"                       |         |
 
 ### quay.io/gotmax23/el-systemd repo
 
