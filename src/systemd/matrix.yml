@@ -228,11 +228,12 @@ distros:
           gha_workflow: false
       - baseimage_version: 34
         vars:
+          gha_workflow: false
       - baseimage_version: 35
+      - baseimage_version: 36
         vars:
           extra_CI_image_tags:
             - "latest"
-      - baseimage_version: 36
       - baseimage_version: 37
         vars:
           extra_CI_image_tags:
