@@ -1,0 +1,15 @@
+---
+image: fedora/latest
+packages:
+  - buildah
+  - qemu-user-static
+secrets:
+  - 62834fbf-7295-429a-86b8-f57c54dc14d4
+tasks:
+  - login: |
+      set +x
+      ~/.buildah-login-quay
+      set -x
+  - build-and-push: |
+      cd Containerfiles/src/toolbox/EL
+      push=true ./toolboxgenerate.sh
