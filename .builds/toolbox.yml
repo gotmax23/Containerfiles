@@ -12,4 +12,4 @@ tasks:
       set -x
   - build-and-push: |
       cd Containerfiles/src/toolbox/EL
-      push=true ./toolboxgenerate.sh
+      push=true bash -x ./toolboxgenerate.sh
