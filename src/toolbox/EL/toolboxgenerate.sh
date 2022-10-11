@@ -29,16 +29,18 @@ finalize() {
 
 build_plain() {
 
-    newcontainer="$(buildah from --arch ${arch} "${image}")"
+    newcontainer="$(buildah from --arch "${arch}" "${image}")"
     echo "newcontainer: ${newcontainer}"
 
     buildah copy "${newcontainer}" context/README.md /
 
     buildah run "${newcontainer}" -- sed -i '/tsflags=nodocs/d' /etc/dnf/dnf.conf
-    buildah run "${newcontainer}" -- dnf -y swap coreutils-single coreutils-full
+    buildah run "${newcontainer}" -- yum -y swap coreutils-single coreutils-full
 
-    buildah run "${newcontainer}" -- dnf -y reinstall $(<"context/${version}/missing-docs")
-    buildah run "${newcontainer}" -- dnf -y install $(<"context/${version}/extra-packages")
+    xargs -d '\n' buildah run "${newcontainer}" -- yum -y reinstall \
+        < "context/${version}/missing-docs"
+    xargs -d '\n' buildah run "${newcontainer}" -- yum -y install \
+        < "context/${version}/extra-packages"
 
     finalize
 }
@@ -47,9 +49,16 @@ build_epel() {
     newcontainer=$(buildah from --arch "${arch}" --pull-never "localhost/${base_name}-plain")
     echo "newcontainer: ${newcontainer}"
 
-    buildah run "${newcontainer}" -- rpm --import "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-${version}"
-    buildah run "${newcontainer}" -- sh -c 'dnf install -y --repofrompath="epel,https://dl.fedoraproject.org/pub/epel/$(rpm -E %rhel)/Everything/"\$basearch --repo=epel --nogpgcheck epel-release'
-    curl -sSL https://src.fedoraproject.org/fork/gotmax23/rpms/epel-release/raw/enable-crb-epel9/f/enable-crb | buildah run "${newcontainer}" -- bash -
+    buildah run "${newcontainer}" -- rpm --import \
+        "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-${version}"
+    buildah run "${newcontainer}" -- yum install -y \
+        "https://dl.fedoraproject.org/pub/epel/epel-release-latest-${version}.noarch.rpm"
+    fi
+    if [ "${distro}" == "centos-stream" ]; then
+        buildah run "${newcontainer}" -- yum install -y \
+            "https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-${version}.noarch.rpm"
+    fi
+    buildah run "${newcontainer}" -- yum upgrade -y
     finalize
 }
 
@@ -58,6 +67,11 @@ build_epel() {
 # }
 
 build() {
+    echo "distro: ${distro}"
+    echo "version: ${version}"
+    echo "variant: ${variant}"
+    echo "arch: ${arch}"
+
     base_name="${distro}-toolbox:${version}"
     reg_name="${base_name}-${variant}"
     fqcn="quay.io/gotmax23/${reg_name}"
@@ -66,29 +80,31 @@ build() {
             image="quay.io/centos/centos:stream${version}"
             fname="CentOS Stream"
             ;;
+        centos-linux)
+            image="quay.io/centos/centos:${version}"
+            fname="CentOS Linux"
+            ;;
         almalinux)
             image="docker.io/almalinux/${version}-base:latest"
             fname="AlmaLinux"
     esac
     if ! podman inspect "localhost/${reg_name}-${arch}" &> /dev/null; then
-        build_${variant}
+        "build_${variant}"
     else
         echo "Skipping ${reg_name} ${arch} build"
     fi
 }
 
-for distro in centos-stream almalinux; do
-    for version in 8 9; do
-        # for variant in plain epel gotmax23; do
-        for variant in plain epel; do
-            echo "distro: ${distro}"
-            echo "version: ${version}"
-            echo "variant: ${variant}"
-            for arch in {amd64,arm64}; do
-                echo "arch: ${arch}"
+for arch in {amd64,arm64}; do
+    for variant in plain epel; do
+        for distro in centos-stream almalinux; do
+            for version in 8 9; do
                 build
             done
         done
     done
     echo "**********"
+    distro="centos-linux"
+    version=7
+    build
 done
