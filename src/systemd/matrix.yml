@@ -238,16 +238,16 @@ distros:
     vars:
       baseimage_repo: registry.opensuse.org/opensuse/leap
     outputs:
-      - baseimage_version: 15.2
+      - baseimage_version: 15.3
         vars:
           extra_CI_image_repos:
-            - "quay.io/gotmax23/opensuse-leap-systemd:15.2"
-      - baseimage_version: 15.3
+            - "quay.io/gotmax23/opensuse-leap-systemd:15.3"
+      - baseimage_version: 15.4
         vars:
           extra_CI_image_tags:
             - "latest"
           extra_CI_image_repos:
-            - "quay.io/gotmax23/opensuse-leap-systemd:15.3"
+            - "quay.io/gotmax23/opensuse-leap-systemd:15.4"
             - "quay.io/gotmax23/opensuse-leap-systemd:latest"
       - baseimage_version: tumbleweed
         vars:
@@ -266,12 +266,10 @@ distros:
         - "ln -s /usr/lib/systemd/systemd /sbin/init"
     outputs:
       - baseimage_version: 15.3
+      - baseimage_version: 15.4
         extra_CI_image_tags:
           - "latest"
           - "15"
-#       - baseimage_version: 15.2
-#         extra_CI_image_tags:
-#           - "15.2"
 
   - name: Ubuntu
     distro_family: Debian
