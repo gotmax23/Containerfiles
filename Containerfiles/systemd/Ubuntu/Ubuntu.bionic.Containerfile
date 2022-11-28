@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN echo "**** Installing packages and updating if necessary ****" \
     && apt-get update && apt-get install -y --no-install-recommends \
-        systemd python3 sudo systemd-sysv python3-apt \
+        systemd python3 sudo ca-certificates systemd-sysv python3-apt \
     && echo "**** Cleaning package cache ****" \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \

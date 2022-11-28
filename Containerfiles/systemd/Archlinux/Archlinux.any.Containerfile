@@ -8,7 +8,7 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 
 RUN echo "**** Installing packages and updating if necessary ****" \
     && pacman -Syu --noconfirm && pacman -S --needed --noconfirm \
-        systemd python3 sudo systemd-sysvcompat \
+        systemd python3 sudo ca-certificates systemd-sysvcompat \
     && echo "**** Cleaning package cache ****" \
     && pacman -Scc \
     && echo "**** Masking systemd services ****" \

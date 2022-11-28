@@ -8,7 +8,7 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 
 RUN echo "**** Installing packages and updating if necessary ****" \
     && zypper install -y \
-        systemd python3 sudo systemd-sysvinit python3-xml \
+        systemd python3 sudo ca-certificates systemd-sysvinit python3-xml \
     && echo "**** Cleaning package cache ****" \
     && zypper clean \
     && echo "**** Masking systemd services ****" \

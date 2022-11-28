@@ -59,6 +59,7 @@ defaults:
       - systemd
       - "python{{ PYTHON_VERSION }}"
       - sudo
+      - ca-certificates
     baseimage: "{{ BASEIMAGE_REPO }}:{{ BASEIMAGE_VERSION }}"
     CI_image_repo: "quay.io/gotmax23/{{ distro['name'] | lower}}-{{ type }}"
     CI_image_tags:
