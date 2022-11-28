@@ -223,18 +223,12 @@ distros:
     vars:
       baseimage_repo: registry.fedoraproject.org/fedora
     outputs:
-      - baseimage_version: 33
-        vars:
-          gha_workflow: false
-      - baseimage_version: 34
-        vars:
-          gha_workflow: false
-      - baseimage_version: 35
       - baseimage_version: 36
+      - baseimage_version: 37
         vars:
           extra_CI_image_tags:
             - "latest"
-      - baseimage_version: 37
+      - baseimage_version: 38
         vars:
           extra_CI_image_tags:
             - "rawhide"
@@ -292,23 +286,10 @@ distros:
       - baseimage_version: focal
         vars:
           extra_CI_image_tags:
-            - "latest"
             - "20"
             - "20.04"
-      - baseimage_version: hirsute
-        vars:
-          gha_workflow: false
-          extra_CI_image_tags:
-            - "21"
-            - "21.04"
-      - baseimage_version: impish
-        vars:
-          extra_CI_image_tags:
-            - "21.10"
-            - "rolling"
-
       - baseimage_version: jammy
         vars:
           extra_CI_image_tags:
-            - devel
             - "22.04"
+            - "latest"

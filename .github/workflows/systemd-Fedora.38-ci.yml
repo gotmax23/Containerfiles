@@ -1,12 +1,12 @@
 ---
-name: "systemd-Ubuntu.impish: Build and push container images"
+name: "systemd-Fedora.38: Build and push container images"
 'on':
   push:
     branches:
       - main
     paths:
-      - "Containerfiles/systemd/Ubuntu/Ubuntu.impish.Containerfile"
-      - ".github/workflows/systemd-Ubuntu.impish-ci.yml"
+      - "Containerfiles/systemd/Fedora/Fedora.38.Containerfile"
+      - ".github/workflows/systemd-Fedora.38-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:
@@ -40,13 +40,13 @@ jobs:
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
-          context: ./Containerfiles/systemd/Ubuntu
-          file: ./Containerfiles/systemd/Ubuntu/Ubuntu.impish.Containerfile
+          context: ./Containerfiles/systemd/Fedora
+          file: ./Containerfiles/systemd/Fedora/Fedora.38.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           labels: |
-            org.opencontainers.image.tite="Ubuntu image with systemd"
-            org.opencontainers.image.description="Ubuntu image with systemd for Ansible testing using Podman and Molecule"
+            org.opencontainers.image.tite="Fedora image with systemd"
+            org.opencontainers.image.description="Fedora image with systemd for Ansible testing using Podman and Molecule"
             org.opencontainers.image.url=${{ github.event.repository.html_url }}/tree/main/Containerfiles/systemd
             org.opencontainers.image.documentation=${{ github.event.repository.html_url }}/tree/main/Containerfiles/systemd/README.md
             org.opencontainers.image.source=${{ github.event.repository.clone_url }}
@@ -55,6 +55,5 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
-            quay.io/gotmax23/ubuntu-systemd:impish
-            quay.io/gotmax23/ubuntu-systemd:21.10
-            quay.io/gotmax23/ubuntu-systemd:rolling
+            quay.io/gotmax23/fedora-systemd:38
+            quay.io/gotmax23/fedora-systemd:rawhide

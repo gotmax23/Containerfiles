@@ -4,7 +4,7 @@
 
 I built these containers for use with Molecule and Podman to test Ansible roles and playbooks. I recommend using Podman over Docker because it has better support for running systemd inside containers, requiring no special configuration. Naturally, it is more secure, as it doesn't require a daemon. However, as long as your distro does not use Cgroups V2/Unified Hierarchy[^3] (or you manually disable it), you can run these images with Docker, as well.
 
-In order to ease maintenance, these Containerfiles are templated by an Ansible playbook located in [`src/systemd`](https://github.com/gotmax23/Containerfiles/tree/main/src/systemd). I am still working on finalizing the code and writing documentation for possible contributors.
+In order to ease maintenance, these Containerfiles are templated by an Ansible playbook located in [`src/systemd`](https://github.com/gotmax23/Containerfiles/tree/main/src/systemd). This should probably be rewritten as a Python script, but ansible is a [good hammer](https://www.youtube.com/watch?v=TVq88JeJbw4) and this was a good experiment...
 
 ## Repos and Tags
 
@@ -119,11 +119,9 @@ container_repo: quay.io/gotmax23/fedora-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | State[^4] |
 | -------------- | ---------------- | ------------------------------------ | --------- |
-| ~~33~~         | 33               | "33"                                 | EOL       |
-| ~~34~~         | 34               | "34"                                 | EOL       |
-| 35             | 35               | "35"                                 | Stable    |
-| 36, latest     | 36               | "36"                                 | Beta      |
-| 37,rawhide     | 37               | "37"                                 | Rawhide   |
+| 36             | 36               | "36"                                 | Stable    |
+| 37,latest      | 37               | "37"                                 | Stable    |
+| 38,rawhide     |                  | "38"                                 | Rawhide   |
 
 ### [opensuse](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/opensuse)
 
@@ -183,13 +181,11 @@ galaxy_platform: Ubuntu
 container_repo: quay.io/gotmax23/debian-systemd
 ```
 
-| Available Tags        | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` | EOL[^4] |
-| --------------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ | ------- |
-| bionic,18,18.04       | bionic           | "18"                                 | "18.04"                        | "bionic"                       |         |
-| focal,20,20.04,latest | focal            | "20"                                 | "20.04"                        | "focal"                        |         |
-| hirsute,21,21.04      | hirsute          | "21"                                 | "21.04"                        | "hirsute"                      | Yes     |
-| impish,21.10,rolling  | impish           | "21"                                 | "21.10"                        | "impish"                       |         |
-| jammy,22.04,devel     | jammy[^1]        | "22"                                 | "22.04"                        | "jammy"                        |         |
+| Available Tags        | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` |
+| --------------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
+| bionic,18,18.04       | bionic           | "18"                                 | "18.04"                        | "bionic"                       |
+| focal,20,20.04,latest | focal            | "20"                                 | "20.04"                        | "focal"                        |
+| jammy,22.04,devel     | jammy[^1]        | "22"                                 | "22.04"                        | "jammy"                        |
 
 ## Credits
 

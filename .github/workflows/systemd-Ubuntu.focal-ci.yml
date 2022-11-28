@@ -56,6 +56,5 @@ jobs:
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
             quay.io/gotmax23/ubuntu-systemd:focal
-            quay.io/gotmax23/ubuntu-systemd:latest
             quay.io/gotmax23/ubuntu-systemd:20
             quay.io/gotmax23/ubuntu-systemd:20.04
