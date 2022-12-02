@@ -206,6 +206,7 @@ distros:
           update_ms: false
           package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} -y --nodoc install"
 
+
   - name: AlmaLinux
     distro_family: RedHat
     vars:
@@ -213,10 +214,14 @@ distros:
     outputs:
       - baseimage_version: 8
         vars:
+          extra_CI_image_repos:
+            - "quay.io/gotmax23/el-systemd:8"
+      - baseimage_version: 9
+        vars:
           extra_CI_image_tags:
             - "latest"
           extra_CI_image_repos:
-            - "quay.io/gotmax23/el-systemd:8"
+            - "quay.io/gotmax23/el-systemd:9"
             - "quay.io/gotmax23/el-systemd:latest"
 
   - name: Fedora

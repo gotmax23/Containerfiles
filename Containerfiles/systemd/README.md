@@ -75,7 +75,8 @@ container_repo: quay.io/gotmax23/almalinux-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
 | -------------- | ---------------- | ------------------------------------ |
-| 8,latest       | 8                | "8"                                  |
+| 8              | 8                | "8"                                  |
+| 9, latest      |                  | "9"                                  |
 
 ### [CentOS](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/CentOS)
 
@@ -97,9 +98,9 @@ container_repo: quay.io/gotmax23/centos-systemd
 
 ### quay.io/gotmax23/el-systemd repo
 
-The quay.io/gotmax23/el-systemd:latest and quay.io/gotmax23/el-systemd:8 tags use the [AlmaLinux 8 Containerfile](https://github.com/gotmax23/Containerfiles/blob/main/Containerfiles/systemd/AlmaLinux/AlmaLinux.8.Containerfile).
+`quay.io/gotmax23/el-systemd:8` and `quay.io/gotmax23/el-systemd:9` use the AlmaLinux.
 
-The quay.io/gotmax23/el-systemd:7 tag uses the [CentOS 7 Containerile](https://github.com/gotmax23/Containerfiles/blob/main/Containerfiles/systemd/CentOS/CentOS.7.Containerfile).
+`quay.io/gotmax23/el-systemd:7` tag uses CentOS Linux 7.
 
 This solves two problems:
 
