@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 {% endif %}
 
 RUN echo "**** Installing packages and updating if necessary ****" \
-    && {{ PACKAGE_MGR_INSTALL_CMD }} \
+    && {{ PACKAGE_MGR_INSTALL_CMD.rstrip() }} \
         {{ all_packages | join(' ') }} \
     && echo "**** Cleaning package cache ****" \
     && {{ PACKAGE_MGR_CLEAN_CMD }} \
