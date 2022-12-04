@@ -86,7 +86,10 @@ distro_families:
   Debian:
     vars:
       package_mgr_name: apt
-      package_mgr_install_cmd: "apt-get update && apt-get install -y --no-install-recommends"
+      package_mgr_install_cmd: >
+        apt-get update &&
+        apt-get upgrade -y --no-install-recommends &&
+        apt-get install -y --no-install-recommends
       package_mgr_clean_cmd: "apt-get clean"
       packages:
         - systemd-sysv
@@ -95,14 +98,14 @@ distro_families:
   RedHat:
     vars:
       package_mgr_name: dnf
-      package_mgr_install_cmd: "dnf -y --nodoc install"
+      package_mgr_install_cmd: "dnf upgrade -y --nodoc && dnf install -y --nodoc"
       package_mgr_clean_cmd: "{{ PACKAGE_MGR_NAME }} clean all"
       packages: []
 
   Suse:
     vars:
       package_mgr_name: zypper
-      package_mgr_install_cmd: "zypper install -y"
+      package_mgr_install_cmd: "zypper upgrade -y && zypper install -y"
       package_mgr_clean_cmd: "zypper clean"
       packages:
         - systemd-sysvinit
@@ -165,7 +168,7 @@ distros:
         vars:
           baseimage: "registry.access.redhat.com/ubi7:latest"
           package_mgr_name: "yum"
-          package_mgr_install_cmd: "yum -y install"
+          package_mgr_install_cmd: "yum upgrade -y && yum install -y"
           python_version: "2"
           docker_platforms:
             - linux/amd64
@@ -179,32 +182,30 @@ distros:
     distro_family: RedHat
     vars:
       baseimage_repo: "quay.io/centos/centos"
-      package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} update -y && {{ PACKAGE_MGR_NAME }} -y --nodoc install"
       update_ms: true
     outputs:
       - baseimage_version: 7
         vars:
           package_mgr_name: "yum"
-          package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} update -y && {{ PACKAGE_MGR_NAME }} -y --setopt=tsflags=nodoc install"
-          #package_mgr_install_cmd: "yum -y install"
+          package_mgr_install_cmd: >
+            {{ PACKAGE_MGR_NAME }} upgrade -y --setopt=tsflags=nodoc &&
+            {{ PACKAGE_MGR_NAME }} install -y --setopt=tsflags=nodoc
           python_version: "2"
           extra_CI_image_repos:
             - "quay.io/gotmax23/el-systemd:7"
       - baseimage_version: 8
         vars:
-          package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} update -y && {{ PACKAGE_MGR_NAME }} -y --nodoc install"
           gha_workflow: false
+          package_mgr_install_cmd: "dnf upgrade -y --nodoc && dnf install -y --nodoc"
 
       - baseimage_version: stream8
         vars:
           update_ms: false
-          package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} -y --nodoc install"
           # extra_CI_image_tags:
           #   - "latest"
       - baseimage_version: stream9
         vars:
           update_ms: false
-          package_mgr_install_cmd: "{{ PACKAGE_MGR_NAME }} -y --nodoc install"
 
 
   - name: AlmaLinux

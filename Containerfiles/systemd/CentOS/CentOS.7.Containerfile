@@ -7,7 +7,8 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
 RUN echo "**** Installing packages and updating if necessary ****" \
-    && yum update -y && yum -y --setopt=tsflags=nodoc install \
+    && yum upgrade -y --setopt=tsflags=nodoc && yum install -y --setopt=tsflags=nodoc
+ \
         systemd python2 sudo ca-certificates \
     && echo "**** Cleaning package cache ****" \
     && yum clean all \

@@ -7,7 +7,7 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
 RUN echo "**** Installing packages and updating if necessary ****" \
-    && dnf update -y && dnf -y --nodoc install \
+    && dnf upgrade -y --nodoc && dnf install -y --nodoc \
         systemd python3 sudo ca-certificates \
     && echo "**** Cleaning package cache ****" \
     && dnf clean all \

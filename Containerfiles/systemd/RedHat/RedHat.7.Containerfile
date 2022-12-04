@@ -7,7 +7,7 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
 RUN echo "**** Installing packages and updating if necessary ****" \
-    && yum -y install \
+    && yum upgrade -y && yum install -y \
         systemd python2 sudo ca-certificates \
     && echo "**** Cleaning package cache ****" \
     && yum clean all \
