@@ -123,7 +123,7 @@ distros:
   - name: Archlinux
     distro_family: Archlinux
     vars:
-      baseimage: docker.io/archlinux/archlinux:base
+      baseimage: docker.io/archlinux/archlinux:base-devel
       baseimage_repo: ''
     outputs:
       - baseimage_version: any
