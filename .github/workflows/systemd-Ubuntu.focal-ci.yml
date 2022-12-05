@@ -1,5 +1,5 @@
 ---
-name: "systemd-Ubuntu.focal: Build and push container images"
+name: "Ubuntu.focal - systemd"
 'on':
   push:
     branches:

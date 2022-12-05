@@ -1,5 +1,5 @@
 ---
-name: "systemd-Archlinux.any: Build and push container images"
+name: "Archlinux.any - systemd"
 'on':
   push:
     branches:

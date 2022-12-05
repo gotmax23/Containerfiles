@@ -1,5 +1,5 @@
 ---
-name: "systemd-opensuse.15.4: Build and push container images"
+name: "opensuse.15.4 - systemd"
 'on':
   push:
     branches:

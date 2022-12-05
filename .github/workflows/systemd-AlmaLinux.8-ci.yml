@@ -1,5 +1,5 @@
 ---
-name: "systemd-AlmaLinux.8: Build and push container images"
+name: "AlmaLinux.8 - systemd"
 'on':
   push:
     branches:

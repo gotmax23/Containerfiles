@@ -1,5 +1,5 @@
 ---
-name: "systemd-CentOS.7: Build and push container images"
+name: "CentOS.7 - systemd"
 'on':
   push:
     branches:

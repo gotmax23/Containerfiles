@@ -1,5 +1,5 @@
 ---
-name: "systemd-opensuse.tumbleweed: Build and push container images"
+name: "opensuse.tumbleweed - systemd"
 'on':
   push:
     branches:

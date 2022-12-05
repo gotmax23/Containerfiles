@@ -1,5 +1,5 @@
 ---
-name: "systemd-Ubuntu.bionic: Build and push container images"
+name: "Ubuntu.bionic - systemd"
 'on':
   push:
     branches:

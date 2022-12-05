@@ -1,5 +1,5 @@
 ---
-name: "systemd-Debian.bookworm: Build and push container images"
+name: "Debian.bookworm - systemd"
 'on':
   push:
     branches:

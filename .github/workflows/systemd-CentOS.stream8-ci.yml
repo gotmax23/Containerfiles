@@ -1,5 +1,5 @@
 ---
-name: "systemd-CentOS.stream8: Build and push container images"
+name: "CentOS.stream8 - systemd"
 'on':
   push:
     branches:

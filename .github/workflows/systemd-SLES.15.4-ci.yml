@@ -1,5 +1,5 @@
 ---
-name: "systemd-SLES.15.4: Build and push container images"
+name: "SLES.15.4 - systemd"
 'on':
   push:
     branches:

@@ -1,5 +1,5 @@
 ---
-name: "systemd-Fedora.37: Build and push container images"
+name: "Fedora.37 - systemd"
 'on':
   push:
     branches:
