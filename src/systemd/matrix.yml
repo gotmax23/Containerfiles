@@ -105,7 +105,7 @@ distro_families:
   Suse:
     vars:
       package_mgr_name: zypper
-      package_mgr_install_cmd: "zypper upgrade -y && zypper install -y"
+      package_mgr_install_cmd: "zypper update -y && zypper install -y"
       package_mgr_clean_cmd: "zypper clean"
       packages:
         - systemd-sysvinit

@@ -7,7 +7,7 @@ LABEL maintainer="Maxwell G <gotmax23@github>"
 
 
 RUN echo "**** Installing packages and updating if necessary ****" \
-    && zypper upgrade -y && zypper install -y \
+    && zypper update -y && zypper install -y \
         systemd python3 sudo ca-certificates \
     && echo "**** Cleaning package cache ****" \
     && zypper clean \
