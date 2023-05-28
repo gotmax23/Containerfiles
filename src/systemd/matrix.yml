@@ -230,12 +230,12 @@ distros:
     vars:
       baseimage_repo: registry.fedoraproject.org/fedora
     outputs:
-      - baseimage_version: 36
       - baseimage_version: 37
+      - baseimage_version: 38
         vars:
           extra_CI_image_tags:
             - "latest"
-      - baseimage_version: 38
+      - baseimage_version: 39
         vars:
           extra_CI_image_tags:
             - "rawhide"
