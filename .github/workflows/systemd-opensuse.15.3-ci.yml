@@ -14,7 +14,7 @@ name: "opensuse.15.3 - systemd"
 jobs:
   build_push:
     name: Build and Push container images to quay.io
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Calculate Docker image tags # Based on https://gist.github.com/sagikazarmark/0119e1f3dde0d8e755fd0ee5a5ef4cdc
