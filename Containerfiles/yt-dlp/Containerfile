@@ -1,0 +1,12 @@
+FROM registry.fedoraproject.org/fedora:latest
+
+RUN set -euo pipefail ;\
+    sudo dnf install -y \
+        https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+        https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm \
+    ;\
+    sudo dnf install -y yt-dlp ffmpeg ;\
+    sudo dnf clean all
+
+ENTRYPOINT ["yt-dlp"]
+CMD ["--help"]
