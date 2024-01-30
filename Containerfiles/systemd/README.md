@@ -120,7 +120,6 @@ container_repo: quay.io/gotmax23/fedora-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | State[^4] |
 | -------------- | ---------------- | ------------------------------------ | --------- |
-| 37             | 37               | "37"                                 | Stable    |
 | 38             | 38               | "38"                                 | Stable    |
 | 39, latest     | 39               | "39"                                 | Stable    |
 | 40,rawhide     |                  | "40"                                 | Rawhide   |
