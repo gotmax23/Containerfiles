@@ -1,12 +1,12 @@
 ---
-name: "Ubuntu.jammy - systemd"
+name: "Ubuntu.noble - systemd"
 'on':
   push:
     branches:
       - main
     paths:
-      - "Containerfiles/systemd/Ubuntu/Ubuntu.jammy.Containerfile"
-      - ".github/workflows/systemd-Ubuntu.jammy-ci.yml"
+      - "Containerfiles/systemd/Ubuntu/Ubuntu.noble.Containerfile"
+      - ".github/workflows/systemd-Ubuntu.noble-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./Containerfiles/systemd/Ubuntu
-          file: ./Containerfiles/systemd/Ubuntu/Ubuntu.jammy.Containerfile
+          file: ./Containerfiles/systemd/Ubuntu/Ubuntu.noble.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           labels: |
@@ -55,5 +55,6 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
-            quay.io/gotmax23/ubuntu-systemd:jammy
-            quay.io/gotmax23/ubuntu-systemd:22.04
+            quay.io/gotmax23/ubuntu-systemd:noble
+            quay.io/gotmax23/ubuntu-systemd:24.04
+            quay.io/gotmax23/ubuntu-systemd:latest

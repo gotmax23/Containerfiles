@@ -297,4 +297,8 @@ distros:
         vars:
           extra_CI_image_tags:
             - "22.04"
+      - baseimage_version: noble
+        vars:
+          extra_CI_image_tags:
+            - "24.04"
             - "latest"
