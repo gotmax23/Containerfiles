@@ -215,6 +215,7 @@ distros:
     distro_family: RedHat
     vars:
       baseimage_repo: registry.fedoraproject.org/fedora
+      package_mgr_install_cmd: "dnf upgrade -y --setopt=tsflags=nodocs && dnf install -y --setopt=tsflags=nodocs"
     outputs:
       - baseimage_version: 39
       - baseimage_version: 40
