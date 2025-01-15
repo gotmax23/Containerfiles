@@ -184,28 +184,18 @@ distros:
       baseimage_repo: "quay.io/centos/centos"
       update_ms: true
     outputs:
-      - baseimage_version: 7
-        vars:
-          package_mgr_name: "yum"
-          package_mgr_install_cmd: >
-            {{ PACKAGE_MGR_NAME }} upgrade -y --setopt=tsflags=nodoc &&
-            {{ PACKAGE_MGR_NAME }} install -y --setopt=tsflags=nodoc
-          python_version: "2"
-          extra_CI_image_repos:
-            - "quay.io/gotmax23/el-systemd:7"
-      - baseimage_version: 8
-        vars:
-          gha_workflow: false
-          package_mgr_install_cmd: "dnf upgrade -y --nodoc && dnf install -y --nodoc"
-
       - baseimage_version: stream8
         vars:
           update_ms: false
-          # extra_CI_image_tags:
-          #   - "latest"
+          gh_workflow: false
       - baseimage_version: stream9
         vars:
           update_ms: false
+      - baseimage_version: stream10
+        vars:
+          update_ms: false
+          extra_CI_image_tags:
+            - "latest"
 
 
   - name: AlmaLinux

@@ -1,12 +1,12 @@
 ---
-name: "CentOS.7 - systemd"
+name: "CentOS.stream10 - systemd"
 'on':
   push:
     branches:
       - main
     paths:
-      - "Containerfiles/systemd/CentOS/CentOS.7.Containerfile"
-      - ".github/workflows/systemd-CentOS.7-ci.yml"
+      - "Containerfiles/systemd/CentOS/CentOS.stream10.Containerfile"
+      - ".github/workflows/systemd-CentOS.stream10-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./Containerfiles/systemd/CentOS
-          file: ./Containerfiles/systemd/CentOS/CentOS.7.Containerfile
+          file: ./Containerfiles/systemd/CentOS/CentOS.stream10.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           labels: |
@@ -55,5 +55,5 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
-            quay.io/gotmax23/centos-systemd:7
-            quay.io/gotmax23/el-systemd:7
+            quay.io/gotmax23/centos-systemd:stream10
+            quay.io/gotmax23/centos-systemd:latest
