@@ -118,9 +118,10 @@ container_repo: quay.io/gotmax23/fedora-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | State[^4] |
 | -------------- | ---------------- | ------------------------------------ | --------- |
-| 38             | 38               | "38"                                 | Stable    |
-| 39, latest     | 39               | "39"                                 | Stable    |
-| 40,rawhide     |                  | "40"                                 | Rawhide   |
+| 39             | 39               | "39"                                 | Stable    |
+| 40             | 40               | "40"                                 | Stable    |
+| 41, latest     | 41               | "41"                                 | Stable    |
+| 42, rawhide    | 42               | "42"                                 | Rawhide   |
 
 ### [opensuse](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/opensuse)
 

@@ -184,10 +184,6 @@ distros:
       baseimage_repo: "quay.io/centos/centos"
       update_ms: true
     outputs:
-      - baseimage_version: stream8
-        vars:
-          update_ms: false
-          gh_workflow: false
       - baseimage_version: stream9
         vars:
           update_ms: false
@@ -220,12 +216,13 @@ distros:
     vars:
       baseimage_repo: registry.fedoraproject.org/fedora
     outputs:
-      - baseimage_version: 38
       - baseimage_version: 39
+      - baseimage_version: 40
+      - baseimage_version: 41
         vars:
           extra_CI_image_tags:
             - "latest"
-      - baseimage_version: 40
+      - baseimage_version: 42
         vars:
           extra_CI_image_tags:
             - "rawhide"
