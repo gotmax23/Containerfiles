@@ -16,7 +16,7 @@ jobs:
     name: Build and Push container images to quay.io
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Calculate Docker image tags # Based on https://gist.github.com/sagikazarmark/0119e1f3dde0d8e755fd0ee5a5ef4cdc
         id: tags
         run: |
@@ -29,16 +29,16 @@ jobs:
           echo version=${VERSION} >> ${GITHUB_OUTPUT}
           echo commit_hash=${GITHUB_SHA::8} >> ${GITHUB_OUTPUT}
           echo build_date=$(git show -s --format=%cI) >> ${GITHUB_OUTPUT}
-      - uses: docker/setup-qemu-action@v2
-      - uses: docker/setup-buildx-action@v2
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
       - name: Login to quay.io
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
       - name: Build and push image.
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v6
         with:
           context: ./Containerfiles/systemd/Ubuntu
           file: ./Containerfiles/systemd/Ubuntu/Ubuntu.jammy.Containerfile
