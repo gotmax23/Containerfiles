@@ -1,12 +1,12 @@
 ---
-name: "opensuse.15.3 - systemd"
+name: "SLES.15.6 - systemd"
 'on':
   push:
     branches:
       - main
     paths:
-      - "Containerfiles/systemd/opensuse/opensuse.15.3.Containerfile"
-      - ".github/workflows/systemd-opensuse.15.3-ci.yml"
+      - "Containerfiles/systemd/SLES/SLES.15.6.Containerfile"
+      - ".github/workflows/systemd-SLES.15.6-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:
@@ -40,13 +40,13 @@ jobs:
       - name: Build and push image.
         uses: docker/build-push-action@v6
         with:
-          context: ./Containerfiles/systemd/opensuse
-          file: ./Containerfiles/systemd/opensuse/opensuse.15.3.Containerfile
+          context: ./Containerfiles/systemd/SLES
+          file: ./Containerfiles/systemd/SLES/SLES.15.6.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           labels: |
-            org.opencontainers.image.tite="opensuse image with systemd"
-            org.opencontainers.image.description="opensuse image with systemd for Ansible testing using Podman and Molecule"
+            org.opencontainers.image.tite="SLES image with systemd"
+            org.opencontainers.image.description="SLES image with systemd for Ansible testing using Podman and Molecule"
             org.opencontainers.image.url=${{ github.event.repository.html_url }}/tree/main/Containerfiles/systemd
             org.opencontainers.image.documentation=${{ github.event.repository.html_url }}/tree/main/Containerfiles/systemd/README.md
             org.opencontainers.image.source=${{ github.event.repository.clone_url }}
@@ -55,5 +55,4 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
-            quay.io/gotmax23/opensuse-systemd:15.3
-            quay.io/gotmax23/opensuse-leap-systemd:15.3
+            quay.io/gotmax23/sles-systemd:15.6

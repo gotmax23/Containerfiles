@@ -245,16 +245,13 @@ distros:
     vars:
       baseimage_repo: registry.opensuse.org/opensuse/leap
     outputs:
-      - baseimage_version: 15.3
+      - baseimage_version: 15.6
         vars:
-          extra_CI_image_repos:
-            - "quay.io/gotmax23/opensuse-leap-systemd:15.3"
-      - baseimage_version: 15.4
-        vars:
+          gha_workflow: absent
           extra_CI_image_tags:
             - "latest"
           extra_CI_image_repos:
-            - "quay.io/gotmax23/opensuse-leap-systemd:15.4"
+            - "quay.io/gotmax23/opensuse-leap-systemd:15.6"
             - "quay.io/gotmax23/opensuse-leap-systemd:latest"
       - baseimage_version: tumbleweed
         vars:
@@ -272,8 +269,7 @@ distros:
         - 'echo "**** Symlinking /usr/lib/systemd/systemd to /sbin/init due to missing systemd-sysvinit package ****"'
         - "ln -s /usr/lib/systemd/systemd /sbin/init"
     outputs:
-      - baseimage_version: 15.3
-      - baseimage_version: 15.4
+      - baseimage_version: 15.6
         extra_CI_image_tags:
           - "latest"
           - "15"
