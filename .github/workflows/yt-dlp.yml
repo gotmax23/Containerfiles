@@ -38,7 +38,7 @@ jobs:
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
       - name: Build and push image.
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v6
         with:
           context: ./Containerfiles/yt-dlp
           file: ./Containerfiles/yt-dlp/Containerfile
