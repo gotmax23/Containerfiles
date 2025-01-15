@@ -235,7 +235,6 @@ distros:
     outputs:
       - baseimage_version: 15.6
         vars:
-          gha_workflow: absent
           extra_CI_image_tags:
             - "latest"
           extra_CI_image_repos:
