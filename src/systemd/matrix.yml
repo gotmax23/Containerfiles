@@ -283,11 +283,6 @@ distros:
     vars:
       baseimage_repo: docker.io/library/ubuntu
     outputs:
-      - baseimage_version: bionic
-        vars:
-          extra_CI_image_tags:
-            - "18.04"
-            - "18"
       - baseimage_version: focal
         vars:
           extra_CI_image_tags:
