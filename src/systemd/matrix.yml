@@ -252,9 +252,6 @@ distros:
     vars:
       baseimage_repo: registry.suse.com/suse/sle15
       packages: []
-      extra_commands:
-        - 'echo "**** Symlinking /usr/lib/systemd/systemd to /sbin/init due to missing systemd-sysvinit package ****"'
-        - "ln -s /usr/lib/systemd/systemd /sbin/init"
     outputs:
       - baseimage_version: 15.6
         extra_CI_image_tags:
