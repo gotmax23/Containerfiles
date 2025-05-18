@@ -57,4 +57,3 @@ jobs:
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
             quay.io/gotmax23/fedora-systemd:41
-            quay.io/gotmax23/fedora-systemd:latest

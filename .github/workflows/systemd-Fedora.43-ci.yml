@@ -1,13 +1,13 @@
 ---
-name: "Fedora.40 - systemd"
+name: "Fedora.43 - systemd"
 
 'on':
   push:
     branches:
       - main
     paths:
-      - "Containerfiles/systemd/Fedora/Fedora.40.Containerfile"
-      - ".github/workflows/systemd-Fedora.40-ci.yml"
+      - "Containerfiles/systemd/Fedora/Fedora.43.Containerfile"
+      - ".github/workflows/systemd-Fedora.43-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:
@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./Containerfiles/systemd/Fedora
-          file: ./Containerfiles/systemd/Fedora/Fedora.40.Containerfile
+          file: ./Containerfiles/systemd/Fedora/Fedora.43.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           labels: |
@@ -56,4 +56,5 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
-            quay.io/gotmax23/fedora-systemd:40
+            quay.io/gotmax23/fedora-systemd:43
+            quay.io/gotmax23/fedora-systemd:rawhide
