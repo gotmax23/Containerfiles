@@ -1,5 +1,6 @@
 ---
 name: "opensuse.15.6 - systemd"
+
 'on':
   push:
     branches:

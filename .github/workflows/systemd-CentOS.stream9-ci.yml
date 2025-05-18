@@ -1,5 +1,6 @@
 ---
 name: "CentOS.stream9 - systemd"
+
 'on':
   push:
     branches:

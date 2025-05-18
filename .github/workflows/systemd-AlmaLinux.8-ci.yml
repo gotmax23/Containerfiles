@@ -1,5 +1,6 @@
 ---
 name: "AlmaLinux.8 - systemd"
+
 'on':
   push:
     branches:

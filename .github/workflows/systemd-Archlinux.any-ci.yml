@@ -1,5 +1,6 @@
 ---
 name: "Archlinux.any - systemd"
+
 'on':
   push:
     branches:

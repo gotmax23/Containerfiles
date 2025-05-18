@@ -1,5 +1,6 @@
 ---
 name: "RedHat.7 - systemd"
+
 'on':
   push:
     branches:

@@ -1,5 +1,6 @@
 ---
 name: "opensuse.tumbleweed - systemd"
+
 'on':
   push:
     branches:

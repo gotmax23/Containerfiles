@@ -1,5 +1,6 @@
 ---
 name: "RedHat.8 - systemd"
+
 'on':
   push:
     branches:

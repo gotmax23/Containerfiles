@@ -1,5 +1,6 @@
 ---
 name: "Fedora.42 - systemd"
+
 'on':
   push:
     branches:
