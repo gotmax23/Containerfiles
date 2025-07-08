@@ -206,9 +206,13 @@ distros:
       - baseimage_version: 9
         vars:
           extra_CI_image_tags:
+            - "quay.io/gotmax23/el-systemd:9"
+      - baseimage_version: 10
+        vars:
+          extra_CI_image_tags:
             - "latest"
           extra_CI_image_repos:
-            - "quay.io/gotmax23/el-systemd:9"
+            - "quay.io/gotmax23/el-systemd:10"
             - "quay.io/gotmax23/el-systemd:latest"
 
   - name: Fedora

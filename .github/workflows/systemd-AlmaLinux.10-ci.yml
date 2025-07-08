@@ -1,13 +1,13 @@
 ---
-name: "AlmaLinux.9 - systemd"
+name: "AlmaLinux.10 - systemd"
 
 'on':
   push:
     branches:
       - main
     paths:
-      - "Containerfiles/systemd/AlmaLinux/AlmaLinux.9.Containerfile"
-      - ".github/workflows/systemd-AlmaLinux.9-ci.yml"
+      - "Containerfiles/systemd/AlmaLinux/AlmaLinux.10.Containerfile"
+      - ".github/workflows/systemd-AlmaLinux.10-ci.yml"
   schedule:
     - cron: "10 1 * * 0"
   workflow_dispatch:
@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./Containerfiles/systemd/AlmaLinux
-          file: ./Containerfiles/systemd/AlmaLinux/AlmaLinux.9.Containerfile
+          file: ./Containerfiles/systemd/AlmaLinux/AlmaLinux.10.Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           labels: |
@@ -56,5 +56,7 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
-            quay.io/gotmax23/almalinux-systemd:9
-            quay.io/gotmax23/almalinux-systemd:quay.io/gotmax23/el-systemd:9
+            quay.io/gotmax23/almalinux-systemd:10
+            quay.io/gotmax23/almalinux-systemd:latest
+            quay.io/gotmax23/el-systemd:10
+            quay.io/gotmax23/el-systemd:latest
