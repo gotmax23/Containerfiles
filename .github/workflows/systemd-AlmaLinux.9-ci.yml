@@ -57,4 +57,4 @@ jobs:
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
             quay.io/gotmax23/almalinux-systemd:9
-            quay.io/gotmax23/almalinux-systemd:quay.io/gotmax23/el-systemd:9
+            quay.io/gotmax23/el-systemd:9

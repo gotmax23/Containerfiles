@@ -205,7 +205,7 @@ distros:
             - "quay.io/gotmax23/el-systemd:8"
       - baseimage_version: 9
         vars:
-          extra_CI_image_tags:
+          extra_CI_image_repos:
             - "quay.io/gotmax23/el-systemd:9"
       - baseimage_version: 10
         vars:
