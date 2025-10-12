@@ -227,6 +227,7 @@ distros:
           extra_CI_image_tags:
             - "latest"
       - baseimage_version: 43
+      - baseimage_version: 44
         vars:
           extra_CI_image_tags:
             - "rawhide"
