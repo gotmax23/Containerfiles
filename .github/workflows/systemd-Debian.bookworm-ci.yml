@@ -57,5 +57,5 @@ jobs:
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
           tags: |
             quay.io/gotmax23/debian-systemd:bookworm
-            quay.io/gotmax23/debian-systemd:testing
+            quay.io/gotmax23/debian-systemd:oldstable
             quay.io/gotmax23/debian-systemd:12

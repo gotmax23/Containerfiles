@@ -58,4 +58,3 @@ jobs:
           tags: |
             quay.io/gotmax23/debian-systemd:buster
             quay.io/gotmax23/debian-systemd:10
-            quay.io/gotmax23/debian-systemd:oldstable
