@@ -186,6 +186,10 @@ container_repo: quay.io/gotmax23/debian-systemd
 | jammy,22.04           | jammy[^1]        | "22"                                 | "22.04"                        | "jammy"                        |
 | noble,24.04           | noble[^1]        | "24"                                 | "24.04"                        | "noble"                        |
 
+## Contributing
+
+If you want to contribute to the project, please check [`CONTRIBUTING.md`](CONTRIBUTING.md) for more details.
+
 ## Credits
 
 These images are inspired by `geerlingguy` and `robertdebock`'s Ansible images
