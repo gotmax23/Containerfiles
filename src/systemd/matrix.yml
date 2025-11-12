@@ -146,18 +146,26 @@ distros:
         vars:
           extra_CI_image_tags:
             - "10"
-            - "oldstable"
       - baseimage_version: bullseye
         vars:
           extra_CI_image_tags:
-            - "latest"
-            - "stable"
             - "11"
       - baseimage_version: bookworm
         vars:
           extra_CI_image_tags:
-            - "testing"
+            - "oldstable"
             - "12"
+      - baseimage_version: trixie
+        vars:
+          extra_CI_image_tags:
+            - "latest"
+            - "stable"
+            - "13"
+      - baseimage_version: forky
+        vars:
+          extra_CI_image_tags:
+            - "testing"
+            - "14"
 
   - name: RedHat
     distro_family: RedHat
