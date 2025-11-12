@@ -38,9 +38,11 @@ container_repo: quay.io/gotmax23/debian-systemd
 
 | Available Tags            | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_release` |
 | ------------------------- | ---------------- | ------------------------------------ | ------------------------------ |
-| buster,10,oldstable       | buster           | "10"                                 | "buster"                       |
-| latest,bullseye,11,stable | bullseye         | "11"                                 | "bullseye"                     |
-| bookworm,12,testing       | bookworm         | "NA"                                 | "NA"                           |
+| buster,10                 | buster           | "10"                                 | "buster"                       |
+| bullseye,11               | bullseye         | "11"                                 | "bullseye"                     |
+| bookworm,12,oldstable     | bookworm         | "12"                                 | "bookworm"                     |
+| trixie,13,stable,latest   | trixie           | "13"                                 | "trixie"                       |
+| forky,14,testing          | forky            | "14"                                 | "forky"                        |
 
 For Debian, `ansible_distribution_major_version` and `ansible_distribution_version` are the same.
 
