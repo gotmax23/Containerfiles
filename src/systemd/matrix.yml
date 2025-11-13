@@ -142,10 +142,6 @@ distros:
     vars:
       baseimage_repo: docker.io/library/debian
     outputs:
-      - baseimage_version: buster
-        vars:
-          extra_CI_image_tags:
-            - "10"
       - baseimage_version: bullseye
         vars:
           extra_CI_image_tags:

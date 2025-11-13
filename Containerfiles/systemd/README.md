@@ -38,7 +38,6 @@ container_repo: quay.io/gotmax23/debian-systemd
 
 | Available Tags            | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_release` |
 | ------------------------- | ---------------- | ------------------------------------ | ------------------------------ |
-| buster,10                 | buster           | "10"                                 | "buster"                       |
 | bullseye,11               | bullseye         | "11"                                 | "bullseye"                     |
 | bookworm,12,oldstable     | bookworm         | "12"                                 | "bookworm"                     |
 | trixie,13,stable,latest   | trixie           | "13"                                 | "trixie"                       |
