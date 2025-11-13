@@ -1,8 +1,8 @@
 # Contributing to the project
 
-This document provides guidelines for contributing, with a focus on the process of adding new images.
+This document provides guidelines for contributing, with a focus on the process of managing built images.
 
-## Adding a New Image
+## Adding a new image
 
 The Containerfiles and GitHub Actions workflows in this repository are generated from templates using Ansible. This makes it easier to manage multiple distributions and versions. To add a new OS image, you'll need to follow these steps.
 
@@ -73,4 +73,40 @@ Once you have completed these steps, commit your changes and open a pull request
 
 1.  Changes to `src/systemd/matrix.yml`.
 2.  The newly generated/updated `Containerfile`s and CI files.
+3.  The updated `Containerfiles/systemd/README.md`.
+
+
+## Removing an image
+
+Once image reaches its EOL, we remove such image from regular build to save CI cycles and avoid potential CI failures once image mirrors become unavailable.
+
+The process is almost a reverse to adding a new image, except we leave previously buiilt Containerfiles in the repository.
+
+### 1. Modify `src/systemd/matrix.yml`
+
+In the [`src/systemd/matrix.yml`](../../src/systemd/matrix.yml) file we need to remove EOLed version of distribution. For example, to remove Debian "buster", you would remove the following from the `outputs` under `Debian`:
+
+```yaml
+      - baseimage_version: buster
+        vars:
+          extra_CI_image_tags:
+            - "10"
+```
+
+### 2. Remove GitHub Workflow
+
+Each existing image has own GitHub workflow defined. We need to remove the file defining the workflow to prevent further periodic builds of the image. For this simply remove the corresponding file in `.github/workflows` folder.
+
+For instance, to remove a workflow for Debian 10, remove the file `.github/workflows/systemd-Debian.buster-ci.yml`
+
+### 3. Update `Containerfiles/systemd/README.md`
+
+You need to manually update the documentation to reflect the changes you've made. Please edit [`Containerfiles/systemd/README.md`](README.md) to remove information about the EOLed distribution version.
+
+### Submitting your contribution
+
+Once you have completed these steps, commit your changes and open a pull request. Please include:
+
+1.  Changes to `src/systemd/matrix.yml`.
+2.  Removal of `.github/workflows/` files.
 3.  The updated `Containerfiles/systemd/README.md`.
