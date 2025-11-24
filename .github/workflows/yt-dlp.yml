@@ -16,7 +16,7 @@ jobs:
     name: Build and Push container images to quay.io
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Calculate Docker image tags # Based on https://gist.github.com/sagikazarmark/0119e1f3dde0d8e755fd0ee5a5ef4cdc
         id: tags
         run: |
