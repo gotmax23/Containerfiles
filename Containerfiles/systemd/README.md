@@ -178,7 +178,7 @@ ansible_distribution: Ubuntu
 
 # These aren't actually Ansible variables
 galaxy_platform: Ubuntu
-container_repo: quay.io/gotmax23/debian-systemd
+container_repo: quay.io/gotmax23/ubuntu-systemd
 ```
 
 | Available Tags        | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` |
@@ -186,6 +186,7 @@ container_repo: quay.io/gotmax23/debian-systemd
 | focal,20,20.04        | focal            | "20"                                 | "20.04"                        | "focal"                        |
 | jammy,22.04           | jammy[^1]        | "22"                                 | "22.04"                        | "jammy"                        |
 | noble,24.04           | noble[^1]        | "24"                                 | "24.04"                        | "noble"                        |
+| resolute,26.04        | resolute[^1]     | "26"                                 | "26.04"                        | "resolute"                     |
 
 ## Contributing
 

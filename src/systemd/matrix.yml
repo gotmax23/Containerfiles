@@ -285,3 +285,7 @@ distros:
           extra_CI_image_tags:
             - "24.04"
             - "latest"
+      - baseimage_version: resolute
+        vars:
+          extra_CI_image_tags:
+            - "26.04"
