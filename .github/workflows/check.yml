@@ -33,6 +33,21 @@ jobs:
           python-version: "3.14"
       - name: Set up uv
         uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
-      - name: Run checks
-        run: uv run --locked --group nox nox
+      - name: Install session deps
         working-directory: src/systemd
+        run: |
+          echo -e '#!/bin/sh\n exec uv run --locked --group nox nox --force-color "$@"' > ./nox
+          chmod a+x nox
+          ./nox --install-only
+      - name: Run zizmor in online mode
+        env:
+          # zizmor requirs token for some checks
+          ZIZMOR_GITHUB_TOKEN: "${{ github.token }}"
+        working-directory: src/systemd
+        run: ./nox -R -s zizmor
+      - name: Get session names
+        working-directory: src/systemd
+        run: ./nox -l --json | jq -r '.[].session' | grep -v zizmor > nox-sessions
+      - name: Run sessions
+        working-directory: src/systemd
+        run: ./nox -R -s $(cat nox-sessions)
