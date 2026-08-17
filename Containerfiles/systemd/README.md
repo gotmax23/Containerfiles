@@ -60,7 +60,6 @@ container_repo: quay.io/gotmax23/redhat-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
 | -------------- | ---------------- | ------------------------------------ |
-| 7              | 7                | "7"[^3]                              |
 | 8,latest       | 8                | "8"                                  |
 
 ### [AlmaLinux](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/AlmaLinux)
@@ -97,14 +96,7 @@ container_repo: quay.io/gotmax23/centos-systemd
 
 ### quay.io/gotmax23/el-systemd repo
 
-`quay.io/gotmax23/el-systemd:8` and `quay.io/gotmax23/el-systemd:9` use the AlmaLinux.
-
-`quay.io/gotmax23/el-systemd:7` tag uses CentOS Linux 7.
-
-This solves two problems:
-
-1. EL containers follow the `"quay.io/gotmax23{{ galaxy_platform | lower }}/{{ galaxy_version | lower }}-systemd"` rule I set earlier.
-2. It will still be possible to test on both EL 7 and EL 8 after [CentOS 8's early EOL](https://blog.centos.org/2020/12/future-is-centos-stream/).
+The `quay.io/gotmax23/el-systemd` tags use the corresponding AlmaLinux images.
 
 ### [Fedora](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Fedora)
 
@@ -119,7 +111,6 @@ container_repo: quay.io/gotmax23/fedora-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | State[^4] |
 | -------------- | ---------------- | ------------------------------------ | --------- |
-| 41             | 41               | "41"                                 | Stable    |
 | 42, latest     | 42               | "42"                                 | Stable    |
 | 43             | 43               | "43"                                 | Stable    |
 | 44             | 44               | "44"                                 | Stable    |
