@@ -39,7 +39,7 @@ jobs:
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
       - name: Build and push image.
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./Containerfiles/systemd/CentOS
           file: ./Containerfiles/systemd/CentOS/CentOS.stream9.Containerfile
