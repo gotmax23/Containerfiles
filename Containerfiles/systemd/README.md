@@ -4,11 +4,11 @@
 
 I built these containers for use with Molecule and Podman to test Ansible roles and playbooks. I recommend using Podman over Docker because it has better support for running systemd inside containers, requiring no special configuration. Naturally, it is more secure, as it doesn't require a daemon. However, as long as your distro does not use Cgroups V2/Unified Hierarchy[^3] (or you manually disable it), you can run these images with Docker, as well.
 
-In order to ease maintenance, these Containerfiles are templated by an Ansible playbook located in [`src/systemd`](https://github.com/gotmax23/Containerfiles/tree/main/src/systemd). This should probably be rewritten as a Python script, but ansible is a [good hammer](https://www.youtube.com/watch?v=TVq88JeJbw4) and this was a fun experiment...
+To ease maintenance, the Containerfiles and GitHub Actions workflow shims are generated from Jinja templates by the Python generator in [`src/systemd`](https://github.com/gotmax23/Containerfiles/tree/main/src/systemd).
 
 ## Repos and Tags
 
-As you will see below, I have listed the values for a couple major Ansible variables for each image, as well as [the platforms and versions that Ansible Galaxy uses](https://galaxy.ansible.com/api/v1/platforms/). I tried to name the Containers like this: `"quay.io/gotmax23{{ galaxy_platform | lower }}/{{ galaxy_version | lower }}-systemd"`.
+As you will see below, I have listed the values for a couple major Ansible variables for each image, as well as [the platforms and versions that Ansible Galaxy uses](https://galaxy.ansible.com/api/v1/platforms/). Primary images use names in the form `quay.io/gotmax23/<distribution>-systemd:<version>`. Some images also publish compatibility aliases described below.
 
 ### [Archlinux](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Archlinux)
 
@@ -21,9 +21,9 @@ galaxy_platform: Archlinux
 container_repo: quay.io/gotmax23/archlinux-systemd
 ```
 
-| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
+| Available Tags | `galaxy_version` | `ansible_distribution_major_version` |
 | -------------- | ---------------- | ------------------------------------ |
-| latest         | any              | "NA"                                 |
+| any,latest     | any              | "NA"                                 |
 
 ### [Debian](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Debian)
 
@@ -36,7 +36,7 @@ galaxy_platform: Debian
 container_repo: quay.io/gotmax23/debian-systemd
 ```
 
-| Available Tags            | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_release` |
+| Available Tags            | `galaxy_version` | `ansible_distribution_major_version` | `ansible_distribution_release` |
 | ------------------------- | ---------------- | ------------------------------------ | ------------------------------ |
 | bullseye,11               | bullseye         | "11"                                 | "bullseye"                     |
 | bookworm,12,oldstable     | bookworm         | "12"                                 | "bookworm"                     |
@@ -58,7 +58,7 @@ galaxy_platform: EL
 container_repo: quay.io/gotmax23/redhat-systemd
 ```
 
-| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
+| Available Tags | `galaxy_version` | `ansible_distribution_major_version` |
 | -------------- | ---------------- | ------------------------------------ |
 | 8,latest       | 8                | "8"                                  |
 
@@ -73,10 +73,11 @@ galaxy_platform: EL
 container_repo: quay.io/gotmax23/almalinux-systemd
 ```
 
-| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` |
+| Available Tags | `galaxy_version` | `ansible_distribution_major_version` |
 | -------------- | ---------------- | ------------------------------------ |
 | 8              | 8                | "8"                                  |
-| 9, latest      |                  | "9"                                  |
+| 9              | 9                | "9"                                  |
+| 10, latest     | 10               | "10"                                 |
 
 ### [CentOS](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/CentOS)
 
@@ -89,7 +90,7 @@ galaxy_platform: EL
 container_repo: quay.io/gotmax23/centos-systemd
 ```
 
-| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_verison` | `ansible_distribution_release` | EOL[^4] |
+| Available Tags | `galaxy_version` | `ansible_distribution_major_version` | `ansible_distribution_version` | `ansible_distribution_release` | EOL[^4] |
 | -------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ | ------- |
 | stream9        | N/A              | "9"                                  | "9"                            | "Stream"                       |         |
 | stream10, latest | N/A            | "10"                                 | "10"                           | "Stream"                       |         |
@@ -109,7 +110,7 @@ galaxy_platform: Fedora
 container_repo: quay.io/gotmax23/fedora-systemd
 ```
 
-| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | State[^4] |
+| Available Tags | `galaxy_version` | `ansible_distribution_major_version` | State[^4] |
 | -------------- | ---------------- | ------------------------------------ | --------- |
 | 42, latest     | 42               | "42"                                 | Stable    |
 | 43             | 43               | "43"                                 | Stable    |
@@ -130,7 +131,7 @@ container_repo: quay.io/gotmax23/opensuse-systemd
 
 Due to a discrepancy between `galaxy_platform` and `ansible_os_family`, these images (with the same tags) are also available at `quay.io/gotmax23/opensuse-leap-systemd`.
 
-| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` |
+| Available Tags | `galaxy_version` | `ansible_distribution_major_version` | `ansible_distribution_version` |
 | -------------- | ---------------- | ------------------------------------ | ------------------------------ |
 | 16,latest      | 16.0[^1]         | "16"                                 | "16.0"                         |
 
@@ -159,7 +160,7 @@ galaxy_platform: SLES
 container_repo: quay.io/gotmax23/sles-systemd
 ```
 
-| Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` |
+| Available Tags | `galaxy_version` | `ansible_distribution_major_version` | `ansible_distribution_version` | `ansible_distribution_release` |
 | -------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
 | 15.7,15        | 15.7[^1]         | "15"                                 | "15.7"                         | 7                              |
 | 16.0,16,latest | 16.0[^1]         | "16"                                 | "16.0"                         | 0                              |
@@ -175,10 +176,10 @@ galaxy_platform: Ubuntu
 container_repo: quay.io/gotmax23/ubuntu-systemd
 ```
 
-| Available Tags        | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` |
+| Available Tags        | `galaxy_version` | `ansible_distribution_major_version` | `ansible_distribution_version` | `ansible_distribution_release` |
 | --------------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
 | jammy,22.04           | jammy[^1]        | "22"                                 | "22.04"                        | "jammy"                        |
-| noble,24.04           | noble[^1]        | "24"                                 | "24.04"                        | "noble"                        |
+| noble,24.04,latest    | noble[^1]        | "24"                                 | "24.04"                        | "noble"                        |
 | resolute,26.04        | resolute[^1]     | "26"                                 | "26.04"                        | "resolute"                     |
 
 ## Contributing
@@ -191,10 +192,10 @@ These images are inspired by `geerlingguy` and `robertdebock`'s Ansible images
 
 ## Footnotes
 
-[^1]: This distro version is not listed at [https://galaxy.ansible.com/api/v1/platforms/](https://galaxy.ansible.com/api/v1/platforms/). Unfortunately, Ansible Galaxy has not updated its platform list in a while, and certain newer distros versions are missing. The `galaxy_version`s that link to this footnote are simply a reflection of what the platform version *should* be based on the existing pattern. Please see [ansible/galaxy#2533](https://github.com/ansible/galaxy/issues/2533) for more information.
+[^1]: This distro version is not listed at [https://galaxy.ansible.com/api/v1/platforms/](https://galaxy.ansible.com/api/v1/platforms/). Unfortunately, Ansible Galaxy has not updated its platform list in a while, and certain newer distro versions are missing. The `galaxy_version`s that link to this footnote are simply a reflection of what the platform version *should* be based on the existing pattern. Please see [ansible/galaxy#2533](https://github.com/ansible/galaxy/issues/2533) for more information.
 
 [^2]: See [https://developers.redhat.com/articles/ubi-faq#community](https://developers.redhat.com/articles/ubi-faq#community).
 
-[^3]: EL 7 comes with a very old version of Systemd that is not compatible with Cgroups V2 at all (even with Podman).
+[^3]: EL 7 comes with a very old version of systemd that is not compatible with Cgroups V2 at all (even with Podman).
 
 [^4]: EOL Containerfiles are kept in the repository but don't receive image updates.

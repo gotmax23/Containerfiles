@@ -95,7 +95,7 @@ Once you have completed these steps, commit your changes and open a pull request
 
 Once image reaches its EOL, we remove such image from regular build to save CI cycles and avoid potential CI failures once image mirrors become unavailable.
 
-The process is almost a reverse to adding a new image, except we leave previously buiilt Containerfiles in the repository.
+The process is almost the reverse of adding a new image, except we leave previously built Containerfiles in the repository.
 
 ### 1. Modify `src/systemd/matrix.yml`
 
