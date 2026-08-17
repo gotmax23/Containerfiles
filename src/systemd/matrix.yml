@@ -61,9 +61,7 @@ distro_families:
       package_mgr_name: zypper
       package_mgr_install_cmd: "zypper update -y && zypper install -y"
       package_mgr_clean_cmd: "zypper clean"
-      packages:
-        - systemd-sysvinit
-        - python3-xml
+      packages: []
 
   Archlinux:
     vars:
@@ -198,12 +196,12 @@ distros:
     vars:
       baseimage_repo: registry.opensuse.org/opensuse/leap
     outputs:
-      - baseimage_version: 15.6
+      - baseimage_version: 16
         vars:
           extra_ci_image_tags:
             - "latest"
           extra_ci_image_repos:
-            - "quay.io/gotmax23/opensuse-leap-systemd:15.6"
+            - "quay.io/gotmax23/opensuse-leap-systemd:16"
             - "quay.io/gotmax23/opensuse-leap-systemd:latest"
       - baseimage_version: tumbleweed
         vars:
@@ -216,13 +214,17 @@ distros:
     distro_family: Suse
     vars:
       baseimage_repo: registry.suse.com/suse/sle15
-      packages: []
     outputs:
-      - baseimage_version: 15.6
+      - baseimage_version: 15.7
         vars:
           extra_ci_image_tags:
-            - "latest"
             - "15"
+      - baseimage_version: 16.0
+        vars:
+          baseimage: registry.suse.com/bci/bci-base:16.0
+          extra_ci_image_tags:
+            - "latest"
+            - "16"
 
   - name: Ubuntu
     distro_family: Debian

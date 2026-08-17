@@ -141,7 +141,7 @@ Due to a discrepancy between `galaxy_platform` and `ansible_os_family`, these im
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` |
 | -------------- | ---------------- | ------------------------------------ | ------------------------------ |
-| 15.6,latest    | 15.6[^1]         | "15"                                 | "15.6"                         |
+| 16,latest      | 16.0[^1]         | "16"                                 | "16.0"                         |
 
 There is also an image for Tumbleweed.
 
@@ -170,7 +170,8 @@ container_repo: quay.io/gotmax23/sles-systemd
 
 | Available Tags | `galaxy_version` | `ansible_distribution_major_verison` | `ansible_distribution_version` | `ansible_distribution_release` |
 | -------------- | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
-| 15.6,15,latest | 15.6[^1]         | "15"                                 | "15.6"                         | 6                              |
+| 15.7,15        | 15.7[^1]         | "15"                                 | "15.7"                         | 7                              |
+| 16.0,16,latest | 16.0[^1]         | "16"                                 | "16.0"                         | 0                              |
 
 ### [Ubuntu](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/Ubuntu)
 
