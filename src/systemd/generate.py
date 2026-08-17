@@ -254,7 +254,7 @@ def resolve_images(config: Config) -> tuple[ResolvedImage, ...]:
                 | distro.vars
                 | output.vars
             )
-            missing = KNOWN_VARS - set(values)
+            missing = KNOWN_VARS - values.keys()
             if missing:
                 raise ConfigError(
                     f"{distro.name}.{output.baseimage_version}: missing variables: {', '.join(sorted(missing))}"
@@ -339,8 +339,10 @@ def resolve_images(config: Config) -> tuple[ResolvedImage, ...]:
     return tuple(images)
 
 
-def render_outputs(repo_root: Path) -> tuple[dict[Path, str], set[Path]]:
-    """Render configured files and return the expected workflow paths."""
+def render_outputs(
+    repo_root: Path,
+) -> tuple[dict[Path, str], dict[Path, str]]:
+    """Render configured Containerfiles and workflow shims."""
 
     source_dir = repo_root / "src/systemd"
     config = load_config(source_dir / "matrix.yml")
@@ -356,28 +358,28 @@ def render_outputs(repo_root: Path) -> tuple[dict[Path, str], set[Path]]:
     containerfile_template = environment.get_template("Containerfile.j2")
     workflow_template = environment.get_template("ci.yml.j2")
 
-    outputs: dict[Path, str] = {}
-    expected_workflows: set[Path] = set()
+    containerfiles: dict[Path, str] = {}
+    workflows: dict[Path, str] = {}
     for image in images:
         context = asdict(image)
-        outputs[repo_root / image.containerfile_path] = containerfile_template.render(
-            **context
+        containerfiles[repo_root / image.containerfile_path] = (
+            containerfile_template.render(**context)
         )
         if image.gha_workflow:
             workflow_path = repo_root / image.workflow_path
-            outputs[workflow_path] = workflow_template.render(**context)
-            expected_workflows.add(workflow_path)
-    return outputs, expected_workflows
+            workflows[workflow_path] = workflow_template.render(**context)
+    return containerfiles, workflows
 
 
 def generate(repo_root: Path, *, check: bool) -> int:
     """Write generated files, or report drift when *check* is true."""
 
-    outputs, expected_workflows = render_outputs(repo_root)
+    containerfiles, workflows = render_outputs(repo_root)
+    outputs = containerfiles | workflows
     stale_workflows = {
         path
         for path in (repo_root / ".github/workflows").glob("systemd-*-ci.yml")
-        if path not in expected_workflows
+        if path not in workflows
     }
     drift = False
     for path, expected in sorted(outputs.items()):
