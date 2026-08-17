@@ -54,17 +54,26 @@ After modifying [`src/systemd/matrix.yml`](../../src/systemd/matrix.yml), run th
 From the root of the repository, execute the following command:
 
 ```bash
-uv run --project src/systemd src/systemd/generate.py
+cd src/systemd
+uv run generate.py
 ```
 
 This creates or updates files in two locations:
 *   `Containerfiles/systemd/<DistroName>/`
 *   `.github/workflows/`
 
+Run the Ruff, mypy, generated-file, and workflow checks with:
+
+```bash
+cd src/systemd
+uv run --group nox nox
+```
+
 To check whether generated files are current without modifying them, run:
 
 ```bash
-uv run --project src/systemd src/systemd/generate.py --check
+cd src/systemd
+uv run generate.py --check
 ```
 
 ### 3. Update `Containerfiles/systemd/README.md`
@@ -101,7 +110,7 @@ In the [`src/systemd/matrix.yml`](../../src/systemd/matrix.yml) file we need to 
 
 ### 2. Generate the Files
 
-Run `uv run --project src/systemd src/systemd/generate.py`. The generator removes the obsolete workflow shim while retaining the historical Containerfile.
+Run `cd src/systemd && uv run generate.py`. The generator removes the obsolete workflow shim while retaining the historical Containerfile.
 
 ### 3. Update `Containerfiles/systemd/README.md`
 

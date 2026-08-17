@@ -10,5 +10,20 @@ dependencies = [
     "pyyaml",
 ]
 
+[dependency-groups]
+lint = [
+    "ruff",
+]
+nox = [
+    "nox",
+]
+typing = [
+    "mypy",
+    "types-pyyaml",
+]
+zizmor = [
+    "zizmor",
+]
+
 [tool.uv]
 package = false

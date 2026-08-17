@@ -1,2 +1,6 @@
 *.swp
 *.swo
+__pycache__/
+.nox/
+.ruff_cache/
+.venv/
