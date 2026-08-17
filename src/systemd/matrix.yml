@@ -222,11 +222,6 @@ distros:
     vars:
       baseimage_repo: docker.io/library/ubuntu
     outputs:
-      - baseimage_version: focal
-        vars:
-          extra_ci_image_tags:
-            - "20"
-            - "20.04"
       - baseimage_version: jammy
         vars:
           extra_ci_image_tags:
