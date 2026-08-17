@@ -2,6 +2,11 @@
 name: "yt-dlp"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/yt-dlp/Containerfile"
+      - ".github/workflows/yt-dlp.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

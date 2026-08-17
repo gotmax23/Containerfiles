@@ -3,6 +3,11 @@
 name: "Archlinux.any - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/Archlinux/Archlinux.any.Containerfile"
+      - ".github/workflows/systemd-Archlinux.any-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

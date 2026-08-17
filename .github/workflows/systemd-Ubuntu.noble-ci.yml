@@ -3,6 +3,11 @@
 name: "Ubuntu.noble - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/Ubuntu/Ubuntu.noble.Containerfile"
+      - ".github/workflows/systemd-Ubuntu.noble-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

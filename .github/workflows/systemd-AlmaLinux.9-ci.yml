@@ -3,6 +3,11 @@
 name: "AlmaLinux.9 - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/AlmaLinux/AlmaLinux.9.Containerfile"
+      - ".github/workflows/systemd-AlmaLinux.9-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

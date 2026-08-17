@@ -3,6 +3,11 @@
 name: "RedHat.8 - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/RedHat/RedHat.8.Containerfile"
+      - ".github/workflows/systemd-RedHat.8-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

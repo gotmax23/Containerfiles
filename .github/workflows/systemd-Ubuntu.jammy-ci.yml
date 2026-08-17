@@ -3,6 +3,11 @@
 name: "Ubuntu.jammy - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/Ubuntu/Ubuntu.jammy.Containerfile"
+      - ".github/workflows/systemd-Ubuntu.jammy-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

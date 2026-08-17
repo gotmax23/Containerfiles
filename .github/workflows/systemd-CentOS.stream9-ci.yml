@@ -3,6 +3,11 @@
 name: "CentOS.stream9 - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/CentOS/CentOS.stream9.Containerfile"
+      - ".github/workflows/systemd-CentOS.stream9-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

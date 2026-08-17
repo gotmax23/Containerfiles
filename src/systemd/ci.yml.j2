@@ -3,6 +3,11 @@
 name: "{{ distro_name }}.{{ baseimage_version }} - {{ image_type }}"
 
 'on':
+  pull_request:
+    paths:
+      - "{{ containerfile_path }}"
+      - "{{ workflow_path }}"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

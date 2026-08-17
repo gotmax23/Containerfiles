@@ -3,6 +3,11 @@
 name: "Fedora.42 - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/Fedora/Fedora.42.Containerfile"
+      - ".github/workflows/systemd-Fedora.42-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

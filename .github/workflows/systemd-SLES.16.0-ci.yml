@@ -3,6 +3,11 @@
 name: "SLES.16.0 - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/SLES/SLES.16.0.Containerfile"
+      - ".github/workflows/systemd-SLES.16.0-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

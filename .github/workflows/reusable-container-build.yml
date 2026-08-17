@@ -73,6 +73,7 @@ jobs:
       - uses: docker/setup-qemu-action@96fe6ef7f33517b61c61be40b68a1882f3264fb8 # v4.2.0
       - uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
       - name: Login to ${{ inputs.registry }}
+        if: github.event_name != 'pull_request'
         uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
         with:
           registry: ${{ inputs.registry }}
@@ -84,7 +85,7 @@ jobs:
           context: ${{ inputs.context }}
           file: ${{ inputs.containerfile }}
           platforms: ${{ inputs.platforms }}
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           labels: |
             org.opencontainers.image.title=${{ inputs.image_title }}
             org.opencontainers.image.description=${{ inputs.image_description }}

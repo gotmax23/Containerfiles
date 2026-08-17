@@ -3,6 +3,11 @@
 name: "opensuse.16 - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/opensuse/opensuse.16.Containerfile"
+      - ".github/workflows/systemd-opensuse.16-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

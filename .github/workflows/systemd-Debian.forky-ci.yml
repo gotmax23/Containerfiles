@@ -3,6 +3,11 @@
 name: "Debian.forky - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/Debian/Debian.forky.Containerfile"
+      - ".github/workflows/systemd-Debian.forky-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

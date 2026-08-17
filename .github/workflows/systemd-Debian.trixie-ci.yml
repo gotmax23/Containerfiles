@@ -3,6 +3,11 @@
 name: "Debian.trixie - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/Debian/Debian.trixie.Containerfile"
+      - ".github/workflows/systemd-Debian.trixie-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main

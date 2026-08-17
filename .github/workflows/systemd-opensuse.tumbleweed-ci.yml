@@ -3,6 +3,11 @@
 name: "opensuse.tumbleweed - systemd"
 
 'on':
+  pull_request:
+    paths:
+      - "Containerfiles/systemd/opensuse/opensuse.tumbleweed.Containerfile"
+      - ".github/workflows/systemd-opensuse.tumbleweed-ci.yml"
+      - ".github/workflows/reusable-container-build.yml"
   push:
     branches:
       - main
