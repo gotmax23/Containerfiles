@@ -4,7 +4,7 @@ This document provides guidelines for contributing, with a focus on the process 
 
 ## Adding a new image
 
-The Containerfiles and GitHub Actions workflows in this repository are generated from templates using Ansible. This makes it easier to manage multiple distributions and versions. To add a new OS image, you'll need to follow these steps.
+The Containerfiles and GitHub Actions workflow shims in this repository are generated from templates using Python, Jinja, and uv. This makes it easier to manage multiple distributions and versions. To add a new OS image, follow these steps.
 
 ### 1. Modify `src/systemd/matrix.yml`
 
@@ -19,7 +19,7 @@ For example, to add Debian "sid", you would add the following to the `outputs` u
 ```yaml
       - baseimage_version: sid
         vars:
-          extra_CI_image_tags:
+          extra_ci_image_tags:
             - "unstable"
 ```
 
@@ -41,7 +41,7 @@ distros:
     outputs:
       - baseimage_version: 1.0
         vars:
-          extra_CI_image_tags:
+          extra_ci_image_tags:
             - "latest"
 ```
 
@@ -49,17 +49,23 @@ Make sure to check the variables under `distro_families` and `defaults.vars` to 
 
 ### 2. Generate the Files
 
-After modifying [`src/systemd/matrix.yml`](../../src/systemd/matrix.yml), you need to run the Ansible playbook to generate the `Containerfile`s and associated CI workflow files.
+After modifying [`src/systemd/matrix.yml`](../../src/systemd/matrix.yml), run the Python generator to generate the `Containerfile`s and associated CI workflow shims.
 
 From the root of the repository, execute the following command:
 
 ```bash
-ansible-playbook src/systemd/generator.yml
+uv run --project src/systemd src/systemd/generate.py
 ```
 
-This will create/update files in two locations:
+This creates or updates files in two locations:
 *   `Containerfiles/systemd/<DistroName>/`
 *   `.github/workflows/`
+
+To check whether generated files are current without modifying them, run:
+
+```bash
+uv run --project src/systemd src/systemd/generate.py --check
+```
 
 ### 3. Update `Containerfiles/systemd/README.md`
 
@@ -89,15 +95,13 @@ In the [`src/systemd/matrix.yml`](../../src/systemd/matrix.yml) file we need to 
 ```yaml
       - baseimage_version: buster
         vars:
-          extra_CI_image_tags:
+          extra_ci_image_tags:
             - "10"
 ```
 
-### 2. Remove GitHub Workflow
+### 2. Generate the Files
 
-Each existing image has own GitHub workflow defined. We need to remove the file defining the workflow to prevent further periodic builds of the image. For this simply remove the corresponding file in `.github/workflows` folder.
-
-For instance, to remove a workflow for Debian 10, remove the file `.github/workflows/systemd-Debian.buster-ci.yml`
+Run `uv run --project src/systemd src/systemd/generate.py`. The generator removes the obsolete workflow shim while retaining the historical Containerfile.
 
 ### 3. Update `Containerfiles/systemd/README.md`
 
@@ -108,5 +112,5 @@ You need to manually update the documentation to reflect the changes you've made
 Once you have completed these steps, commit your changes and open a pull request. Please include:
 
 1.  Changes to `src/systemd/matrix.yml`.
-2.  Removal of `.github/workflows/` files.
+2.  Regenerated `.github/workflows/` files.
 3.  The updated `Containerfiles/systemd/README.md`.

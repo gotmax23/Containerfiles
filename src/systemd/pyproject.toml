@@ -1,0 +1,14 @@
+[project]
+name = "systemd-containerfile-generator"
+version = "0.0.0"
+requires-python = ">=3.11"
+classifiers = [
+    "Private :: Do Not Upload",
+]
+dependencies = [
+    "jinja2",
+    "pyyaml",
+]
+
+[tool.uv]
+package = false
