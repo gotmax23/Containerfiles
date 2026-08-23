@@ -38,6 +38,7 @@ jobs:
       documentation_path: "Containerfiles/systemd/README.md"
       tags: |
         quay.io/gotmax23/fedora-systemd:44
+        quay.io/gotmax23/fedora-systemd:latest
     secrets:
       registry_username: ${{ secrets.QUAY_USERNAME }}
       registry_password: ${{ secrets.QUAY_PASSWORD }}

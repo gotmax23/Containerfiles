@@ -170,12 +170,10 @@ distros:
       baseimage_repo: registry.fedoraproject.org/fedora
       package_mgr_install_cmd: "dnf upgrade -y --setopt=tsflags=nodocs && dnf install -y --setopt=tsflags=nodocs"
     outputs:
-      - baseimage_version: 42
+      - baseimage_version: 44
         vars:
           extra_ci_image_tags:
             - "latest"
-      - baseimage_version: 43
-      - baseimage_version: 44
       - baseimage_version: 45
       - baseimage_version: 46
         vars:
