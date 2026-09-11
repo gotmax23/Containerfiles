@@ -26,7 +26,7 @@ jobs:
     name: Build and Push container images to quay.io
     permissions:
       contents: read
-    uses: ./.github/workflows/reusable-container-build.yml
+    uses: $/.github/workflows/reusable-container-build.yml
     with:
       context: "./Containerfiles/yt-dlp"
       containerfile: "./Containerfiles/yt-dlp/Containerfile"

@@ -27,7 +27,7 @@ jobs:
     name: Build and Push container images to quay.io
     permissions:
       contents: read
-    uses: ./.github/workflows/reusable-container-build.yml
+    uses: $/.github/workflows/reusable-container-build.yml
     with:
       context: "./Containerfiles/systemd/CentOS"
       containerfile: "./Containerfiles/systemd/CentOS/CentOS.stream9.Containerfile"
