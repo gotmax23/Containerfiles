@@ -95,10 +95,6 @@ distros:
     vars:
       baseimage_repo: docker.io/library/debian
     outputs:
-      - baseimage_version: bullseye
-        vars:
-          extra_ci_image_tags:
-            - "11"
       - baseimage_version: bookworm
         vars:
           extra_ci_image_tags:
