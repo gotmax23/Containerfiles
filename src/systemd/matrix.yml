@@ -138,6 +138,16 @@ distros:
           extra_ci_image_tags:
             - "latest"
 
+  - name: RockyLinux
+    distro_family: RedHat
+    vars:
+      baseimage_repo: "quay.io/rockylinux/rockylinux"
+    outputs:
+      - baseimage_version: 9
+      - baseimage_version: 10
+        vars:
+          extra_ci_image_tags:
+            - "latest"
 
   - name: AlmaLinux
     distro_family: RedHat
