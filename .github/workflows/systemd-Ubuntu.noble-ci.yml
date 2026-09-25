@@ -39,7 +39,6 @@ jobs:
       tags: |
         quay.io/gotmax23/ubuntu-systemd:noble
         quay.io/gotmax23/ubuntu-systemd:24.04
-        quay.io/gotmax23/ubuntu-systemd:latest
     secrets:
       registry_username: ${{ secrets.QUAY_USERNAME }}
       registry_password: ${{ secrets.QUAY_PASSWORD }}

@@ -171,8 +171,8 @@ container_repo: quay.io/gotmax23/ubuntu-systemd
 | Available Tags        | `ansible_distribution_major_version` | `ansible_distribution_version` | `ansible_distribution_release` |
 | --------------------- | ------------------------------------ | ------------------------------ | ------------------------------ |
 | jammy,22.04           | "22"                                 | "22.04"                        | "jammy"                        |
-| noble,24.04,latest    | "24"                                 | "24.04"                        | "noble"                        |
-| resolute,26.04        | "26"                                 | "26.04"                        | "resolute"                     |
+| noble,24.04           | "24"                                 | "24.04"                        | "noble"                        |
+| resolute,26.04,latest | "26"                                 | "26.04"                        | "resolute"                     |
 
 ## Contributing
 
