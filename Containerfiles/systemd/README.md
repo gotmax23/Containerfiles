@@ -42,7 +42,7 @@ For Debian, `ansible_distribution_major_version` and `ansible_distribution_versi
 
 ### [RedHat](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/RedHat)
 
-These images are based on RedHat's UBI (Universal Base Image). UBI and images based on it are free to use without a RedHat subscription. However, if they are not used on a registered RedHat system, the package selection is limited. For example, it is not possible to install the dependencies needed for many EPEL packages without a RedHat subscription[^2]. Therefore, I recommend using the CentOS and AlmaLinux based images, instead.
+These images are based on RedHat's UBI (Universal Base Image). UBI and images based on it are free to use without a RedHat subscription. However, if they are not used on a registered RedHat system, the package selection is limited. For example, it is not possible to install the dependencies needed for many EPEL packages without a RedHat subscription[^2]. Therefore, I recommend using the CentOS, AlmaLinux or RockyLinux based images, instead.
 
 ```yaml
 ansible_os_family: RedHat
@@ -83,6 +83,20 @@ container_repo: quay.io/gotmax23/centos-systemd
 | ---------------- | ------------------------------------ | ------------------------------ | ------------------------------ | ------- |
 | stream9          | "9"                                  | "9"                            | "Stream"                       |         |
 | stream10, latest | "10"                                 | "10"                           | "Stream"                       |         |
+
+### [RockyLinux](https://github.com/gotmax23/Containerfiles/tree/main/Containerfiles/systemd/RockyLinux)
+
+```yaml
+ansible_os_family: RedHat
+ansible_distribution: Rocky
+
+container_repo: quay.io/gotmax23/rockylinux-systemd
+```
+
+| Available Tags | `ansible_distribution_major_version` |
+| -------------- | ------------------------------------ |
+| 9              | "9"                                  |
+| 10, latest     | "10"                                 |
 
 ### quay.io/gotmax23/el-systemd repo
 
