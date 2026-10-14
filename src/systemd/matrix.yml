@@ -142,6 +142,8 @@ distros:
     distro_family: RedHat
     vars:
       baseimage_repo: "quay.io/rockylinux/rockylinux"
+      extra_masked_services:
+        - systemd-logind.service
     outputs:
       - baseimage_version: 9
       - baseimage_version: 10
